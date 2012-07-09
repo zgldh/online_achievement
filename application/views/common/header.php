@@ -11,14 +11,14 @@
 <head>
 	<meta charset="utf-8">
 	
-    <script type="text/javascript" src="/js/jquery-min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <script src="/js/jquery-min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="shortcut icon" href="images/favicon.ico" />
     
     <?php // load javascript files?>
     <?php if($javascripts):?>
     <?php foreach($javascripts as $index=>$javascript_file):?>
-    <script type="text/javascript" src="<?php echo $javascript_file;?>"></script>
+    <script src="<?php echo $javascript_file;?>"></script>
     <?php endforeach;?>
     <?php endif;?>
     
@@ -36,7 +36,7 @@
     <?php // load style files?>
     <?php if($styles):?>
     <?php foreach($styles as $index=>$style_file):?>
-    <link rel="stylesheet" type="text/css" href="<?php echo $style_file;?>" />
+    <link rel="stylesheet" href="<?php echo $style_file;?>" />
     <?php endforeach;?>
     <?php endif;?>
     
