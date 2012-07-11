@@ -1,11 +1,11 @@
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span> 
                 <span class="icon-bar"></span>
-            </a> 
+                <span class="icon-bar"></span>
+            </a>
             <a class="brand" href="#" style="color:#fff;">在线成就系统</a>
             <div class="nav-collapse">
                 <ul class="nav">
@@ -26,12 +26,17 @@
                     <input type="text" class="search-query span2" placeholder="搜索" />
                 </form>
                 <ul class="nav pull-right">
-                    <li><a href="#">注册</a></li>
+                    <li><a href="/register">注册</a></li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<b class="caret"></b></a>
                         <div class="dropdown-menu">
-                            <p></p>
+                            <form method="post" style="padding: 4px 10px;">
+                                <input type="text" class="input-medium" placeholder="帐号">
+                                <input type="password" class="input-medium" placeholder="密码">
+                                <button type="submit" class="btn btn-primary">登录</button>
+                                <a class="btn">忘记密码</a>
+                            </form>
                         </div>
                     </li>
                 </ul>
