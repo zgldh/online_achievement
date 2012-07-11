@@ -32,13 +32,6 @@
 							<p class="help-block">确认注册，接收网站活动提醒等</p>
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label" for="email">电子邮箱</label>
-						<div class="controls">
-							<input type="password" class="input-xlarge" id="email">
-							<p class="help-block">确认注册，接收网站活动提醒等</p>
-						</div>
-					</div>
 					<div class="form-actions">
 						<button class="btn btn-primary btn-large" type="submit">注册</button>
 					</div>

@@ -10,6 +10,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active"><a href="/">首页</a></li>
+                    <li><a href="#">编写成就</a></li>
                     <li><a href="#">所有成就</a></li>
                     <li><a href="#">随便看看</a></li>
                     <li class="dropdown">
