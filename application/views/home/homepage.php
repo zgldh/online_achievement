@@ -1,13 +1,43 @@
-<div id="body">
-	<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-	<p>If you would like to edit this page you'll find it located at:</p>
-	<code>application/views/welcome_message.php</code>
-
-	<p>The corresponding controller for this page is found at:</p>
-	<code>application/controllers/welcome.php</code>
-
-	<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+<div class="hero-unit">
+    <ul class="thumbnails">
+        <li class="span4">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/360x268">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+        <li class="span2">
+          <a class="thumbnail" href="#">
+            <img alt="" src="http://placehold.it/160x120">
+          </a>
+        </li>
+    </ul>
+    <h1>快来实现你的成就!</h1>
+	<p class="">良好的规划，非凡的目标，让你的生活充满乐趣。</p>
+    <a class="btn btn-primary btn-large">立刻开始!</a>
+    <a class="btn btn-info btn-large">更多介绍>></a>
 </div>
-
-<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
