@@ -5,8 +5,8 @@
  */
 class WebUser{
 
-    private $_session_key = 'swu';
-    private $_cookie_key = 'cwu';
+    private static $_session_key = 'swu';
+    private static $_cookie_key = 'cwu';
 
     private $_user = null;
     private $_user_id = 0;
@@ -19,7 +19,7 @@ class WebUser{
         $ci->load->library('session');
         $session_data = $ci->session->userdata(WebUser::$_session_key);
         $cookie_data = $ci->input->cookie(WebUser::$_cookie_key);
-        if($user_data)
+        if($session_data)
         {
             // 有session
             $this->_user_id = $session_data['user_id'];
@@ -28,8 +28,7 @@ class WebUser{
         }
         elseif($cookie_data = $ci->input->cookie(WebUser::$_cookie_key))
         {
-            // 有cookie，自动登录
-            // TODO
+            // TODO 有cookie，自动登录
         }
         else
         {

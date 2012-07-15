@@ -2,33 +2,49 @@
 
 class MY_Controller extends CI_Controller{
 
+    /**
+     * 当前正在访问的用户。
+     * @var WebUser
+     */
+    public $webuser = null;
+    
+    /**
+     * 顶部导航栏
+     * @var NavBar
+     */
+    public $navbar = null;
+    
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
     private $_styles = array();
     private $_title = null;
     
     private $_show_navbar = true;
+    private $_current_navbar_item = 'home';
     
-    public function showNavBar()
+    function __construct()
     {
-        $this->setNavBar(true);
+        parent::__construct();
     }
-    public function hideNavBar()
+    
+    
+    /**
+     * 
+     * @return WebUser
+     */
+    public function getWebUser()
     {
-        $this->setNavBar(false);
+        return $this->_webuser;
     }
-    public function toggleNavBar()
+    /**
+     * 
+     * @param WebUser $webuser
+     */
+    public function setWebUser($webuser)
     {
-        $this->setNavBar(!$this->getNavBar());
+        $this->_webuser = $webuser;
     }
-    public function setNavBar($show)
-    {
-        $this->_show_navbar = (boolean)$show;
-    }
-    public function getNavBar()
-    {
-        return $this->_show_navbar;
-    }
+    
     /**
      * 设置页面标题
      * @param string $str
@@ -91,25 +107,22 @@ class MY_Controller extends CI_Controller{
      */
     protected function view($view_path, $in_data = array())
     {
-        if($this->getNavBar())
+        if($this->navbar->isDisplay())
         {
             $this->addJavascriptFile('/js/bootstrap-dropdown.js');
             $this->addAutoRunJavascriptCode("$('.dropdown-toggle').dropdown()");
         }
-        
+
         $meta_data = array(
                 'title'=>$this->getTitle(),
                 'javascripts'=>$this->_javascripts,
                 'auto_javascript_codes'=>$this->_auto_javascript_codes,
-                'styles'=>$this->_styles                
-                );
+                'styles'=>$this->_styles
+        );
         $data = array_merge($meta_data, $in_data);
         
         $this->load->view('common/header',$data);
-        if($this->getNavBar())
-        {
-            $this->load->view('common/navbar');
-        }
+        $this->load->view('common/navbar');
         $this->load->view($view_path);
         $this->load->view('common/footer');
     }

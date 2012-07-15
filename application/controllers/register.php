@@ -20,6 +20,7 @@ class register extends MY_Controller
 	 */
 	public function index()
 	{
+	    $this->navbar->setCurrentItem(NavBar::$ITEM_REGISTER);
 	    $this->setTitle("注册--在线成就系统");
 		$this->view('/register/register');
 	}

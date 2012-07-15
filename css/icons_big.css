@@ -1,5 +1,5 @@
-.icon-big{background-image:url(icons_big.png);background-repeat:no-repeat;display:inline-block;height:36px; width: 36px;vertical-align:text-top;}
-.icon-white.icon-big{background-image:url(icons_big_white.png);}
+.icon-big{background-image:url(../images/icons_big.png);background-repeat:no-repeat;display:inline-block;height:36px; width: 36px;vertical-align:middle;}
+.icon-white.icon-big{background-image:url(../images/icons_big_white.png);}
 .icon-big.icon-glass{background-position:0px 0px;}
 .icon-big.icon-leaf{background-position:-36px 0px;}
 .icon-big.icon-dog{background-position:-72px 0px;}

@@ -1,3 +1,13 @@
+<?php 
+/**
+ * @param WebUser $webuser
+ * @param string $current_nav_item
+ */
+if(!$this->navbar->isDisplay())
+{
+    return;
+}
+?>
 <div class="navbar">
     <div class="navbar-inner">
         <div class="container">
@@ -9,10 +19,10 @@
             <a class="brand" href="#" style="color: white;font-family: 微软雅黑;font-weight: bold;">在线成就系统 :-)</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="/">首页</a></li>
-                    <li><a href="#">编写成就</a></li>
-                    <li><a href="#">所有成就</a></li>
-                    <li><a href="#">随便看看</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_HOME); ?>"><a href="/">首页</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_CREATE); ?>"><a href="/create">编写成就</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_ALL); ?>"><a href="#">所有成就</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_JUSTLOOK); ?>"><a href="#">随便看看</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -27,9 +37,9 @@
                     <input type="text" class="search-query span2" placeholder="搜索" />
                 </form>
                 <ul class="nav pull-right">
-                    <li><a href="/register">注册</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>"><a href="/register">注册</a></li>
                     <li class="divider-vertical"></li>
-                    <li class="dropdown">
+                    <li class="dropdown <?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<b class="caret"></b></a>
                         <div class="dropdown-menu" style="padding: 10px;">
                             <form method="post">
