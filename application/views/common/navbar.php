@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @param WebUser $webuser
  * @param string $current_nav_item
@@ -39,7 +39,7 @@ if(!$this->navbar->isDisplay())
                 <ul class="nav pull-right">
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>"><a href="/register">注册</a></li>
                     <li class="divider-vertical"></li>
-                    <li class="dropdown <?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>">
+                    <li class="dropdown <?php echo $this->navbar->getItemClass(NavBar::$ITEM_SIGNIN); ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">登录<b class="caret"></b></a>
                         <div class="dropdown-menu" style="padding: 10px;">
                             <form method="post">
