@@ -162,6 +162,15 @@ class MY_Controller extends CI_Controller{
 	{
 		return $this->input->get ( $key, $xss_filter );
 	}
+
+    public function signinAndRedirectTo($redirect_to_url = '/')
+    {
+        $redirect_to = urlencode($redirect_to_url);
+
+        $this->load->helper('url');
+        redirect('/signin?redirect_to='.$redirect_to);
+        exit();
+    }
 }
 // END Controller class
 

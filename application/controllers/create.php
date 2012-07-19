@@ -16,14 +16,19 @@ class create extends MY_Controller
 	 */
 	public function index()
 	{
+        if(!$this->webuser->isLogin())
+        {
+            $this->redirectToSignIn('/create');
+        }
+
 	    $this->addJavascriptFile('js/jquery.nestable.js');
 	    $this->addJavascriptFile('js/create.js');
 	    $this->addAutoRunJavascriptCode("$('.dd').nestable();");
 	    $this->addStyleFile('css/icons_big.css');
 	    $this->addStyleFile('css/create.css');
-	    
+
 	    $this->navbar->setCurrentItem(NavBar::$ITEM_CREATE);
-	    
+
 	    $this->setTitle("编写成就--在线成就系统");
 		$this->view('/create/create');
 	}

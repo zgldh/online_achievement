@@ -22,6 +22,10 @@ class signin extends MY_Controller
 	{
         $data = array();
         $redirect_to = $this->inputPost('redirect_to');
+        if(!$redirect_to)
+        {
+            $redirect_to = $this->inputGet('redirect_to');
+        }
         if($this->isPostRequest())
         {
             $error = $this->doLogin();
