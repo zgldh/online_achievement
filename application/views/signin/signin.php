@@ -2,7 +2,7 @@
 	<input type="hidden" name="redirect_to" value="<?php echo $this->navbar->getRedirectTo();?>" />
     <fieldset>
         <legend>会员登录</legend>
-        <?php if($error):?>
+        <?php if(isset($error)):?>
         <div class="alert alert-error">
             <strong>登录失败</strong>
             <?php echo $error['msg'];?>
