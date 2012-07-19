@@ -22,7 +22,7 @@
         </div>
         <div class="control-group">
             <div class="controls">
-                <p>您也可以直接用新浪微博帐号、QQ帐号、人人网帐号直接登录。</p>
+                <p>您也可以用新浪微博帐号、QQ帐号、人人网帐号直接登录。</p>
                 <img src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png" />
                 <img src="http://wiki.dev.renren.com/mediawiki/images/9/95/%E8%BF%9E%E6%8E%A5%E6%8C%89%E9%92%AE2_%E7%99%BD%E8%89%B2132X28.png" />
             </div>
