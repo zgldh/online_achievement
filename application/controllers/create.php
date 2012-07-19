@@ -18,7 +18,7 @@ class create extends MY_Controller
 	{
         if(!$this->webuser->isLogin())
         {
-            $this->redirectToSignIn('/create');
+            $this->signinAndRedirectTo('/create');
         }
 
 	    $this->addJavascriptFile('js/jquery.nestable.js');
