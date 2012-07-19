@@ -14,6 +14,8 @@ class NavBar{
 
     private $_show_navbar = true;
     private $_current_navbar_item = 'home';
+    private $_show_signin = true;
+    private $_redirect_to = null;
     
     function __construct()
     {
@@ -84,6 +86,67 @@ class NavBar{
     public function isDisplay()
     {
         return $this->_show_navbar;
+    }
+    
+
+    // 登录栏相关 start
+    /**
+     * 显示登录栏
+     */
+    public function showSignIn()
+    {
+    	$this->setSignIn(true);
+    }
+    /**
+     * 不显示登录栏
+     */
+    public function hideSignIn()
+    {
+    	$this->setSignIn(false);
+    }
+    /**
+     * 直接设置登录栏的显示状态
+     * @param boolean $show true显示, false不显示
+     */
+    public function setSignIn($show)
+    {
+        $this->_show_signin = (boolean)$show;
+    }
+    /**
+     * 当前登录栏到底显示不显示？
+     * @return boolean true显示, false不显示
+     */
+    public function isDisplaySignIn()
+    {
+        return $this->_show_signin;
+    }
+    // 登录栏相关 end
+    
+    /**
+     * 设置登录后重定向位置
+     * @param unknown_type $url
+     */
+    public function setRedirectTo($url)
+    {
+    	$this->_redirect_to = $url;
+    }
+    /**
+     * 得到登录后重定向位置
+     */
+    public function getRedirectTo()
+    {
+    	if($this->_redirect_to == null)
+    	{
+    		if(isset($_SERVER['REQUEST_URI']))
+    		{
+    			$this->_redirect_to = $_SERVER['REQUEST_URI'];
+    		}
+    		else
+    		{
+    			$this->_redirect_to = '/';
+    		}
+    	}
+    	return $this->_redirect_to;
     }
 }
 // END Controller class

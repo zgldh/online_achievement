@@ -20,10 +20,35 @@ class signin extends MY_Controller
 	 */
 	public function index()
 	{
+        $data = array();
+        $redirect_to = $this->inputPost('redirect_to');
+        if($this->isPostRequest())
+        {
+            $error = $this->doLogin();
+            if(!$error)
+            {
+                $this->load->helper('url');
+                redirect($redirect_to);
+                exit();
+            }
+        }
+        $this->navbar->setRedirectTo($redirect_to);
 	    $this->navbar->setCurrentItem(NavBar::$ITEM_SIGNIN);
+	    $this->navbar->hideSignIn();
 	    $this->setTitle("登录--在线成就系统");
-		$this->view('/signin/signin');
+        $data = compact('error');
+		$this->view('/signin/signin', $data);
 	}
+
+    private function doLogin()
+    {
+        $re_data = array();
+        $user_name = $this->inputPost('user_name');
+        $password = $this->inputPost('password');
+
+        $error = $this->webuser->login($user_name, $password);
+        return $error;
+    }
 }
 
 /* End of file welcome.php */

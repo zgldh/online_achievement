@@ -20,7 +20,7 @@
             </div>
         </div>
         <!-- 左侧栏 结束 -->
-        
+
         <!-- 基本信息 开始 -->
         <form id="form_step_1" class="form-horizontal span9">
             <fieldset>
@@ -28,24 +28,24 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">成就名称</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="input01">
+                        <input type="text" class="input-xxlarge" id="input01">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">成就描述</label>
                     <div class="controls">
-                        <textarea></textarea>
+                        <textarea class="input-xxlarge" rows="7"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">成就LOGO</label>
                     <div class="controls">
-                        <a href="#" class="thumbnail">
-                            <img src="http://placehold.it/260x180" alt="">
+                        <a href="#" class="thumbnail" style="width: 128px;">
+                            <img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
                         </a>
                     </div>
                 </div>
-                <?php 
+                <?php
                 /**
                  * TODO 将来这里可以选择“前驱成就”, 显示“复制自某成就”
                  */
@@ -56,7 +56,7 @@
             </fieldset>
         </form>
         <!-- 基本信息 结束 -->
-        
+
         <!-- 步骤计划 开始 -->
         <form id="form_step_2" class="form-horizontal span9">
             <fieldset>
@@ -101,7 +101,7 @@
             </fieldset>
         </form>
         <!-- 步骤计划 结束 -->
-        
+
         <!-- 预览完成 开始 -->
         <form id="form_step_3" class="form-horizontal span9">
             <fieldset>

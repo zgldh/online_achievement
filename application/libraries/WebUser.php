@@ -11,7 +11,6 @@ class WebUser{
     private $_user = null;
     private $_user_id = 0;
     private $_user_name = null;
-    private $_session_id = null;
 
     function __construct()
     {
@@ -52,18 +51,63 @@ class WebUser{
     {
         return ($this->_user_id == 0)?false:true;
     }
-    public function getSessionId()
-    {
-        return $this->_session_id;
-    }
 
-
+    /**
+     * 登录操作, 登录失败返回错误信息, 登录成功不返回任何东西
+     *
+     */
     public function login($user_name, $password)
     {
+        // TODO 从数据模型里验证能否登录
+        $m_user_id = 9527;
+        $m_user_name = 'test';
+        $m_password = 'test';
+        if($user_name != $m_user_name || $password != $m_password)
+        {
+            $error['msg'] = '错误的帐号或密码。';
+            return $error;
+        }
+
+        //设置 webuser
+        $this->_user = null; // 数据模型 user
+        $this->_user_id = $m_user_id;
+        $this->_user_name = $m_user_name;
+
+        //设置session
+        $ci = & get_instance();
+        $ci->load->library('session');
+        $userdata = array(
+                    WebUser::$_session_key => array(
+                            'user_id'  => $this->_user_id,
+                            'user_name'     => $this->_user_name)
+               );
+        $ci->session->set_userdata($userdata);
+
+        //设置 cookie
+        // TODO
+
+
     }
 
     public function logout()
     {
+        //设置session
+        $ci = & get_instance();
+        $ci->load->library('session');
+        $userdata = array(
+            WebUser::$_session_key => array(
+                    'user_id'  => 0,
+                    'user_name'     => null)
+       );
+        $ci->session->set_userdata($userdata);
+
+        //设置 cookie
+        // TODO
+
+        //设置 webuser
+        $this->_user = null;
+        $this->_user_id = 0;
+        $this->_user_name = null;
     }
 }
 // END Controller class

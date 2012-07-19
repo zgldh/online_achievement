@@ -3598,6 +3598,7 @@ input[type="submit"].btn.btn-mini {
 
 .navbar .container {
   width: auto;
+  min-width: 940px;
 }
 
 .nav-collapse.collapse {

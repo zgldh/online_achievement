@@ -5,30 +5,30 @@
 				<fieldset>
 					<legend>注册会员</legend>
 					<div class="control-group">
-						<label class="control-label" for="name">帐号</label>
+						<label class="control-label" for="user_name">帐号</label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" id="name">
+							<input type="text" class="input-xlarge" id="user_name" name="user_name">
 							<p class="help-block">登录时会用到</p>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="password">密码</label>
 						<div class="controls">
-							<input type="password" class="input-xlarge" id="password">
+							<input type="password" class="input-xlarge" id="password" name="password">
 							<p class="help-block">请输入大小写字母、数字来作为密码</p>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="repassword">重复密码</label>
 						<div class="controls">
-							<input type="password" class="input-xlarge" id="repassword">
+							<input type="password" class="input-xlarge" id="repassword" name="repassword">
 							<p class="help-block">重新输入一遍，确保没记错</p>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label" for="email">电子邮箱</label>
 						<div class="controls">
-							<input type="password" class="input-xlarge" id="email">
+							<input type="password" class="input-xlarge" id="email" name="email">
 							<p class="help-block">确认注册，接收网站活动提醒等</p>
 						</div>
 					</div>

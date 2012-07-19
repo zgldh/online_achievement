@@ -7,29 +7,29 @@ class MY_Controller extends CI_Controller{
      * @var WebUser
      */
     public $webuser = null;
-    
+
     /**
      * 顶部导航栏
      * @var NavBar
      */
     public $navbar = null;
-    
+
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
     private $_styles = array();
     private $_title = null;
-    
+
     private $_show_navbar = true;
     private $_current_navbar_item = 'home';
-    
+
     function __construct()
     {
         parent::__construct();
     }
-    
-    
+
+
     /**
-     * 
+     *
      * @return WebUser
      */
     public function getWebUser()
@@ -37,14 +37,14 @@ class MY_Controller extends CI_Controller{
         return $this->_webuser;
     }
     /**
-     * 
+     *
      * @param WebUser $webuser
      */
     public function setWebUser($webuser)
     {
         $this->_webuser = $webuser;
     }
-    
+
     /**
      * 设置页面标题
      * @param string $str
@@ -61,7 +61,7 @@ class MY_Controller extends CI_Controller{
     {
         return $this->_title;
     }
-    
+
     /**
      * 添加一个Javascript文件
      * @param String $path
@@ -99,7 +99,7 @@ class MY_Controller extends CI_Controller{
         }
         return false;
     }
-    
+
     /**
      * 显示出一个模板来
      * @param string $view_path 模板路径
@@ -120,12 +120,48 @@ class MY_Controller extends CI_Controller{
                 'styles'=>$this->_styles
         );
         $data = array_merge($meta_data, $in_data);
-        
+
         $this->load->view('common/header',$data);
-        $this->load->view('common/navbar');
         $this->load->view($view_path);
         $this->load->view('common/footer');
     }
+
+    /**
+     * 得到请求方法
+     * @return string “GET”, “HEAD”，“POST”，“PUT”
+     */
+    protected function getRequestMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
+    }
+
+    /**
+     * 是否是post请求
+     * @return boolean true|false
+     */
+    protected function isPostRequest()
+    {
+        return ($this->getRequestMethod() == 'POST')?true:false;
+    }
+    /**
+     * 是否是get请求
+     * @return boolean true|false
+     */
+    protected function isGetRequest()
+    {
+        return ($this->getRequestMethod() == 'GET')?true:false;
+    }
+
+
+	public function inputPost($key, $xss_filter = false)
+	{
+		return $this->input->post ( $key, $xss_filter );
+	}
+
+	public function inputGet($key, $xss_filter = false)
+	{
+		return $this->input->get ( $key, $xss_filter );
+	}
 }
 // END Controller class
 
