@@ -46,14 +46,9 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">分类</label>
+                    <label class="control-label" for="input01">标签</label>
                     <div class="controls">
-                        <select id="category_select" name="category" multiple="multiple" >
-                        	<option value="chihuo">吃货</option>
-                        	<option value="daociyiyou">到此一游</option>
-                        	<option value="qianwuguren">前无古人</option>
-                        	<option value="fafentuqiang">发奋图强</option>
-                        </select>
+                        <input class="input-xxlarge" id="category_select" name="category" type="text"/>
                     </div>
                 </div>
                 <?php

@@ -26,7 +26,6 @@ class create extends MY_Controller
 	    $this->addJavascriptFile('js/jquery.nestable.js');
 	    $this->addJavascriptFile('js/create.js');
 	    $this->addAutoRunJavascriptCode("$('.dd').nestable();");
-	    $this->addAutoRunJavascriptCode("$('#category_select').select2(); ");
 	    $this->addStyleFile('js/select2/select2.css');
 	    $this->addStyleFile('css/icons_big.css');
 	    $this->addStyleFile('css/create.css');
@@ -51,13 +50,11 @@ class create extends MY_Controller
 		if ( ! $this->upload->do_upload('file'))
 		{
 			$error = array('error' => $this->upload->display_errors());
-			 
 			print_r($error);
 		}
 		else
 		{
 			$data = array('upload_data' => $this->upload->data());
-			 
 			print_r($data);
 		}
 	}

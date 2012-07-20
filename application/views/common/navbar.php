@@ -21,7 +21,7 @@
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_ALL); ?>"><a href="#">所有成就</a></li>
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_JUSTLOOK); ?>"><a href="#">随便看看</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">标签分类<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">吃货</a></li>
                             <li><a href="#">到此一游</a></li>
