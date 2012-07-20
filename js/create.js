@@ -45,4 +45,10 @@ $(function(){
     step_3_to_2_btn.click(function(){
         setStep(2);
     });
+    
+    var logoModal = $('#logoModal');
+    var logoHandle = $('#logoHandle');
+    logoHandle.click(function(){
+    	logoModal.modal();
+    });
 });

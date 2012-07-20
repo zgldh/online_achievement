@@ -40,7 +40,12 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">成就LOGO</label>
                     <div class="controls">
-                        <a href="#" class="thumbnail" style="width: 128px;">
+                    <?php 
+                    	$this->load->add_package_path(APPPATH.'third_party/logo_widget/');
+						$this->load->library('index.html'); // Loads
+					?>
+			                    
+                        <a id="logoHandle" href="#" class="thumbnail" style="width: 128px;">
                             <img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
                         </a>
                     </div>
@@ -166,6 +171,25 @@
             </fieldset>
         </form>
         <!-- 预览完成 结束 -->
+    </div>
+</div>
+
+<div class="modal hide fade" id="logoModal">
+    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">×</button>
+	    <h3>上传LOGO</h3>
+    </div>
+    <div class="modal-body">
+    	<?php $this->load->helper(array('form', 'url'));?>
+    	<?php echo form_open_multipart('create/upload');?>
+    		<fieldset>
+    			<input type="file" name="file" class="input-file input-xlarge" />
+    			<button type="submit" class="btn btn-primary pull-right">上传</button>
+    		</fieldset>
+    	</form>
+    </div>
+    <div class="modal-footer">
+	    <a href="#" class="btn" data-dismiss="modal">Close</a>
     </div>
 </div>
 

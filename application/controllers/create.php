@@ -21,6 +21,7 @@ class create extends MY_Controller
             $this->signinAndRedirectTo('/create');
         }
 
+	    $this->addJavascriptFile('js/bootstrap.min.js');
 	    $this->addJavascriptFile('js/jquery.nestable.js');
 	    $this->addJavascriptFile('js/create.js');
 	    $this->addAutoRunJavascriptCode("$('.dd').nestable();");
@@ -31,6 +32,31 @@ class create extends MY_Controller
 
 	    $this->setTitle("编写成就--在线成就系统");
 		$this->view('/create/create');
+	}
+
+
+	function upload()
+	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = '1000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+	
+		$this->load->library('upload', $config);
+	
+		if ( ! $this->upload->do_upload('file'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			 
+			print_r($error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			 
+			print_r($data);
+		}
 	}
 }
 
