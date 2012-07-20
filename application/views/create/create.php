@@ -40,11 +40,6 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">成就LOGO</label>
                     <div class="controls">
-                    <?php 
-                    	$this->load->add_package_path(APPPATH.'third_party/logo_widget/');
-						$this->load->library('index.html'); // Loads
-					?>
-			                    
                         <a id="logoHandle" href="#" class="thumbnail" style="width: 128px;">
                             <img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
                         </a>
