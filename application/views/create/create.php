@@ -45,6 +45,17 @@
                         </a>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">分类</label>
+                    <div class="controls">
+                        <select id="category_select" name="category" multiple="multiple" >
+                        	<option value="chihuo">吃货</option>
+                        	<option value="daociyiyou">到此一游</option>
+                        	<option value="qianwuguren">前无古人</option>
+                        	<option value="fafentuqiang">发奋图强</option>
+                        </select>
+                    </div>
+                </div>
                 <?php
                 /**
                  * TODO 将来这里可以选择“前驱成就”, 显示“复制自某成就”

@@ -21,10 +21,13 @@ class create extends MY_Controller
             $this->signinAndRedirectTo('/create');
         }
 
+	    $this->addJavascriptFile('js/select2/select2.js');
 	    $this->addJavascriptFile('js/bootstrap.min.js');
 	    $this->addJavascriptFile('js/jquery.nestable.js');
 	    $this->addJavascriptFile('js/create.js');
 	    $this->addAutoRunJavascriptCode("$('.dd').nestable();");
+	    $this->addAutoRunJavascriptCode("$('#category_select').select2(); ");
+	    $this->addStyleFile('js/select2/select2.css');
 	    $this->addStyleFile('css/icons_big.css');
 	    $this->addStyleFile('css/create.css');
 
