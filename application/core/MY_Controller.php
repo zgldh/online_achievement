@@ -163,6 +163,10 @@ class MY_Controller extends CI_Controller{
 		return $this->input->get ( $key, $xss_filter );
 	}
 
+	/**
+	 * 跳转到登录页面， 登录后重定向到redirect_to_url
+	 * @param string $redirect_to_url 登录后重定向到的位置
+	 */
     public function signinAndRedirectTo($redirect_to_url = '/')
     {
         $redirect_to = urlencode($redirect_to_url);
@@ -170,6 +174,29 @@ class MY_Controller extends CI_Controller{
         $this->load->helper('url');
         redirect('/signin?redirect_to='.$redirect_to);
         exit();
+    }
+    
+    /**
+     * 得到JSONP输出字符串
+     * @param string $callback    回调javascript函数名字
+     * @param any $parameter      回调参数
+     * @param string $iframe_id = false  如果输出在iframe里面， 则需要在这里提供iframe的id
+     * @return string 是一个&lt;script&gt;...js代码...&lt;/script&gt; 的字符串
+     */
+    public function getJSONP($callback,$parameter, $iframe_id = false)
+    {
+        $parameter = json_encode($parameter);
+        $str = '<script>';
+        if($iframe_id)
+        {
+            $str.= 'parent.'.$callback.'('.$parameter.',"'.$iframe_id.'");';
+        }
+        else
+        {
+            $str.= $callback.'('.$parameter.');';
+        }
+        $str .= '</script>';
+        return $str;
     }
 }
 // END Controller class

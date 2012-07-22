@@ -51,6 +51,8 @@ class CI_Upload {
 	public $xss_clean				= FALSE;
 	public $temp_prefix				= "temp_file_";
 	public $client_name				= '';
+	
+	public $relative_path           = '';
 
 	protected $_file_name_override	= '';
 
@@ -712,6 +714,7 @@ class CI_Upload {
 
 		if (function_exists('realpath') AND @realpath($this->upload_path) !== FALSE)
 		{
+		    $this->relative_path = str_replace("\\","/",$this->upload_path);
 			$this->upload_path = str_replace("\\", "/", realpath($this->upload_path));
 		}
 
@@ -1149,25 +1152,29 @@ class CI_Upload {
 			@mkdir ( $path, 0777, true );
 		}
 		
-		$path .= ($fd.DIRECTORY_SEPARATOR);
+		$path .= ($fd.'/');
+		$this->relative_path .= ($fd.'/');
 		if (! is_dir ( $path ))
 		{
 			@mkdir ( $path, 0777, true );
 		}
 		
-		$path .= ($sd.DIRECTORY_SEPARATOR);
+		$path .= ($sd.'/');
+		$this->relative_path .= ($sd.'/');
 		if (! is_dir ( $path ))
 		{
 			@mkdir ( $path, 0777, true );
 		}
 		
-		$path .= ($td.DIRECTORY_SEPARATOR);
+		$path .= ($td.'/');
+		$this->relative_path .= ($td.'/');
 		if (! is_dir ( $path ))
 		{
 			@mkdir ( $path, 0777, true );
 		}
 		
-		$path .= ($md5.DIRECTORY_SEPARATOR);
+		$path .= ($md5.'/');
+		$this->relative_path .= ($md5.'/');
 		if (! is_dir ( $path ))
 		{
 			@mkdir ( $path, 0777, true );

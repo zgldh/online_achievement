@@ -46,11 +46,11 @@ $(function(){
         setStep(2);
     });
 
-    var logoModal = $('#logoModal');
-    var logoHandle = $('#logoHandle');
-    logoHandle.click(function(){
-    	logoModal.modal();
-    });
+    var logo_modal = $('#logo_modal');
+    var logo_handle = $('#logo_handle');
+//    logo_handle.click(function(){
+//    	logo_modal.modal({backdrope:true});
+//    });
 
     var category_select = $('#category_select');
     category_select.select2({
@@ -70,4 +70,24 @@ $(function(){
                                         {id: 2, text: '前无古人'},
                                         {id: 3, text: '发奋图强'}]
                             });
+    
+    var logo_form = $('#logo_form');
+    var image_file = $('#image_file');
+    image_file.change(function(){
+        var iframe_name = 'LOGO_'+Date.parse(new Date());
+        var iframe = $('<iframe style="display:none;" name="'+iframe_name+'" id="'+iframe_name+'"></iframe>');
+        $(document.body).append(iframe);
+        var action_url = '/create/jsonp_logo_upload?callback=LOGO_CALLBACK&iframe_id='+iframe_name;
+        logo_form.attr('action',action_url).attr('target',iframe_name).submit();
+    });
 });
+var LOGO_CALLBACK = function(re, iframe_id){
+    if(typeof(re) == 'string')
+    {
+        var logo_chop_group = $('#logo_chop_group');
+        var logo_img = $('#logo_img');
+        logo_img.attr('src',re);
+        logo_chop_group.removeClass('hide');
+    }
+    $('#'+iframe_id).remove();
+};

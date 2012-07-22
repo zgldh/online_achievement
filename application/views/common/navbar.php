@@ -26,7 +26,9 @@
                             <li><a href="#">吃货</a></li>
                             <li><a href="#">到此一游</a></li>
                             <li><a href="#">前无古人</a></li>
-                            <li><a href="#">发奋图强</a></li>
+                            <li><a href="#">发奋图强</a></li> 
+                            <li class="divider"></li>
+                            <li><a href="#">全部</a></li>                  
                         </ul>
                     </li>
                     <li class="divider-vertical"></li>
@@ -36,9 +38,16 @@
                 </form>
                 <ul class="nav pull-right">
                 <?php if($this->webuser->isLogin()):?>
-                    <li class="navbar-text"><?php echo $this->webuser->getUserName();?></li>
-                    <li class="divider-vertical"></li>
-                    <li><a href="/logout" title="退出"><i class="icon-white icon-off"></i>退出</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->webuser->getUserName();?><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">个人资料</a></li>
+                            <li><a href="#">我的成就</a></li>
+                            <li><a href="#">信息</a></li> 
+                            <li class="divider"></li>
+                            <li><a href="/logout" title="退出">退出</a></li>
+                        </ul>
+                    </li>
                 <?php else:?>
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>"><a href="/register">注册</a></li>
                     <?php if($this->navbar->isDisplaySignIn()):?>

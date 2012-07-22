@@ -36,10 +36,10 @@ class create extends MY_Controller
 		$this->view('/create/create');
 	}
 
-
-	function upload()
+	
+	public function jsonp_logo_upload()
 	{
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = 'uploads';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size'] = '1000';
 		$config['max_width']  = '1024';
@@ -47,15 +47,17 @@ class create extends MY_Controller
 	
 		$this->load->library('upload', $config);
 	
+		$callback = $this->inputGet('callback');
+		$iframe_id = $this->inputGet('iframe_id');
 		if ( ! $this->upload->do_upload('file'))
 		{
-			$error = array('error' => $this->upload->display_errors());
-			print_r($error);
+			echo $this->getJSONP($callback, $this->upload->display_errors(), $iframe_id);
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
-			print_r($data);
+			$data = $this->upload->data();
+			$image_url = '/'.$this->upload->relative_path.$data['file_name'];
+			echo $this->getJSONP($callback, $image_url, $iframe_id);
 		}
 	}
 }

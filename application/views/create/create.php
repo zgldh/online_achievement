@@ -28,19 +28,19 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">成就名称</label>
                     <div class="controls">
-                        <input type="text" class="input-xxlarge" id="input01">
+                        <input type="text" class="input-xlarge" id="input01">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">成就描述</label>
                     <div class="controls">
-                        <textarea class="input-xxlarge" rows="7"></textarea>
+                        <textarea class="input-xlarge" rows="7"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">成就LOGO</label>
                     <div class="controls">
-                        <a id="logoHandle" href="#" class="thumbnail" style="width: 128px;">
+                        <a id="logo_handle" href="#logo_modal" data-toggle="modal" class="thumbnail" style="width: 128px;">
                             <img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
                         </a>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">标签</label>
                     <div class="controls">
-                        <input class="input-xxlarge" id="category_select" name="category" type="text"/>
+                        <input class="input-xlarge" id="category_select" name="category" type="text"/>
                     </div>
                 </div>
                 <?php
@@ -175,17 +175,27 @@
     </div>
 </div>
 
-<div class="modal hide fade" id="logoModal">
+<div class="modal hide" id="logo_modal">
     <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">×</button>
 	    <h3>上传LOGO</h3>
     </div>
     <div class="modal-body">
     	<?php $this->load->helper(array('form', 'url'));?>
-    	<?php echo form_open_multipart('create/upload');?>
+    	<form id="logo_form" action="/create/jsonp_logo_upload" class="form-horizontal" accept-charset="utf-8" method="post" enctype="multipart/form-data">
     		<fieldset>
-    			<input type="file" name="file" class="input-file input-xlarge" />
-    			<button type="submit" class="btn btn-primary pull-right">上传</button>
+                <div class="control-group">
+                    <label class="control-label" for="image_file">请选择成就Logo</label>
+                    <div class="controls">
+    			        <input type="file" name="file" class="input-file" id="image_file" />   
+                    </div>
+                </div> 
+                <div class="control-group hide" id="logo_chop_group">
+                    <label class="control-label">选择区域</label>
+                    <div class="controls">
+    			        <img src="" id="logo_img"/>   
+                    </div>
+                </div> 
     		</fieldset>
     	</form>
     </div>
