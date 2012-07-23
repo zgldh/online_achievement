@@ -40,6 +40,15 @@
     <?php endforeach;?>
     <?php endif;?>
 
+    <?php // css codes ?>
+    <?php if($css_codes):?>
+    <style>
+    <?php foreach($css_codes as $index=>$css_code):?>
+    <?php echo $css_code;?>
+    <?php endforeach;?>
+    </style>
+    <?php endif;?>
+
 	<title><?php echo $title;?></title>
 </head>
 <body>

@@ -48,9 +48,6 @@ $(function(){
 
     var logo_modal = $('#logo_modal');
     var logo_handle = $('#logo_handle');
-//    logo_handle.click(function(){
-//    	logo_modal.modal({backdrope:true});
-//    });
 
     var category_select = $('#category_select');
     category_select.select2({
@@ -70,7 +67,7 @@ $(function(){
                                         {id: 2, text: '前无古人'},
                                         {id: 3, text: '发奋图强'}]
                             });
-    
+
     var logo_form = $('#logo_form');
     var image_file = $('#image_file');
     image_file.change(function(){
@@ -80,14 +77,58 @@ $(function(){
         var action_url = '/create/jsonp_logo_upload?callback=LOGO_CALLBACK&iframe_id='+iframe_name;
         logo_form.attr('action',action_url).attr('target',iframe_name).submit();
     });
+
+    var logo_img = $('#logo_img');
 });
 var LOGO_CALLBACK = function(re, iframe_id){
     if(typeof(re) == 'string')
     {
-        var logo_chop_group = $('#logo_chop_group');
         var logo_img = $('#logo_img');
+        var logo_chop_group = $('#logo_chop_group');
+        var logo_preview = $('#logo_preview');
+        var logo_preview_group = $('#logo_preview_group');
         logo_img.attr('src',re);
         logo_chop_group.removeClass('hide');
+        logo_preview.attr('src',re);
+        logo_preview_group.removeClass('hide');
+
+        var updatePreview = function(c)
+        {
+            if (parseInt(c.w) > 0)
+            {
+                var rx = 128 / c.w;
+                var ry = 128 / c.h;
+
+                logo_preview.css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                    marginTop: '-' + Math.round(ry * c.y) + 'px'
+                });
+            }
+        };
+
+        var jcrop_api, boundx, boundy;
+        logo_img.Jcrop(
+            {
+                aspectRatio: 1,
+                minSize: [128,128],
+                maxSize: [128,128],
+                bgFade:     false,
+                bgOpacity: .3,
+                setSelect: [ 0, 0, 127, 127 ],
+                onChange: updatePreview,
+                onSelect: updatePreview,
+            },
+            function()
+            {
+                var bounds = this.getBounds();
+                boundx = bounds[0];
+                boundy = bounds[1];
+                jcrop_api = this;
+            }
+        );
+
     }
     $('#'+iframe_id).remove();
 };

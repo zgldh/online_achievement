@@ -17,6 +17,7 @@ class MY_Controller extends CI_Controller{
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
     private $_styles = array();
+    private $_style_codes = array();
     private $_title = null;
 
     private $_show_navbar = true;
@@ -79,7 +80,6 @@ class MY_Controller extends CI_Controller{
     /**
      * 添加一段自动执行的Javascript代码
      * @param String $path
-     * @return boolean true成功添加 false已经存在
      */
     public function addAutoRunJavascriptCode($code)
     {
@@ -99,6 +99,14 @@ class MY_Controller extends CI_Controller{
         }
         return false;
     }
+    /**
+     * 添加一段css代码
+     * @param String css code
+     */
+    public function addStyleCode($code)
+    {
+        $this->_style_codes[] = $code;
+    }
 
     /**
      * 显示出一个模板来
@@ -114,10 +122,12 @@ class MY_Controller extends CI_Controller{
         }
 
         $meta_data = array(
-                'title'=>$this->getTitle(),
-                'javascripts'=>$this->_javascripts,
-                'auto_javascript_codes'=>$this->_auto_javascript_codes,
-                'styles'=>$this->_styles
+                            'title'=>$this->getTitle(),
+                            'javascripts'=>$this->_javascripts,
+                            'auto_javascript_codes'=>$this->_auto_javascript_codes,
+                            'styles'=>$this->_styles
+,
+                            'css_codes'=>$this->_style_codes
         );
         $data = array_merge($meta_data, $in_data);
 
@@ -175,7 +185,7 @@ class MY_Controller extends CI_Controller{
         redirect('/signin?redirect_to='.$redirect_to);
         exit();
     }
-    
+
     /**
      * 得到JSONP输出字符串
      * @param string $callback    回调javascript函数名字

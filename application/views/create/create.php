@@ -187,20 +187,29 @@
                 <div class="control-group">
                     <label class="control-label" for="image_file">请选择成就Logo</label>
                     <div class="controls">
-    			        <input type="file" name="file" class="input-file" id="image_file" />   
+    			        <input type="file" name="file" class="input-file" id="image_file" />
                     </div>
-                </div> 
+                </div>
                 <div class="control-group hide" id="logo_chop_group">
                     <label class="control-label">选择区域</label>
                     <div class="controls">
-    			        <img src="" id="logo_img"/>   
+    			        <img src="" id="logo_img"/>
                     </div>
-                </div> 
+                </div>
+                <div class="control-group hide" id="logo_preview_group">
+                    <label class="control-label">预览</label>
+                    <div class="controls">
+                        <div style="width: 128px;height: 128px;overflow:hidden;">
+                            <img src="" id="logo_preview" alt="Preview" class="jcrop-preview" />
+                        </div>
+                    </div>
+                </div>
     		</fieldset>
     	</form>
     </div>
     <div class="modal-footer">
-	    <a href="#" class="btn" data-dismiss="modal">Close</a>
+	    <button class="btn btn-success" type="button">确定</button>
+	    <a href="#" class="btn" data-dismiss="modal">取消</a>
     </div>
 </div>
 
