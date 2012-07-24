@@ -31,7 +31,6 @@ class create extends MY_Controller
 		$this->addStyleFile('js/jcrop/jquery.Jcrop.min.css');
 		$this->addStyleFile('css/icons_big.css');
 		$this->addStyleFile('css/create.css');
-		$this->addStyleCode('.jcrop-handle{display:none;}');
 
 		$this->navbar->setCurrentItem(NavBar::$ITEM_CREATE);
 
@@ -52,20 +51,26 @@ class create extends MY_Controller
 		$iframe_id = $this->inputGet('iframe_id');
 		if ( ! $this->upload->do_upload('file'))
 		{
-			echo $this->getJSONP($callback, $this->upload->display_errors(), $iframe_id);
+			$re = array('error_msg'=>$this->upload->error_msg);
+			echo $this->getJSONP($callback,$re, $iframe_id);
 		}
 		else
-		{
+		{	
 			$data = $this->upload->data();
 
-			$config['source_image'] = $data['full_path'];
-			$config['width'] = 255;
-			$config['height'] = 255;
-			$this->load->library('image_lib', $config);
-			$this->image_lib->resize();
-
+			if($data['image_width'] > 256 || $data['image_height'] > 256)
+			{
+				$config['source_image'] = $data['full_path'];
+				$config['width'] = 256;
+				$config['height'] = 256;
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+			}
 			$image_url = '/'.$this->upload->relative_path.$data['file_name'];
-			echo $this->getJSONP($callback, $image_url, $iframe_id);
+			$re = array('image_url'=>$image_url,
+						'image_width'=>$data['image_width'],
+						'image_height'=>$data['image_height']);
+			echo $this->getJSONP($callback, $re, $iframe_id);
 		}
 	}
 }

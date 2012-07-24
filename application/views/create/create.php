@@ -187,7 +187,7 @@
                 <div class="control-group">
                     <label class="control-label" for="image_file">请选择成就Logo</label>
                     <div class="controls">
-    			        <input type="file" name="file" class="input-file" id="image_file" />
+    			        <input type="file" name="file" class="input-file" id="image_file" accept="image/*" />
                     </div>
                 </div>
                 <div class="control-group hide" id="logo_chop_group">

@@ -46,8 +46,6 @@ $(function(){
         setStep(2);
     });
 
-    var logo_modal = $('#logo_modal');
-    var logo_handle = $('#logo_handle');
 
     var category_select = $('#category_select');
     category_select.select2({
@@ -68,6 +66,11 @@ $(function(){
                                         {id: 3, text: '发奋图强'}]
                             });
 
+
+    //logo图像上传选择
+    var logo_modal = $('#logo_modal');
+    var logo_handle = $('#logo_handle');
+
     var logo_form = $('#logo_form');
     var image_file = $('#image_file');
     image_file.change(function(){
@@ -81,15 +84,15 @@ $(function(){
     var logo_img = $('#logo_img');
 });
 var LOGO_CALLBACK = function(re, iframe_id){
-    if(typeof(re) == 'string')
+    if(typeof(re.error_msg) == 'undefined')
     {
         var logo_img = $('#logo_img');
         var logo_chop_group = $('#logo_chop_group');
         var logo_preview = $('#logo_preview');
         var logo_preview_group = $('#logo_preview_group');
-        logo_img.attr('src',re);
+        logo_img.attr('src',re.image_url);
         logo_chop_group.removeClass('hide');
-        logo_preview.attr('src',re);
+        logo_preview.attr('src',re.image_url);
         logo_preview_group.removeClass('hide');
 
         var updatePreview = function(c)
@@ -108,15 +111,23 @@ var LOGO_CALLBACK = function(re, iframe_id){
             }
         };
 
-        var jcrop_api, boundx, boundy;
+        var pre_width = Math.min(128,re.image_width);
+        var pre_height= Math.min(128,re.image_height);
+        pre_width = Math.min(pre_width,re.pre_height);
+        pre_height = pre_width;
+
+        var boundx, boundy;
+        if(LOGO_CALLBACK.jcrop_api != null)
+    	{
+        	LOGO_CALLBACK.jcrop_api.destroy();
+    	}
         logo_img.Jcrop(
             {
                 aspectRatio: 1,
-                minSize: [128,128],
                 maxSize: [128,128],
                 bgFade:     false,
                 bgOpacity: .3,
-                setSelect: [ 0, 0, 127, 127 ],
+                setSelect: [ 0, 0, pre_width, pre_height ],
                 onChange: updatePreview,
                 onSelect: updatePreview,
             },
@@ -125,10 +136,13 @@ var LOGO_CALLBACK = function(re, iframe_id){
                 var bounds = this.getBounds();
                 boundx = bounds[0];
                 boundy = bounds[1];
-                jcrop_api = this;
+                LOGO_CALLBACK.jcrop_api = this;
             }
         );
-
     }
+    else
+	{
+    	alert(re.error_msg);
+	}
     $('#'+iframe_id).remove();
 };
