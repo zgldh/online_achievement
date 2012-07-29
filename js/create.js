@@ -83,8 +83,8 @@ $(function(){
         image_file_uploading.show();
     });
     var logo_img = $('#logo_img');
-    
-    
+
+
     //过程编辑器
     var procedure_editor = $('#procedure_editor');
     var procedure_editor_ol = procedure_editor.find('ol');
@@ -92,7 +92,7 @@ $(function(){
     var procedure_add_btn = $('#procedure_add_btn');
     procedure_add_btn.click(function(){
         var tpl= '<li class="dd-item" data-id="1"> ';
-        tpl+='<div class="dd-handle" style="display: inline-block;"><i class="icon-resize-vertical"></i></div> ';
+        tpl+='<div class="dd-handle" style="display: inline-block;"><i class="icon-move"></i></div> ';
         tpl+='<textarea class="procedure_content" placeholder="这一步做什么呢..."></textarea> ';
         tpl+='<button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button> ';
         tpl+='</li>';
@@ -107,7 +107,7 @@ $(function(){
         procedure_editor_ol.append(children_li);
         btn.parent().remove();
     });
-    
+
 });
 var LOGO_CALLBACK = function(re, iframe_id){
     if(typeof(re.error_msg) == 'undefined')
@@ -170,11 +170,11 @@ var LOGO_CALLBACK = function(re, iframe_id){
    	{
        	alert(re.error_msg);
    	}
-    
+
     var image_file = $('#image_file');
     var image_file_uploading = image_file.siblings('.alert');
     image_file.show();
     image_file_uploading.hide();
-    
+
     $('#'+iframe_id).remove();
 };
