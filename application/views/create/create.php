@@ -34,7 +34,7 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">成就描述</label>
                     <div class="controls">
-                        <textarea class="input-xlarge" rows="7"></textarea>
+                        <textarea class="input-xlarge" rows="7" style="max-height: 200px;"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
@@ -77,27 +77,16 @@
                 <div class="control-group">
                     <label class="control-label" for="input01">实现步骤</label>
                     <div class="controls">
-                        <div class="dd">
+                        <div id="procedure_editor" class="dd">
                             <ol class="dd-list">
                                 <li class="dd-item" data-id="1">
-                                    <div class="dd-handle">Item 1</div>
-                                </li>
-                                <li class="dd-item" data-id="2">
-                                    <div class="dd-handle">Item 2</div>
-                                </li>
-                                <li class="dd-item" data-id="3">
-                                    <div class="dd-handle">Item 3</div>
-                                    <ol class="dd-list">
-                                        <li class="dd-item" data-id="4">
-                                            <div class="dd-handle">Item 4</div>
-                                        </li>
-                                        <li class="dd-item" data-id="5">
-                                            <div class="dd-handle">Item 5</div>
-                                        </li>
-                                    </ol>
+                                    <div class="dd-handle" style="display: inline-block;"><i class="icon-resize-vertical"></i></div>
+                                    <textarea class="procedure_content" placeholder="这一步做什么呢..." ></textarea>
+                                    <button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button>
                                 </li>
                             </ol>
                         </div>
+                        <button id="procedure_add_btn" type="button" class="btn"><i class="icon-plus"></i> 增加步骤</button>
                     </div>
                 </div>
                 <div class="form-actions">
@@ -188,6 +177,7 @@
                     <label class="control-label" for="image_file">请选择成就Logo</label>
                     <div class="controls">
     			        <input type="file" name="file" class="input-file" id="image_file" accept="image/*" />
+    			        <div class="alert hide">上传中...</div>
                     </div>
                 </div>
                 <div class="control-group hide" id="logo_chop_group">

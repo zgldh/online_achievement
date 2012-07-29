@@ -25,8 +25,10 @@ class create extends MY_Controller
 		$this->addJavascriptFile('js/bootstrap.min.js');
 		$this->addJavascriptFile('js/jquery.nestable.js');
 		$this->addJavascriptFile('js/jcrop/jquery.Jcrop.min.js');
+		$this->addJavascriptFile('js/jquery.autosize.js');
+		$this->addAutoRunJavascriptCode("$('textarea').autosize();");
 		$this->addJavascriptFile('js/create.js');
-		$this->addAutoRunJavascriptCode("$('.dd').nestable();");
+		
 		$this->addStyleFile('js/select2/select2.css');
 		$this->addStyleFile('js/jcrop/jquery.Jcrop.min.css');
 		$this->addStyleFile('css/icons_big.css');

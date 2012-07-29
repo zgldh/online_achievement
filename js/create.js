@@ -70,18 +70,44 @@ $(function(){
     //logo图像上传选择
     var logo_modal = $('#logo_modal');
     var logo_handle = $('#logo_handle');
-
     var logo_form = $('#logo_form');
     var image_file = $('#image_file');
+    var image_file_uploading = image_file.siblings('.alert');
     image_file.change(function(){
         var iframe_name = 'LOGO_'+Date.parse(new Date());
         var iframe = $('<iframe style="display:none;" name="'+iframe_name+'" id="'+iframe_name+'"></iframe>');
         $(document.body).append(iframe);
         var action_url = '/create/jsonp_logo_upload?callback=LOGO_CALLBACK&iframe_id='+iframe_name;
         logo_form.attr('action',action_url).attr('target',iframe_name).submit();
+        image_file.hide();
+        image_file_uploading.show();
     });
-
     var logo_img = $('#logo_img');
+    
+    
+    //过程编辑器
+    var procedure_editor = $('#procedure_editor');
+    var procedure_editor_ol = procedure_editor.find('ol');
+    procedure_editor.nestable({maxDepth:2,expandBtnHTML:'',collapseBtnHTML:''});
+    var procedure_add_btn = $('#procedure_add_btn');
+    procedure_add_btn.click(function(){
+        var tpl= '<li class="dd-item" data-id="1"> ';
+        tpl+='<div class="dd-handle" style="display: inline-block;"><i class="icon-resize-vertical"></i></div> ';
+        tpl+='<textarea class="procedure_content" placeholder="这一步做什么呢..."></textarea> ';
+        tpl+='<button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button> ';
+        tpl+='</li>';
+        tpl = $(tpl);
+        procedure_editor_ol.append(tpl);
+        tpl.find('textarea').autosize();
+    });
+    var procedure_remove_btn = procedure_editor.find('.procedure_remove_btn');
+    procedure_remove_btn.live('click',function(){
+        var btn = $(this);
+        var children_li = btn.siblings('ol').find('li');
+        procedure_editor_ol.append(children_li);
+        btn.parent().remove();
+    });
+    
 });
 var LOGO_CALLBACK = function(re, iframe_id){
     if(typeof(re.error_msg) == 'undefined')
@@ -118,9 +144,9 @@ var LOGO_CALLBACK = function(re, iframe_id){
 
         var boundx, boundy;
         if(LOGO_CALLBACK.jcrop_api != null)
-    	{
-        	LOGO_CALLBACK.jcrop_api.destroy();
-    	}
+       	{
+           	LOGO_CALLBACK.jcrop_api.destroy();
+       	}
         logo_img.Jcrop(
             {
                 aspectRatio: 1,
@@ -141,8 +167,14 @@ var LOGO_CALLBACK = function(re, iframe_id){
         );
     }
     else
-	{
-    	alert(re.error_msg);
-	}
+   	{
+       	alert(re.error_msg);
+   	}
+    
+    var image_file = $('#image_file');
+    var image_file_uploading = image_file.siblings('.alert');
+    image_file.show();
+    image_file_uploading.hide();
+    
     $('#'+iframe_id).remove();
 };
