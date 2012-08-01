@@ -22,33 +22,37 @@
         <!-- 左侧栏 结束 -->
 
         <!-- 基本信息 开始 -->
-        <form id="form_step_1" class="form-horizontal span9">
-            <fieldset>
+        <form class="form-horizontal span9">
+            <fieldset id="form_step_1">
                 <legend><i class="icon-big icon-file"></i>基本信息</legend>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就名称</label>
+                    <label class="control-label" for="ach_name">成就名称</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="input01">
+                        <input type="text" class="input-xlarge" id="ach_name">
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就描述</label>
+                    <label class="control-label" for="ach_description">成就描述</label>
                     <div class="controls">
-                        <textarea class="input-xlarge" rows="7" style="max-height: 200px;"></textarea>
+                        <textarea id="ach_description" class="input-xlarge" rows="7" style="max-height: 200px;"></textarea>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就LOGO</label>
+                    <label class="control-label">成就LOGO</label>
                     <div class="controls">
-                        <a id="logo_handle" href="#logo_modal" data-toggle="modal" class="thumbnail" style="width: 128px;">
-                            <img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
+                        <a id="logo_handle" href="#logo_modal" data-toggle="modal" class="thumbnail logo_preview_box">
+                        	<div class="logo_preview_box_div">
+                        		<img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
+                            </div>
                         </a>
+                        <input type="hidden" name="ach_logo_src" id="ach_logo_src" value="" />
+                        <input type="hidden" name="ach_logo_crop" id="ach_logo_crop" value="" />
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">标签</label>
+                    <label class="control-label" for="ach_categories">标签</label>
                     <div class="controls">
-                        <input class="input-xlarge" id="category_select" name="category" type="text"/>
+                        <input class="input-xlarge" id="ach_categories" name="category" type="text"/>
                     </div>
                 </div>
                 <?php
@@ -60,26 +64,28 @@
                     <button id="step_1_to_2_btn" class="btn btn-primary btn-large" type="button" >下一步</button>
                 </div>
             </fieldset>
-        </form>
         <!-- 基本信息 结束 -->
 
         <!-- 步骤计划 开始 -->
-        <form id="form_step_2" class="form-horizontal span9">
-            <fieldset>
+            <fieldset id="form_step_2">
                 <legend><i class="icon-big icon-list"></i>步骤计划</legend>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就名称</label>
+                    <label class="control-label">成就名称</label>
                     <div class="controls">
-                        <img alt="成就logo">
-                        <h2 class="help-inline">成就名称</h2>
+                        <div class="thumbnail logo_preview_box">
+                        	<div class="logo_preview_box_div">
+                        		<img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
+                            </div>
+                        </div>
+                        <h2 class="help-inline ach_name_preview">成就名称</h2>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">实现步骤</label>
+                    <label class="control-label">实现步骤</label>
                     <div class="controls">
                         <div id="procedure_editor" class="dd">
                             <ol class="dd-list">
-                                <li class="dd-item" data-id="1">
+                                <li class="dd-item" data-text="">
                                     <div class="dd-handle" style="display: inline-block;"><i class="icon-move"></i></div>
                                     <textarea class="procedure_content" placeholder="这一步做什么呢..." ></textarea>
                                     <button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button>
@@ -94,64 +100,31 @@
                     <button id="step_2_to_3_btn" class="btn btn-primary btn-large" type="button" >下一步</button>
                 </div>
             </fieldset>
-        </form>
         <!-- 步骤计划 结束 -->
 
         <!-- 预览完成 开始 -->
-        <form id="form_step_3" class="form-horizontal span9">
-            <fieldset>
+            <fieldset id="form_step_3">
                 <legend><i class="icon-big icon-circle_ok"></i>预览，完成！</legend>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就名称</label>
+                    <label class="control-label">成就名称</label>
                     <div class="controls">
-                        <img alt="成就logo">
-                        <h2 class="help-inline">成就名称</h2>
+                        <div class="thumbnail logo_preview_box">
+                        	<div class="logo_preview_box_div">
+                        		<img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
+                            </div>
+                        </div>
+                        <h2 class="help-inline ach_name_preview">成就名称</h2>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">成就描述</label>
+                    <label class="control-label">成就描述</label>
                     <div class="controls">
-                        {成就描述,一大堆}
+                        <p id="ach_description_preview"></p>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">实现步骤</label>
-                    <div class="controls">
-                        <ol>
-                            <li>
-                                <div>先干啥</div>
-                            </li>
-                            <li>
-                                <div>然后干啥</div>
-                                <ol>
-                                    <li>
-                                        <div>然后干啥1</div>
-                                    </li>
-                                    <li>
-                                        <div>然后干啥2</div>
-                                        <ol>
-                                            <li>
-                                                <div>然后干啥2.1</div>
-                                            </li>
-                                            <li>
-                                                <div>然后干啥2.2</div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                </ol>
-                            </li>
-                            <li>
-                                <div>最后干啥</div>
-                                <ol>
-                                    <li>
-                                        <div>最后干啥1</div>
-                                    </li>
-                                    <li>
-                                        <div>最后干啥2</div>
-                                    </li>
-                                </ol>
-                            </li>
-                        </ol>
+                    <label class="control-label">实现步骤</label>
+                    <div class="controls" id="procedure_preview">
                     </div>
                 </div>
                 <div class="form-actions">
@@ -180,17 +153,17 @@
     			        <div class="alert hide">上传中...</div>
                     </div>
                 </div>
-                <div class="control-group hide" id="logo_chop_group">
+                <div class="control-group hide logo_chop_group">
                     <label class="control-label">选择区域</label>
                     <div class="controls">
-    			        <img src="" id="logo_img"/>
+    			        <img src="" class="logo_img"/>
                     </div>
                 </div>
-                <div class="control-group hide" id="logo_preview_group">
+                <div class="control-group hide logo_preview_group">
                     <label class="control-label">预览</label>
                     <div class="controls">
                         <div style="width: 128px;height: 128px;overflow:hidden;">
-                            <img src="" id="logo_preview" alt="Preview" class="jcrop-preview" />
+                            <img src="" alt="Preview" class="logo_preview jcrop-preview" />
                         </div>
                     </div>
                 </div>
@@ -198,7 +171,7 @@
     	</form>
     </div>
     <div class="modal-footer">
-	    <button class="btn btn-success" type="button">确定</button>
+	    <button class="btn btn-success logo_confirm_btn" type="button">确定</button>
 	    <a href="#" class="btn" data-dismiss="modal">取消</a>
     </div>
 </div>

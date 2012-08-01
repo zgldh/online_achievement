@@ -69,9 +69,10 @@ class create extends MY_Controller
 				$this->image_lib->resize();
 			}
 			$image_url = '/'.$this->upload->relative_path.$data['file_name'];
+			$image_size = getimagesize($data['full_path']);
 			$re = array('image_url'=>$image_url,
-						'image_width'=>$data['image_width'],
-						'image_height'=>$data['image_height']);
+						'image_width'=>$image_size[0],
+						'image_height'=>$image_size[1]);
 			echo $this->getJSONP($callback, $re, $iframe_id);
 		}
 	}

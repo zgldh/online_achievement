@@ -47,6 +47,14 @@
 	display: none;
 }
 
+.ach_name_preview{vertical-align: top;}
+.logo_preview_box{width: 128px;height:128px;display: inline-block;}
+.logo_preview_box_div{width: 128px;height:128px;position: relative; display: inline-block; overflow: hidden;}
+.logo_preview_box_div img{position: absolute;max-width: none;}
+
+/**
+步骤列表 css
+**/
 .dd {
 	display: block;
 	font-size: 13px;
