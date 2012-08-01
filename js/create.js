@@ -46,14 +46,14 @@ $(function(){
         // 设置预览步骤
         var procedure = procedure_editor.nestable('serialize');
         procedure_preview.empty();
-        
+
         var ol = ProcedureOLmaker(procedure,1);
         procedure_preview.append(ol);
     });
     step_3_to_2_btn.click(function(){
         setStep(2);
     });
-    
+
     /**
      * 生成 步骤计划 的ol列表. 递归
      */
@@ -93,13 +93,13 @@ $(function(){
     	}
         return ol;
     }
-    
+
     var ach_name_preview = $('.ach_name_preview');
     var ach_name = $('#ach_name');
     ach_name.blur(function(){
     	ach_name_preview.text(ach_name.val());
     });
-    
+
     var ach_description_preview = $('#ach_description_preview');
     var ach_description = $('#ach_description');
     ach_description.blur(function(){
@@ -126,7 +126,7 @@ $(function(){
                                         {id: 3, text: '发奋图强'}]
                             });
 
-    
+
 
     //logo图像上传选择
     var logo_modal = $('#logo_modal');
@@ -151,6 +151,7 @@ $(function(){
         if(LOGO_CALLBACK.jcrop_api == null)
        	{
         	logo_modal.modal('hide');
+            return;
        	}
         var image = logo_modal.data('image');
     	var src = image.image_url;
@@ -158,9 +159,9 @@ $(function(){
     	ach_logo_src.val(src);
     	ach_logo_crop.val(crop);
     	//设置预览
-    	
+
     	var rate = 128/crop.w;
-    	
+
     	var logo_preview_box_img = $('.logo_preview_box img');
     	logo_preview_box_img.attr('src',src);
 
