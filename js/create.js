@@ -263,7 +263,6 @@ var LOGO_CALLBACK = function(re, iframe_id){
         logo_img.Jcrop(
             {
                 aspectRatio: 1,
-                maxSize: [128,128],
                 bgFade:     false,
                 bgOpacity: .3,
                 setSelect: [ 0, 0, pre_width, pre_height ],
