@@ -223,13 +223,17 @@ $(function(){
 var LOGO_CALLBACK = function(re, iframe_id){
     if(typeof(re.error_msg) == 'undefined')
     {
+        if(LOGO_CALLBACK.jcrop_api != null)
+       	{
+           	LOGO_CALLBACK.jcrop_api.destroy();
+       	}
         var logo_modal = $('#logo_modal');
         var logo_chop_group = logo_modal.find('.logo_chop_group');
         var logo_img = logo_modal.find('.logo_img');
         var logo_preview_group = logo_modal.find('.logo_preview_group');
         var logo_preview = logo_modal.find('.logo_preview');
         logo_modal.data('image',re);
-        logo_img.attr('src',re.image_url);
+        logo_img.attr('src',re.image_url).css('width',re.image_width+'px').css('height',re.image_height+'px');
         logo_chop_group.removeClass('hide');
         logo_preview.attr('src',re.image_url);
         logo_preview_group.removeClass('hide');
@@ -256,10 +260,6 @@ var LOGO_CALLBACK = function(re, iframe_id){
         pre_height = pre_width;
 
         var boundx, boundy;
-        if(LOGO_CALLBACK.jcrop_api != null)
-       	{
-           	LOGO_CALLBACK.jcrop_api.destroy();
-       	}
         logo_img.Jcrop(
             {
                 aspectRatio: 1,

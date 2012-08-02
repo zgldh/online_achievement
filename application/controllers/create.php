@@ -28,7 +28,7 @@ class create extends MY_Controller
 		$this->addJavascriptFile('js/jquery.autosize.js');
 		$this->addAutoRunJavascriptCode("$('textarea').autosize();");
 		$this->addJavascriptFile('js/create.js');
-		
+
 		$this->addStyleFile('js/select2/select2.css');
 		$this->addStyleFile('js/jcrop/jquery.Jcrop.min.css');
 		$this->addStyleFile('css/icons_big.css');
@@ -45,9 +45,6 @@ class create extends MY_Controller
 	{
 		$config['upload_path'] = 'uploads';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
 		$this->load->library('upload', $config);
 		$callback = $this->inputGet('callback');
 		$iframe_id = $this->inputGet('iframe_id');
@@ -57,7 +54,7 @@ class create extends MY_Controller
 			echo $this->getJSONP($callback,$re, $iframe_id);
 		}
 		else
-		{	
+		{
 			$data = $this->upload->data();
 
 			if($data['image_width'] > 256 || $data['image_height'] > 256)
