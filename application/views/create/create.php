@@ -1,9 +1,10 @@
 <div class="container-fluid">
+	<div class="page-header">
+		<h1>编写成就</h1>
+	</div>
     <div class="row-fluid">
         <!-- 左侧栏 开始 -->
         <div class="span3 well">
-            <h1>编写成就</h1>
-            <hr />
             <div id="step_titles" class="unstyled">
                 <div id="step_title_1" class="current">
                     <i class="icon-big icon-file"></i>
@@ -24,21 +25,22 @@
         <!-- 基本信息 开始 -->
         <form class="form-horizontal span9">
             <fieldset id="form_step_1">
-                <legend><i class="icon-big icon-file"></i>基本信息</legend>
                 <div class="control-group">
-                    <label class="control-label" for="ach_name">成就名称</label>
+                    <label class="control-label" for="ach_name"><span class="label label-important">必填</span> 成就名称</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="ach_name">
+                        <span class="help-inline error">请填写成就名称</span>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="ach_description">成就描述</label>
+                    <label class="control-label" for="ach_description"><span class="label label-important">必填</span> 成就描述</label>
                     <div class="controls">
                         <textarea id="ach_description" class="input-xlarge" rows="7" style="max-height: 200px;"></textarea>
+                        <span class="help-inline error">请填写成就描述</span>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">成就LOGO</label>
+                    <label class="control-label"><span class="label label-important">必填</span> 成就LOGO</label>
                     <div class="controls">
                         <a id="logo_handle" href="#logo_modal" data-toggle="modal" class="thumbnail logo_preview_box">
                         	<div class="logo_preview_box_div">
@@ -47,6 +49,8 @@
                         </a>
                         <input type="hidden" name="ach_logo_src" id="ach_logo_src" value="" />
                         <input type="hidden" name="ach_logo_crop" id="ach_logo_crop" value="" />
+                    
+                        <span class="help-inline error">请选择一个Logo</span>
                     </div>
                 </div>
                 <div class="control-group">
@@ -68,7 +72,6 @@
 
         <!-- 步骤计划 开始 -->
             <fieldset id="form_step_2">
-                <legend><i class="icon-big icon-list"></i>步骤计划</legend>
                 <div class="control-group">
                     <label class="control-label">成就名称</label>
                     <div class="controls">
@@ -104,7 +107,6 @@
 
         <!-- 预览完成 开始 -->
             <fieldset id="form_step_3">
-                <legend><i class="icon-big icon-circle_ok"></i>预览，完成！</legend>
                 <div class="control-group">
                     <label class="control-label">成就名称</label>
                     <div class="controls">

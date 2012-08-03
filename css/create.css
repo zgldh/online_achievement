@@ -69,6 +69,8 @@
 .dd textarea.procedure_content {
 	display: inline-block;
 	width: 414px;
+    max-width: 414px;
+    min-width: 414px;
 	max-height: 100px;
     min-height: 53px;
 }
@@ -90,6 +92,8 @@
 }
 .dd-list .dd-list textarea {
     width: 384px;	
+    max-width: 384px;	
+    min-width: 384px;	
 }
 
 .dd-collapsed .dd-list {

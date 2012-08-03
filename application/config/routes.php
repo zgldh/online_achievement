@@ -39,6 +39,7 @@
 */
 
 $route['default_controller'] = "home";
+$route['all'] = 'achievements/all';
 $route['404_override'] = '';
 
 

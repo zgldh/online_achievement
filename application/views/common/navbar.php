@@ -18,9 +18,9 @@
                     <li class="divider-vertical"></li>
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_HOME); ?>"><a href="/">首页</a></li>
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_CREATE); ?>"><a href="/create">编写成就</a></li>
-                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_ALL); ?>"><a href="#">所有成就</a></li>
-                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_JUSTLOOK); ?>"><a href="#">随便看看</a></li>
-                    <li class="dropdown">
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_ALL); ?>"><a href="/all">所有成就</a></li>
+                    <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_JUSTLOOK); ?>"><a href="/random">随便看看</a></li>
+                    <li class="dropdown <?php echo $this->navbar->getItemClass(NavBar::$ITEM_TAGS); ?>">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">标签分类<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">吃货</a></li>
@@ -28,7 +28,7 @@
                             <li><a href="#">前无古人</a></li>
                             <li><a href="#">发奋图强</a></li> 
                             <li class="divider"></li>
-                            <li><a href="#">全部</a></li>                  
+                            <li><a href="/tags">全部</a></li>                  
                         </ul>
                     </li>
                     <li class="divider-vertical"></li>
@@ -36,19 +36,19 @@
                 <form class="navbar-search pull-left" action="">
                     <input type="text" class="search-query span2" placeholder="搜索" />
                 </form>
-                <ul class="nav pull-right">
                 <?php if($this->webuser->isLogin()):?>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->webuser->getUserName();?><b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="icon-user"></i> 个人资料</a></li>
-                            <li><a href="#"><i class="icon-star"></i> 我的成就</a></li>
-                            <li><a href="#"><i class="icon-envelope"></i> 信息</a></li> 
-                            <li class="divider"></li>
-                            <li><a href="/logout" title="退出"><i class="icon-off"></i> 退出</a></li>
-                        </ul>
-                    </li>
+                <div class="btn-group pull-right">
+                	<a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo $this->webuser->getUserName();?><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                    	<li><a href="#"><i class="icon-list-alt"></i> 个人资料</a></li>
+                        <li><a href="#"><i class="icon-star"></i> 我的成就</a></li>
+                        <li><a href="#"><i class="icon-envelope"></i> 信息</a></li> 
+                        <li class="divider"></li>
+                        <li><a href="/logout" title="退出"><i class="icon-off"></i> 退出</a></li>
+                    </ul>
+                </div>
                 <?php else:?>
+                <ul class="nav pull-right">
                     <li class="<?php echo $this->navbar->getItemClass(NavBar::$ITEM_REGISTER); ?>"><a href="/register">注册</a></li>
                     <?php if($this->navbar->isDisplaySignIn()):?>
                     <li class="divider-vertical"></li>
@@ -68,8 +68,8 @@
                         </div>
                     </li>
                     <?php endif;?>
-                <?php endif;?>
                 </ul>
+                <?php endif;?>
             </div>
             <!-- /.nav-collapse -->
         </div>

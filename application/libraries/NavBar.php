@@ -11,6 +11,7 @@ class NavBar{
     public static $ITEM_JUSTLOOK = 'justlook';
     public static $ITEM_REGISTER = 'register';
     public static $ITEM_SIGNIN = 'signin';
+    public static $ITEM_TAGS = 'tags';
 
     private $_show_navbar = true;
     private $_current_navbar_item = 'home';

@@ -13,6 +13,7 @@
 
     <script src="/js/jquery-min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/oa.css" />
     <link rel="shortcut icon" href="images/favicon.ico" />
 
     <?php // load javascript files?>

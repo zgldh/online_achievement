@@ -36,6 +36,33 @@ $(function(){
     }
 
     step_1_to_2_btn.click(function(){
+    	var title = $.trim(ach_name.val());
+	    var description = $.trim(ach_description.val());
+	    var logo_src = ach_logo_src.val();
+	    var logo_crop = ach_logo_crop.val();
+	    
+	    form_step_1.find('.control-group').removeClass('error');
+	    $error = false;
+	    if(logo_src == '' || logo_crop == '')
+    	{
+	    	ach_logo_src.focus().parent().parent().addClass('error');
+		    $error = true;
+    	}
+	    if(description == '')
+	    {
+	    	ach_description.focus().parent().parent().addClass('error');
+		    $error = true;
+	    }
+	    if(title == '')
+	    {
+	    	ach_name.focus().parent().parent().addClass('error');
+		    $error = true;
+	    }
+    	
+	    if($error)
+    	{
+	    	return false;
+    	}
         setStep(2);
     });
     step_2_to_1_btn.click(function(){

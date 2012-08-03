@@ -1,0 +1,5 @@
+@CHARSET "UTF-8";
+
+.control-group .help-inline.error,.control-group .help-block.error{display: none;}
+.control-group.error .help-inline.error{display: inline-block;}
+.control-group.error .help-block.error{display: block;}
