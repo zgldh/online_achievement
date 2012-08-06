@@ -1,5 +1,5 @@
 <form class="form-horizontal" method="post">
-	<input type="hidden" name="redirect_to" value="<?php echo $this->navbar->getRedirectTo();?>" />
+	<input type="hidden" name="redirect_to" value="<?php echo $this->navbar->getSignInPageRedirectTo();?>" />
     <fieldset>
         <legend>会员登录</legend>
         <?php if(isset($error)):?>

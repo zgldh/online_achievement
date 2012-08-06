@@ -1,13 +1,20 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span7">
+			<?php if($errors):?>
+			<div class="alert alert-error"><ol>
+			<?php foreach($errors as $key=>$error):?>
+			<li><?php echo $error;?></li>
+			<?php endforeach;?>
+			</ol></div>
+			<?php endif;?>
 			<form class="form-horizontal" method="post">
 				<fieldset>
 					<legend>注册会员</legend>
 					<div class="control-group">
 						<label class="control-label" for="user_name">帐号</label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" id="user_name" name="user_name">
+							<input type="text" class="input-xlarge" id="user_name" name="user_name" value="<?php echo $user_name;?>">
 							<p class="help-block">登录时会用到</p>
 						</div>
 					</div>
@@ -28,7 +35,7 @@
 					<div class="control-group">
 						<label class="control-label" for="email">电子邮箱</label>
 						<div class="controls">
-							<input type="password" class="input-xlarge" id="email" name="email">
+							<input type="text" class="input-xlarge" id="email" name="email" value="<?php echo $email;?>">
 							<p class="help-block">确认注册，接收网站活动提醒等</p>
 						</div>
 					</div>

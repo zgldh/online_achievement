@@ -58,23 +58,23 @@ class WebUser{
      */
     public function login($user_name, $password)
     {
-        // TODO 从数据模型里验证能否登录
-        $m_user_id = 9527;
-        $m_user_name = 'test';
-        $m_password = 'test';
-        if($user_name != $m_user_name || $password != $m_password)
+        // 从数据模型里验证能否登录
+        
+        $ci = & get_instance();
+        $ci->load->model('User_model', 'user', true);
+        $_user = $ci->user->checkLogin($user_name, $password);
+        if(!$_user)
         {
             $error['msg'] = '错误的帐号或密码。';
             return $error;
         }
 
         //设置 webuser
-        $this->_user = null; // 数据模型 user
-        $this->_user_id = $m_user_id;
-        $this->_user_name = $m_user_name;
+        $this->_user = $_user; // 数据模型 user
+        $this->_user_id = $_user->user_id;
+        $this->_user_name = $_user->name;
 
         //设置session
-        $ci = & get_instance();
         $ci->load->library('session');
         $userdata = array(
                     WebUser::$_session_key => array(

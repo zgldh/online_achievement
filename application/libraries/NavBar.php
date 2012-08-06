@@ -149,6 +149,24 @@ class NavBar{
     	}
     	return $this->_redirect_to;
     }
+    /**
+     * 得到登录后重定向位置
+     */
+    public function getSignInPageRedirectTo()
+    {
+    	if($this->_redirect_to == null)
+    	{
+    		if(isset($_SERVER['HTTP_REFERER']))
+    		{
+    			$this->_redirect_to = $_SERVER['HTTP_REFERER'];
+    		}
+    		else
+    		{
+    			$this->_redirect_to = '/';
+    		}
+    	}
+    	return $this->_redirect_to;
+    }
 }
 // END Controller class
 

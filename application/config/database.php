@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['username'] = 'zgldhcom_oa';
+$db['default']['password'] = 'Q_SS{sb7]QuH';
+$db['default']['database'] = 'zgldhcom_oa';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
