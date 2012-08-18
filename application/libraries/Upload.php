@@ -354,6 +354,7 @@ class CI_Upload {
 						'file_type'			=> $this->file_type,
 						'file_path'			=> $this->upload_path,
 						'full_path'			=> $this->upload_path.$this->file_name,
+						'relative_path'		=> $this->relative_path,
 						'raw_name'			=> str_replace($this->file_ext, '', $this->file_name),
 						'orig_name'			=> $this->orig_name,
 						'client_name'		=> $this->client_name,
@@ -1141,7 +1142,7 @@ class CI_Upload {
 	 */
 	protected function getUploadPath()
 	{
-		$md5 = md5_file($this->file_temp);
+		$md5 = md5($this->file_temp.time());
 		$fd = substr ( $md5, 0, 2 );
 		$sd = substr ( $md5, 2, 2 );
 		$td = substr ( $md5, 4, 2 );

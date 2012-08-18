@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '/';
+define('BASEURL', '/');
+$config['base_url']	= BASEURL;
 
 /*
 |--------------------------------------------------------------------------

@@ -31,8 +31,8 @@ class register extends MY_Controller
 			$re_password = $this->inputPost('repassword');
 			$email = $this->inputPost('email');
 			
-			$this->load->model('User_model','user',true);
-			$errors = $this->user->register($user_name,$password,$re_password,$email);
+			$this->loadUserModel();
+			$errors = UserPeer::model()->register($user_name,$password,$re_password,$email);
 			if(!$errors)
 			{
 				$this->load->helper('url');
@@ -41,7 +41,7 @@ class register extends MY_Controller
 			}
 		}
 		$this->navbar->hideSignIn();
-	    $this->navbar->setCurrentItem(NavBar::$ITEM_REGISTER);
+	    $this->navbar->setCurrentItem(NavBar::ITEM_REGISTER);
 	    $this->setTitle("注册--在线成就系统");
 	    
 	    $data = compact('user_name','email','errors');
@@ -51,7 +51,7 @@ class register extends MY_Controller
 	public function ok()
 	{
 		$this->navbar->hideSignIn();
-	    $this->navbar->setCurrentItem(NavBar::$ITEM_REGISTER);
+	    $this->navbar->setCurrentItem(NavBar::ITEM_REGISTER);
 	    $this->setTitle("注册成功--在线成就系统");
 	    
 		$this->view('/register/register_ok');

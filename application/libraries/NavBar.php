@@ -5,13 +5,13 @@
  */
 class NavBar{
 
-    public static $ITEM_HOME = 'home';
-    public static $ITEM_CREATE = 'create';
-    public static $ITEM_ALL = 'all';
-    public static $ITEM_JUSTLOOK = 'justlook';
-    public static $ITEM_REGISTER = 'register';
-    public static $ITEM_SIGNIN = 'signin';
-    public static $ITEM_TAGS = 'tags';
+    const ITEM_HOME = 'home';
+    const ITEM_CREATE = 'create';
+    const ITEM_ALL = 'all';
+    const ITEM_JUSTLOOK = 'justlook';
+    const ITEM_REGISTER = 'register';
+    const ITEM_SIGNIN = 'signin';
+    const ITEM_TAGS = 'tags';
 
     private $_show_navbar = true;
     private $_current_navbar_item = 'home';
@@ -32,7 +32,7 @@ class NavBar{
     }
     /**
      * 设置某项目处于active
-     * @param String $item NavBar::$ITEM_xxx
+     * @param String $item NavBar::ITEM_xxx
      */
     public function setCurrentItem($item)
     {
@@ -166,6 +166,30 @@ class NavBar{
     		}
     	}
     	return $this->_redirect_to;
+    }
+    
+    /**
+     * 得到导航条上的tag列表的数据
+     * @return Ambigous <multitype:TagPeer, multitype:TagPeer >
+     */
+    public function getTagList()
+    {
+    	$CI = & get_instance();
+    	$CI->load->model('Tags_model','tags_model',true);
+    	$tags = TagPeer::model()->getMostUsedTags(10);
+    	return $tags;
+    }
+    
+    /**
+     * 尝试着显示顶部导航条
+     */
+    public function tryToDisplay()
+    {
+    	if($this->isDisplay())
+    	{
+    		$CI = & get_instance(); 
+    		$CI->load->view('common/navbar');
+    	}
     }
 }
 // END Controller class

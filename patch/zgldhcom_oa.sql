@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50519
 Source Host           : localhost:3306
-Source Database       : online_achievement
+Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2012-08-06 19:22:50
+Date: 2012-08-18 12:37:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,20 +23,17 @@ CREATE TABLE `oa_achievement` (
   `super_achievement_id` bigint(20) unsigned DEFAULT NULL COMMENT '本条成就继承自哪个成就',
   `name` varchar(255) NOT NULL COMMENT '成就名字',
   `creater_id` bigint(20) unsigned NOT NULL COMMENT '创作者id=>oa_user.user_id',
+  `logo_id` bigint(20) unsigned DEFAULT NULL,
   `track_type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '1: 普通 2: 阶段式 3: 无限式',
   `requirement` text NOT NULL COMMENT '达成条件，达成需求',
   `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '0: 刚创建，编辑中； 1. 创建完成，待审核； 2. 审核通过； 3. 已屏蔽',
+  `create_date` datetime NOT NULL,
   PRIMARY KEY (`achievement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='oa_achievement\r\n用于记录表示每一个成就实体。';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='oa_achievement\r\n用于记录表示每一个成就实体。';
 
 -- ----------------------------
 -- Records of oa_achievement
 -- ----------------------------
-INSERT INTO oa_achievement VALUES ('1', null, 'first achievement', '2', '1', '第一个成就', '0');
-INSERT INTO oa_achievement VALUES ('2', '1', 'child one', '3', '1', '继承自第一个成就', '0');
-INSERT INTO oa_achievement VALUES ('3', null, 'hyhyhyh', '1', '1', 'efeafaewfw', '0');
-INSERT INTO oa_achievement VALUES ('4', null, 'qw', '1', '1', 'qw', '0');
-INSERT INTO oa_achievement VALUES ('5', null, '1', '1', '1', '1', '0');
 
 -- ----------------------------
 -- Table structure for `oa_grradation`
@@ -80,12 +77,13 @@ CREATE TABLE `oa_intent` (
 -- ----------------------------
 DROP TABLE IF EXISTS `oa_procedure`;
 CREATE TABLE `oa_procedure` (
-  `step_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `achievement_id` bigint(20) unsigned NOT NULL COMMENT '成绩id',
+  `procedure_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `achievement_id` bigint(20) unsigned NOT NULL COMMENT '成就id',
   `step_num` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '步骤顺序，小序在前',
+  `upper_id` bigint(20) unsigned DEFAULT NULL COMMENT '上一级步骤ID',
   `description` text NOT NULL COMMENT '步骤描述',
-  PRIMARY KEY (`step_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='oa_achievement_step\r\n达成成就所必需的步骤列表';
+  PRIMARY KEY (`procedure_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_step\r\n达成成就所必需的步骤列表';
 
 -- ----------------------------
 -- Records of oa_procedure
@@ -99,8 +97,9 @@ CREATE TABLE `oa_tags` (
   `tag_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(255) NOT NULL,
   `tag_count` int(10) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`tag_id`),
+  KEY `tag_name` (`tag_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_tags
@@ -144,13 +143,15 @@ DROP TABLE IF EXISTS `oa_uploaded`;
 CREATE TABLE `oa_uploaded` (
   `uploaded_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `file_name` varchar(255) NOT NULL,
+  `file_ext` varchar(10) DEFAULT NULL COMMENT '扩展名',
   `relative_path` varchar(255) NOT NULL,
   `size` int(10) unsigned NOT NULL DEFAULT '0',
   `file_type` varchar(255) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   `statues` varchar(32) NOT NULL DEFAULT 'processing',
+  `upload_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`uploaded_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_uploaded
@@ -166,14 +167,16 @@ CREATE TABLE `oa_user` (
   `password` varchar(32) NOT NULL COMMENT '经过md5加密的密码',
   `email` varchar(255) NOT NULL,
   `reg_datetime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '注册时间戳',
+  `auto_login_token` varchar(255) DEFAULT NULL,
+  `auto_login_expire` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='oa_user\r\n用户表';
 
 -- ----------------------------
 -- Records of oa_user
 -- ----------------------------
-INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24');
-INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28');
-INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37');
-INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44');
-INSERT INTO oa_user VALUES ('6', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-06 18:59:01');
+INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
+INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'b929c12306ea7c3f6a01fca0a0ae64981345259073', '2012-09-17 00:00:00');
+INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', null, null);
+INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
+INSERT INTO oa_user VALUES ('6', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-06 18:59:01', '9e747c1b6ef02167ce93a6d87afd2e291344927520', '2012-09-13 00:00:00');

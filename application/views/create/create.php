@@ -23,19 +23,21 @@
         <!-- 左侧栏 结束 -->
 
         <!-- 基本信息 开始 -->
-        <form class="form-horizontal span9">
+        <form id="create_form" class="form-horizontal span9" method="post">
             <fieldset id="form_step_1">
                 <div class="control-group">
                     <label class="control-label" for="ach_name"><span class="label label-important">必填</span> 成就名称</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="ach_name">
+                        <input type="text" class="input-xlarge" id="ach_name" name="Achievement[name]" placeholder="起个响亮的名字">
                         <span class="help-inline error">请填写成就名称</span>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="ach_description"><span class="label label-important">必填</span> 成就描述</label>
                     <div class="controls">
-                        <textarea id="ach_description" class="input-xlarge" rows="7" style="max-height: 200px;"></textarea>
+                        <textarea id="ach_description" name="Achievement[description]" class="input-xlarge" rows="7" style="max-height: 200px;"
+                         placeholder="为什么要有这个成就呢？"
+                        ></textarea>
                         <span class="help-inline error">请填写成就描述</span>
                     </div>
                 </div>
@@ -47,8 +49,9 @@
                         		<img src="/images/image_placeholder_128x128.png" alt="image_placeholder_128x128">
                             </div>
                         </a>
-                        <input type="hidden" name="ach_logo_src" id="ach_logo_src" value="" />
-                        <input type="hidden" name="ach_logo_crop" id="ach_logo_crop" value="" />
+                        <input type="hidden" name="Achievement[logo_src]" id="ach_logo_src" value="" />
+                        <input type="hidden" name="Achievement[logo_crop]" id="ach_logo_crop" value="" />
+                        <input type="hidden" name="Achievement[uploaded_id]" id="ach_uploaded_id" value="" />
                     
                         <span class="help-inline error">请选择一个Logo</span>
                     </div>
@@ -56,7 +59,7 @@
                 <div class="control-group">
                     <label class="control-label" for="ach_categories">标签</label>
                     <div class="controls">
-                        <input class="input-xlarge" id="ach_categories" name="category" type="text"/>
+                        <input class="input-xlarge" id="ach_categories" name="Achievement[categories]" type="text"/>
                     </div>
                 </div>
                 <?php
@@ -85,6 +88,7 @@
                 </div>
                 <div class="control-group">
                     <label class="control-label">实现步骤</label>
+                    <input type="hidden" id="ach_procedure" name="Achievement[procedure]" />
                     <div class="controls">
                         <div id="procedure_editor" class="dd">
                             <ol class="dd-list">
@@ -173,7 +177,7 @@
     	</form>
     </div>
     <div class="modal-footer">
-	    <button class="btn btn-success logo_confirm_btn" type="button">确定</button>
+	    <button class="btn btn-success logo_confirm_btn" type="submit">确定</button>
 	    <a href="#" class="btn" data-dismiss="modal">取消</a>
     </div>
 </div>

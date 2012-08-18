@@ -13,6 +13,27 @@ class MY_Controller extends CI_Controller{
      * @var NavBar
      */
     public $navbar = null;
+    
+    /**
+     * @var Uploaded_model
+     */
+    public $uploaded_model = null;
+    /**
+     * @var Achievement_model
+     */
+    public $achievement_model = null;
+    /**
+     * @var Procedure_model
+     */
+    public $procedure_model = null;
+    /**
+     * @var User_model
+     */
+    public $user_model = null;
+    /**
+     * @var Tags_model
+     */
+    public $tags_model = null;
 
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
@@ -207,6 +228,38 @@ class MY_Controller extends CI_Controller{
         }
         $str .= '</script>';
         return $str;
+    }
+    
+    /**
+     * 需要登录，不然直接断掉
+     */
+    public function needLoginOrExit()
+    {
+    	if(!$this->webuser->isLogin())
+    	{
+    		exit();
+    	}
+    }
+    
+    protected function loadUserModel()
+    {
+	    $this->load->model('User_model','user_model',true);
+    }
+    protected function loadUploadedModel()
+    {
+	    $this->load->model('Uploaded_model','uploaded_model',true);
+    }
+    protected function loadAchievementModel()
+    {
+	    $this->load->model('Achievement_model','achievement_model',true);
+    }
+    protected function loadProcedureModel()
+    {
+	    $this->load->model('Procedure_model','procedure_model',true);
+    }
+    protected function loadTagsModel()
+    {
+	    $this->load->model('Tags_model','tags_model',true);
     }
 }
 // END Controller class

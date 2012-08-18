@@ -54,9 +54,6 @@
 </head>
 <body>
 <?php
-if($this->navbar->isDisplay())
-{
-    $this->load->view('common/navbar');
-}
+$this->navbar->tryToDisplay();
 ?>
 <div class="container">

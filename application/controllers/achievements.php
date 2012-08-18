@@ -4,7 +4,7 @@ class achievements extends MY_Controller
 {
 	public function all()
 	{
-		$this->navbar->setCurrentItem(NavBar::$ITEM_ALL);
+		$this->navbar->setCurrentItem(NavBar::ITEM_ALL);
 		$this->setTitle("所有成就--在线成就系统");
 		$this->view('/achievements/all');
 	}

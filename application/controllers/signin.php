@@ -37,7 +37,7 @@ class signin extends MY_Controller
             }
         }
         $this->navbar->setRedirectTo($redirect_to);
-	    $this->navbar->setCurrentItem(NavBar::$ITEM_SIGNIN);
+	    $this->navbar->setCurrentItem(NavBar::ITEM_SIGNIN);
 	    $this->navbar->hideSignIn();
 	    $this->setTitle("登录--在线成就系统");
         $data = compact('error');

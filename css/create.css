@@ -197,3 +197,12 @@
 .dd-dragel .dd-handle {
 	box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.1);
 }
+
+.created_ok_preview_box{
+	margin: 0 auto;
+    text-align: center;
+    width: 200px;
+}
+.created_ok_preview_box img{
+	margin: 10px auto;
+}
