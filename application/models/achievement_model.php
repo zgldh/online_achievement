@@ -5,8 +5,8 @@ class Achievement_model extends MY_Model
 	public function getByPK($achievement_id)
 	{
 		$raw = $this->db->get_where ( Achievement_model::TABLE, array (AchievementPeer::PK => $achievement_id ) )->row_array ();
-		$user = $raw ? new AchievementPeer ( $raw ) : false;
-		return $user;
+		$achievement = $raw ? new AchievementPeer ( $raw ) : false;
+		return $achievement;
 	}
 	/**
 	 * 得到某用户最后生成的成就
@@ -17,8 +17,27 @@ class Achievement_model extends MY_Model
 	{
 		$this->db->order_by('achievement_id','DESC');
 		$raw = $this->db->get_where ( Achievement_model::TABLE, array ('creater_id'=> $user_id ) )->row_array ();
-		$user = $raw ? new AchievementPeer ( $raw ) : false;
-		return $user;
+		$achievement = $raw ? new AchievementPeer ( $raw ) : false;
+		return $achievement;
+	}
+	/**
+	 * 得到最热门的成就列表
+	 * @param string $limit 要返回几个
+	 * @return Ambigous <boolean, AchievementPeer>
+	 */
+	public function getMostPopularAchievements($limit)
+	{
+		$re = array();
+		$this->db->order_by('achievement_id','DESC');
+		$result = $this->db->get ( Achievement_model::TABLE )->result_array ();
+		foreach($result as $raw)
+		{
+			if($raw)
+			{
+				$re[] = new AchievementPeer ( $raw );
+			}
+		}
+		return $re;
 	}
 	/**
 	 * 更新数据 或 插入数据
@@ -160,6 +179,7 @@ class AchievementPeer extends BasePeer
 		foreach ( $tags as $value )
 		{
 			$tag = TagPeer::model ()->getTagByName ( $value, true );
+			$tag->save();
 			$tag->appendToAchievement ( $this->achievement_id );
 		}
 		return true;

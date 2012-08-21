@@ -29,6 +29,7 @@
         </div>
         <div class="form-actions">
             <button class="btn btn-primary btn-large" type="submit">登录</button>
+            <a class="btn btn-success btn-large" href="/register">注册</a>
         </div>
     </fieldset>
 </form>

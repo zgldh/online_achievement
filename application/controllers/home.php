@@ -22,7 +22,16 @@ class home extends MY_Controller
 	{
 	    $this->navbar->setCurrentItem(NavBar::ITEM_HOME);
 	    $this->setTitle("首页--在线成就系统");
-		$this->view('/home/homepage');
+		$this->addJavascriptFile ( '/js/nailthumb/jquery.nailthumb.1.1.min.js' );
+		$this->addStyleFile( '/js/nailthumb/jquery.nailthumb.1.1.min.css' );
+	    $this->addAutoRunJavascriptCode("jQuery('.home_wall_item').nailthumb({titleAnimationTime:200, width:128,height:128});");
+		
+	    $this->loadAchievementModel();
+	    $achievements = AchievementPeer::model()->getMostPopularAchievements(21);
+	    
+	    $data = compact('achievements');
+	    
+		$this->view('/home/homepage', $data);
 	}
 }
 

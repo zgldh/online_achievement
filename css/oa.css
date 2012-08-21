@@ -3,3 +3,7 @@
 .control-group .help-inline.error,.control-group .help-block.error{display: none;}
 .control-group.error .help-inline.error{display: inline-block;}
 .control-group.error .help-block.error{display: block;}
+
+#home_wall{}
+#home_wall:after{clear: both;}
+#home_wall .home_wall_item{display: block;float: left; margin:1px;}

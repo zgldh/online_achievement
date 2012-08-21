@@ -224,7 +224,7 @@ class TagToAchievementPeer extends BasePeer
 	 */
 	public function save()
 	{
-		TagToAchievementPeer::model ()->saveTagAchievementPeer ( $this );
+		return TagToAchievementPeer::model ()->saveTagAchievementPeer ( $this );
 	}
 	/**
 	 * 删除该"标签-成就"关系。
