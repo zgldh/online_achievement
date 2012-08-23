@@ -132,6 +132,7 @@ $(function() {
 		ach_description_preview.text(ach_description.val());
 	});
 
+	// 标签
 	function ach_categories_format(tag) {
 		return tag.text;
 	}
@@ -171,6 +172,15 @@ $(function() {
 		formatSelection: ach_categories_format,
 		formatInputTooShort: function(term,minLength){return '请至少输入'+minLength+'个字';},
 		formatSearching: function(){return '搜索中...';}
+	});
+	var add_tag_btn = $('button.add_tag_btn');
+	add_tag_btn.click(function(){
+		var btn = $(this);
+		var tag_name = btn.attr('tag_name');
+		var data = ach_categories.select2('data');
+		data.push({id:tag_name,text:tag_name});
+		ach_categories.select2('data',data);
+		return ;
 	});
 
 	// logo图像上传选择

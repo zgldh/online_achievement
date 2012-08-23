@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2012-08-21 18:40:50
+Date: 2012-08-23 18:43:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,7 +29,7 @@ CREATE TABLE `oa_achievement` (
   `status` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '0: 刚创建，编辑中； 1. 创建完成，待审核； 2. 审核通过； 3. 已屏蔽',
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`achievement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='oa_achievement\r\n用于记录表示每一个成就实体。';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='oa_achievement\r\n用于记录表示每一个成就实体。';
 
 -- ----------------------------
 -- Records of oa_achievement
@@ -38,6 +38,9 @@ INSERT INTO oa_achievement VALUES ('6', '0', '一顿饭吃10个馒头', '7', '5'
 INSERT INTO oa_achievement VALUES ('7', '0', '纸篓投篮达人', '7', '7', '1', '办公室常见游戏', '2', '2012-08-21 17:58:22');
 INSERT INTO oa_achievement VALUES ('8', '0', '小浣熊卡牌专家', '7', '8', '1', '我想收集齐小浣熊出的所有三国卡、水浒卡', '2', '2012-08-21 18:07:33');
 INSERT INTO oa_achievement VALUES ('9', '0', '上过太空', '7', '9', '1', '你们这群地球人上过太空么？！', '2', '2012-08-21 18:13:31');
+INSERT INTO oa_achievement VALUES ('10', '0', '睡神', '7', '11', '1', '眼睛一闭，就睡过去了', '2', '2012-08-23 17:15:49');
+INSERT INTO oa_achievement VALUES ('11', '0', '四大名著', '7', '12', '1', '将四大名著都读过一遍，并且分别写出读后感', '2', '2012-08-23 17:21:05');
+INSERT INTO oa_achievement VALUES ('12', '0', '拿到驾照', '7', '13', '1', '会开还要拿驾照', '2', '2012-08-23 18:06:46');
 
 -- ----------------------------
 -- Table structure for `oa_grradation`
@@ -87,7 +90,7 @@ CREATE TABLE `oa_procedure` (
   `upper_id` bigint(20) unsigned DEFAULT NULL COMMENT '上一级步骤ID',
   `description` text NOT NULL COMMENT '步骤描述',
   PRIMARY KEY (`procedure_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_step\r\n达成成就所必需的步骤列表';
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_step\r\n达成成就所必需的步骤列表';
 
 -- ----------------------------
 -- Records of oa_procedure
@@ -107,6 +110,19 @@ INSERT INTO oa_procedure VALUES ('20', '9', '1', null, '在中国，还是先去
 INSERT INTO oa_procedure VALUES ('21', '9', '2', null, '宇航员选拔的时候一定要被选上');
 INSERT INTO oa_procedure VALUES ('22', '9', '3', null, '争取参加载人航天任务');
 INSERT INTO oa_procedure VALUES ('23', '9', '4', null, '上去了。来张照片留念');
+INSERT INTO oa_procedure VALUES ('24', '10', '1', null, '一觉睡上12小时。这才刚入门');
+INSERT INTO oa_procedure VALUES ('25', '10', '2', null, '吃过晚饭后，直接睡到第二天晚饭');
+INSERT INTO oa_procedure VALUES ('26', '10', '3', null, '连续睡三天不睁眼');
+INSERT INTO oa_procedure VALUES ('27', '10', '4', null, '连续睡一星期（这是昏迷了吧？）');
+INSERT INTO oa_procedure VALUES ('28', '11', '1', null, '读《红楼梦》并且写读后感');
+INSERT INTO oa_procedure VALUES ('29', '11', '2', null, '读《西游记》并且写读后感');
+INSERT INTO oa_procedure VALUES ('30', '11', '3', null, '读《三国演义》并且写读后感');
+INSERT INTO oa_procedure VALUES ('31', '11', '4', null, '读《水浒传》并且写读后感');
+INSERT INTO oa_procedure VALUES ('32', '12', '1', null, '到当地车管所报名， 或到一个驾校报名');
+INSERT INTO oa_procedure VALUES ('33', '12', '2', null, '科目一理论考试，要考到90分以上');
+INSERT INTO oa_procedure VALUES ('34', '12', '3', null, '科目二桩考');
+INSERT INTO oa_procedure VALUES ('35', '12', '4', null, '科目三路考');
+INSERT INTO oa_procedure VALUES ('36', '12', '5', null, '领证吧');
 
 -- ----------------------------
 -- Table structure for `oa_tags`
@@ -118,7 +134,7 @@ CREATE TABLE `oa_tags` (
   `tag_count` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`tag_id`),
   KEY `tag_name` (`tag_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_tags
@@ -133,6 +149,10 @@ INSERT INTO oa_tags VALUES ('11', '卡牌', '1');
 INSERT INTO oa_tags VALUES ('12', '收集', '1');
 INSERT INTO oa_tags VALUES ('13', '太空', '1');
 INSERT INTO oa_tags VALUES ('14', '旅行', '1');
+INSERT INTO oa_tags VALUES ('15', '睡觉', '1');
+INSERT INTO oa_tags VALUES ('16', '读书', '1');
+INSERT INTO oa_tags VALUES ('17', '驾驶', '1');
+INSERT INTO oa_tags VALUES ('18', '技能', '1');
 
 -- ----------------------------
 -- Table structure for `oa_tags_achievement`
@@ -158,6 +178,10 @@ INSERT INTO oa_tags_achievement VALUES ('8', '11');
 INSERT INTO oa_tags_achievement VALUES ('8', '12');
 INSERT INTO oa_tags_achievement VALUES ('9', '13');
 INSERT INTO oa_tags_achievement VALUES ('9', '14');
+INSERT INTO oa_tags_achievement VALUES ('10', '15');
+INSERT INTO oa_tags_achievement VALUES ('11', '16');
+INSERT INTO oa_tags_achievement VALUES ('12', '17');
+INSERT INTO oa_tags_achievement VALUES ('12', '18');
 
 -- ----------------------------
 -- Table structure for `oa_track`
@@ -190,7 +214,7 @@ CREATE TABLE `oa_uploaded` (
   `statues` varchar(32) NOT NULL DEFAULT 'processing',
   `upload_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`uploaded_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_uploaded
@@ -199,6 +223,9 @@ INSERT INTO oa_uploaded VALUES ('5', '002.jpg', '.jpg', 'uploads/43/08/0f/43080f
 INSERT INTO oa_uploaded VALUES ('7', 'u1029571090,3652895485fm52gp0.jpg', '.jpg', 'uploads/41/d5/16/41d5161c7066dca8a6f8f01ea6e8db3b/', '3095', 'logo', '7', 'saved', '2012-08-21 17:57:13');
 INSERT INTO oa_uploaded VALUES ('8', '20090105.raccoon-sticker04_.jpg', '.jpg', 'uploads/5b/69/8e/5b698e0c248248596580b7a2cdfca2be/', '8745', 'logo', '7', 'saved', '2012-08-21 18:06:31');
 INSERT INTO oa_uploaded VALUES ('9', '200911292439802_2.jpg', '.jpg', 'uploads/11/23/9e/11239e163d298bb2eb25999fc083570d/', '4155', 'logo', '7', 'saved', '2012-08-21 18:11:50');
+INSERT INTO oa_uploaded VALUES ('11', 'Sleep.jpg', '.jpg', 'uploads/0d/92/34/0d923432f560abdf4887b277a2f4bc06/', '7268', 'logo', '7', 'saved', '2012-08-23 17:13:59');
+INSERT INTO oa_uploaded VALUES ('12', 'd231428.jpg', '.jpg', 'uploads/01/ea/e3/01eae39f648aba5aa1a19cc5b133d14a/', '7309', 'logo', '7', 'saved', '2012-08-23 17:20:27');
+INSERT INTO oa_uploaded VALUES ('13', '20110322011353843daib.jpg', '.jpg', 'uploads/a8/23/c8/a823c86b5a519b9bc5134ab1f42328ec/', '5188', 'logo', '7', 'saved', '2012-08-23 18:05:12');
 
 -- ----------------------------
 -- Table structure for `oa_user`
@@ -222,4 +249,4 @@ INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', ''
 INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'b929c12306ea7c3f6a01fca0a0ae64981345259073', '2012-09-17 00:00:00');
 INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', null, null);
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
-INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '28fe41b6091a4b9f733e5eb19f541c491345542394', '2012-09-20 00:00:00');
+INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '5fad6024b501fa53b6397fc9e356d24a1345712287', '2012-09-22 00:00:00');

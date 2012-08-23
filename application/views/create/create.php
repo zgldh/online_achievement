@@ -62,6 +62,15 @@
                         <input class="input-xlarge" id="ach_categories" name="Achievement[categories]" type="text"/>
                     </div>
                 </div>
+                <div class="control-group">
+                    <label class="control-label" >常用标签</label>
+                    <div class="controls">
+                        <?php $tags = $this->navbar->getTagList();?>
+                        <?php foreach($tags as $tag):?>
+                        <button type="button" class="btn add_tag_btn" tag_name="<?php echo $tag->tag_name;?>">+ <?php echo $tag->tag_name;?></button>
+                        <?php endforeach;?>
+                    </div>
+                </div>
                 <?php
                 /**
                  * TODO 将来这里可以选择“前驱成就”, 显示“复制自某成就”
