@@ -214,6 +214,28 @@ class AchievementPeer extends BasePeer
 		return $logo;
 	}
 	/**
+	 * 得到当前成就的作者
+	 * @return Ambigous <boolean, UserPeer>
+	 */
+	public function getCreater()
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'User_model', 'user_model', true );
+		$creater = UserPeer::model()->getByPK($this->creater_id);
+		return $creater;
+	}
+	/**
+	 * 得到当前成就的作者
+	 * @return Ambigous <boolean, UserPeer>
+	 */
+	public function getProcedures()
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'Procedure_model', 'procedure_model', true );
+		$procedures = ProcedurePeer::model()->getByAchievementID($this->achievement_id,true);
+		return $procedures;
+	}
+	/**
 	 * 为当前成就添加标签
 	 *
 	 * @param array $tags

@@ -103,7 +103,7 @@
                             <ol class="dd-list">
                                 <li class="dd-item" data-text="">
                                     <div class="dd-handle" style="display: inline-block;"><i class="icon-move"></i></div>
-                                    <textarea class="procedure_content" placeholder="这一步做什么呢..." ></textarea>
+                                    <textarea class="procedure_content" placeholder="这一步做什么呢..." maxlength="512" ></textarea>
                                     <button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button>
                                 </li>
                             </ol>

@@ -8,6 +8,7 @@ if (! defined ( 'BASEPATH' ))
  */
 class NavBar
 {
+	const ITEM_NONE = 'none';
 	const ITEM_HOME = 'home';
 	const ITEM_CREATE = 'create';
 	const ITEM_ALL = 'all';

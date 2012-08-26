@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>404 Page Not Found</title>
+<title>404 页面不存在</title>
 <style type="text/css">
 
 ::selection{ background-color: #E13300; color: white; }
@@ -55,8 +55,8 @@ p {
 </head>
 <body>
 	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+		<h1><?php // echo $heading; ?>404 页面不存在</h1>
+		<?php //echo $message; ?><p><a href="<?php echo BASEURL;?>">回首页看看吧</a></p>
 	</div>
 </body>
 </html>

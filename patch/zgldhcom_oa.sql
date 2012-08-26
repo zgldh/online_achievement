@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50519
+Source Server Version : 50154
 Source Host           : localhost:3306
 Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-08-23 18:43:50
+Date: 2012-08-26 19:43:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,7 @@ CREATE TABLE `oa_achievement` (
 INSERT INTO oa_achievement VALUES ('6', '0', '一顿饭吃10个馒头', '7', '5', '1', '不怕撑死', '2', '2012-08-21 17:47:39');
 INSERT INTO oa_achievement VALUES ('7', '0', '纸篓投篮达人', '7', '7', '1', '办公室常见游戏', '2', '2012-08-21 17:58:22');
 INSERT INTO oa_achievement VALUES ('8', '0', '小浣熊卡牌专家', '7', '8', '1', '我想收集齐小浣熊出的所有三国卡、水浒卡', '2', '2012-08-21 18:07:33');
-INSERT INTO oa_achievement VALUES ('9', '0', '上过太空', '7', '9', '1', '你们这群地球人上过太空么？！', '2', '2012-08-21 18:13:31');
+INSERT INTO oa_achievement VALUES ('9', '0', '上过太空', '3', '9', '1', '你们这群地球人上过太空么？！', '2', '2012-08-21 18:13:31');
 INSERT INTO oa_achievement VALUES ('10', '0', '睡神', '7', '11', '1', '眼睛一闭，就睡过去了', '2', '2012-08-23 17:15:49');
 INSERT INTO oa_achievement VALUES ('11', '0', '四大名著', '7', '12', '1', '将四大名著都读过一遍，并且分别写出读后感', '2', '2012-08-23 17:21:05');
 INSERT INTO oa_achievement VALUES ('12', '0', '拿到驾照', '7', '13', '1', '会开还要拿驾照', '2', '2012-08-23 18:06:46');
@@ -89,7 +89,9 @@ CREATE TABLE `oa_procedure` (
   `step_num` int(10) unsigned NOT NULL DEFAULT '1' COMMENT '步骤顺序，小序在前',
   `upper_id` bigint(20) unsigned DEFAULT NULL COMMENT '上一级步骤ID',
   `description` text NOT NULL COMMENT '步骤描述',
-  PRIMARY KEY (`procedure_id`)
+  PRIMARY KEY (`procedure_id`),
+  KEY `achievement_id` (`achievement_id`,`step_num`),
+  KEY `upper_id` (`upper_id`,`step_num`)
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_step\r\n达成成就所必需的步骤列表';
 
 -- ----------------------------
@@ -246,7 +248,7 @@ CREATE TABLE `oa_user` (
 -- Records of oa_user
 -- ----------------------------
 INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
-INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'b929c12306ea7c3f6a01fca0a0ae64981345259073', '2012-09-17 00:00:00');
+INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'e3d796e1b7d1c8a2a536a0df5a135f0d1345972944', '2012-09-25 00:00:00');
 INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', null, null);
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
 INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '5fad6024b501fa53b6397fc9e356d24a1345712287', '2012-09-22 00:00:00');
