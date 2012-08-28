@@ -74,18 +74,22 @@ $creater = $achievement->getCreater();
                 <?php else:?>
                 <p>完成本成就不需要步骤。。</p>
                 <?php endif;?>
+                <hr />
             </div>
             <div class="right-item">
                 <h4>这些人完成了本成就</h4>
                 <div></div>
+                <hr />
             </div>
             <div class="right-item">
                 <h4>这些人正在努力</h4>
                 <div></div>
+                <hr />
             </div>
             <div class="right-item">
                 <h4>大家怎么说</h4>
                 <div></div>
+                <hr />
             </div>
         </div>
         <!-- 预览完成 结束 -->

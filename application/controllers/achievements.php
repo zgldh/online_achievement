@@ -30,6 +30,17 @@ class achievements extends MY_Controller
 		$data = compact('achievement');
 		$this->view('achievements/detail',$data);
 	}
+	
+	/**
+	 * TODO 开始向某成就努力<br />
+	 * 如果条件允许，则添加该intent然后重定向到/detail/$achievement_id<br />
+	 * 会检测： 是否登录， 前提条件 等
+	 * @param int $achievement_id
+	 */
+	public function work_intent($achievement_id)
+	{
+		$this->needLoginOrExit('/achievements/work_intent/'.$achievement_id);
+	}
 }
 
 /* End of file welcome.php */

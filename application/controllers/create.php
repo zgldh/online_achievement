@@ -51,6 +51,10 @@ class create extends MY_Controller
 		$this->setTitle ( "编写成就--在线成就系统" );
 		$this->view ( '/create/create' );
 	}
+	/**
+	 * logo上传的响应函数<br />
+	 * 返回一个jsonp脚本
+	 */
 	public function jsonp_logo_upload()
 	{
 		$this->needLoginOrExit ();

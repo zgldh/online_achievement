@@ -20,16 +20,15 @@ class register extends MY_Controller
 	 */
 	public function index()
 	{
-		$user_name = '';
-		$email = '';
 		$errors = '';
 		
 		if($this->isPostRequest())
 		{
-			$user_name = $this->inputPost('user_name');
-			$password = $this->inputPost('password');
-			$re_password = $this->inputPost('repassword');
-			$email = $this->inputPost('email');
+			$form = $this->inputPost('Register');
+			$user_name = $form['user_name'];
+			$password = $form['password'];
+			$re_password = $form['re_password'];
+			$email = $form['email'];
 			
 			$this->loadUserModel();
 			$errors = UserPeer::model()->register($user_name,$password,$re_password,$email);
@@ -44,7 +43,7 @@ class register extends MY_Controller
 	    $this->navbar->setCurrentItem(NavBar::ITEM_REGISTER);
 	    $this->setTitle("注册--在线成就系统");
 	    
-	    $data = compact('user_name','email','errors');
+	    $data = compact('errors','form');
 		$this->view('/register/register',$data);
 	}
 	

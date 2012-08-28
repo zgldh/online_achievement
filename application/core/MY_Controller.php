@@ -233,11 +233,18 @@ class MY_Controller extends CI_Controller{
     /**
      * 需要登录，不然直接断掉
      */
-    public function needLoginOrExit()
+    public function needLoginOrExit($redirect = null)
     {
     	if(!$this->webuser->isLogin())
     	{
-    		exit();
+    		if($redirect == null)
+    		{
+    			exit();
+    		}
+    		else
+    		{
+    			$this->signinAndRedirectTo($redirect);
+    		}
     	}
     }
     

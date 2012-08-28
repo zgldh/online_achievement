@@ -11,7 +11,8 @@ class tags extends MY_Controller
 		$this->view ( '/tags/all' );
 	}
 	/**
-	 * 用来查询可能的标签
+	 * 用来查询可能的标签<br />
+	 * 返回一个json字符串，被浏览器解析为一个json对象
 	 */
 	public function ajax_query_tags()
 	{

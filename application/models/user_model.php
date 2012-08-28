@@ -69,35 +69,35 @@ class User_model extends MY_Model
 	/**
 	 * 用户注册业务
 	 *
-	 * @param string $name        	
+	 * @param string $user_name        	
 	 * @param string $password        	
 	 * @param string $re_password        	
 	 * @param string $email        	
 	 */
-	public function register($name, $password, $re_password, $email)
+	public function register($user_name, $password, $re_password, $email)
 	{
 		$errors = array ();
 		if (! strlen ( $password ))
 		{
-			$errors [] = '请输入密码';
+			$errors ['password'] = '请输入密码';
 		}
 		if ($password != $re_password)
 		{
-			$errors [] = '两次输入的密码不一样';
+			$errors ['re_password'] = '两次输入的密码不一样';
 		}
 		$this->load->helper ( 'email' );
 		if (! valid_email ( $email ))
 		{
-			$errors [] = '电子邮箱地址无效';
+			$errors ['email'] = '电子邮箱地址无效';
 		}
 		elseif ($this->getByEmail ( $email ))
 		{
-			$errors [] = '电子邮箱地址 ' . $email . ' 已经有人使用';
+			$errors ['email'] = '电子邮箱地址 ' . $email . ' 已经有人使用';
 		}
 		
-		if ($this->getByName ( $name ))
+		if ($this->getByName ( $user_name ))
 		{
-			$errors [] = '帐号 ' . $name . ' 已经有人使用';
+			$errors ['user_name'] = '帐号 ' . $user_name . ' 已经有人使用';
 		}
 		
 		if ($errors)
@@ -105,7 +105,7 @@ class User_model extends MY_Model
 			return $errors;
 		}
 		
-		$user = new UserPeer ( array ('name' => $name, 'password' => md5 ( $password ), 'email' => $email, 'reg_datetime' => time () ) );
+		$user = new UserPeer ( array ('name' => $user_name, 'password' => md5 ( $password ), 'email' => $email, 'reg_datetime' => time () ) );
 		$user->save ();
 	}
 }
