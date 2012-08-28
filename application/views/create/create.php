@@ -52,7 +52,7 @@
                         <input type="hidden" name="Achievement[logo_src]" id="ach_logo_src" value="" />
                         <input type="hidden" name="Achievement[logo_crop]" id="ach_logo_crop" value="" />
                         <input type="hidden" name="Achievement[uploaded_id]" id="ach_uploaded_id" value="" />
-                    
+
                         <span class="help-inline error">请选择一个Logo</span>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                                 <li class="dd-item" data-text="">
                                     <div class="dd-handle" style="display: inline-block;"><i class="icon-move"></i></div>
                                     <textarea class="procedure_content" placeholder="这一步做什么呢..." maxlength="512" ></textarea>
-                                    <button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button>
+                                    <button type="button" class="btn btn-small btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button>
                                 </li>
                             </ol>
                         </div>

@@ -4,15 +4,15 @@
  * @param string $current_nav_item
  */
 ?>
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-        <div class="container">
+        <div class="container navbar-container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#" style="color: white;font-family: 微软雅黑;font-weight: bold;">在线成就系统 :-)</a>
+            <a class="brand" href="#" style="font-family: 微软雅黑;font-weight: bold;">在线成就系统 :-)</a>
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="divider-vertical"></li>
@@ -33,7 +33,7 @@
                             </li>
                         <?php endforeach;?>
                             <li class="divider"></li>
-                            <li><a href="/tags">全部</a></li>                  
+                            <li><a href="/tags">全部</a></li>
                         </ul>
                     </li>
                     <li class="divider-vertical"></li>
@@ -47,7 +47,7 @@
                     <ul class="dropdown-menu">
                     	<li><a href="#"><i class="icon-list-alt"></i> 个人资料</a></li>
                         <li><a href="#"><i class="icon-star"></i> 我的成就</a></li>
-                        <li><a href="#"><i class="icon-envelope"></i> 信息</a></li> 
+                        <li><a href="#"><i class="icon-envelope"></i> 信息</a></li>
                         <li class="divider"></li>
                         <li><a href="/logout" title="退出"><i class="icon-off"></i> 退出</a></li>
                     </ul>

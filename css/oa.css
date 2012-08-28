@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
 
+body{padding-top:50px;}
+.navbar-container{width: 99% !important;}
+
 .control-group .help-inline.error,.control-group .help-block.error{display: none;}
 .control-group.error .help-inline.error{display: inline-block;}
 .control-group.error .help-block.error{display: block;}
@@ -15,7 +18,7 @@
 .right-content .right-item{margin-bottom:10px;}
 
 .detail-content{}
-.detail-content .header-right{  
+.detail-content .header-right{
 	height: 118px;
     width: 742px;
     padding: 10px;

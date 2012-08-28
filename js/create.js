@@ -171,18 +171,20 @@ $(function()
             dataType : 'json',
             data : function(term, page)
             {
-                return
+                var obj =
                 {
-                    q : term, // search term
-                    page_limit : 10
+                    q : term,
+                    page_limit:10
                 };
+                return obj;
             },
             results : function(data, page)
             {
-                return
+                var obj =
                 {
                     results : data
                 };
+                return obj;
             }
         },
         dropdownCssClass : "bigdrop",
@@ -305,7 +307,7 @@ $(function()
             var tpl = '<li class="dd-item"> ';
             tpl += '<div class="dd-handle" style="display: inline-block;"><i class="icon-move"></i></div> ';
             tpl += '<textarea class="procedure_content" placeholder="这一步做什么呢..." maxlength="512" ></textarea> ';
-            tpl += '<button type="button" class="btn btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button> ';
+            tpl += '<button type="button" class="btn btn-small btn-danger procedure_remove_btn"><i class="icon-remove icon-white"></i></button> ';
             tpl += '</li>';
             tpl = $(tpl);
             procedure_editor_ol.append(tpl);
