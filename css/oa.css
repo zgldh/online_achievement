@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-body{padding-top:50px;}
+#site-topbar{margin-bottom:10px;}
 .navbar-container{width: 99% !important;}
 
 .control-group .help-inline.error,.control-group .help-block.error{display: none;}

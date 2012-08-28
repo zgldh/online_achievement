@@ -4,7 +4,7 @@
  * @param string $current_nav_item
  */
 ?>
-<div class="navbar navbar-fixed-top">
+<div id="site-topbar" class="navbar navbar-static-top">
     <div class="navbar-inner">
         <div class="container navbar-container">
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
