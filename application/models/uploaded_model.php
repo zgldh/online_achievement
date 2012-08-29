@@ -136,7 +136,7 @@ class UploadedPeer extends BasePeer
 	public $user_id = 0;
 	/**
 	 * 上传时间戳
-	 * 
+	 *
 	 * @var string
 	 */
 	public $upload_datetime = '';
@@ -158,12 +158,22 @@ class UploadedPeer extends BasePeer
 	
 	/**
 	 * 得到文件的URL地址
-	 * @param string $base_url
+	 *
+	 * @param string $base_url        	
 	 * @return string
 	 */
 	public function getFileURL($base_url = BASEURL)
 	{
-		return $base_url.$this->relative_path.$this->file_name;
+		return $base_url . $this->relative_path . $this->file_name;
+	}
+	/**
+	 * 得到文件全路径
+	 *
+	 * @return string
+	 */
+	public function getFullPath()
+	{
+		return $this->relative_path . $this->file_name;
 	}
 	
 	/**
@@ -227,7 +237,7 @@ class UploadedPeer extends BasePeer
 	 * @param obj $crop
 	 *        	{"x":0,"y":0,"x2":256,"y2":256,"w":256,"h":256}
 	 */
-	public function resize($crop)
+	public function crop($crop)
 	{
 		if (! $crop)
 		{
@@ -265,6 +275,59 @@ class UploadedPeer extends BasePeer
 		$this->save ();
 		
 		return true;
+	}
+	public function preResize()
+	{
+		$full_path = $this->getFullPath ();
+		$size = getimagesize ( $full_path );
+		list ( $width, $height, $type, $attr ) = $size;
+		if ($width > 256 || $height > 256)
+		{
+			$config ['source_image'] = $full_path;
+			$config ['width'] = 256;
+			$config ['height'] = 256;
+			$CI = & get_instance ();
+			$CI->load->library ( 'image_lib', $config );
+			$CI->image_lib->resize ();
+		}
+		
+		$size = getimagesize ( $full_path );
+		list ( $width, $height, $type, $attr ) = $size;
+		if ($width != $height)
+		{
+			$old_image = imagecreatefromjpeg ( $full_path );
+			$bright_ness = $this->getImageBrightness ( $old_image );
+			
+			$new_width = max ( $width, $height );
+			$new_height = $new_width;
+			$new_image = imagecreatetruecolor ( $new_width, $new_height );
+			
+			if ($bright_ness > 130)
+			{
+				$color = imagecolorallocate ( $new_image, 255, 255, 255 );
+			}
+			else
+			{
+				$color = imagecolorallocate ( $new_image, 0, 0, 0 );
+			}
+			imagefill ( $new_image, 0, 0, $color );
+			
+			imagecopyresampled ( $new_image, $old_image, ($new_width - $width) / 2, ($new_height - $height) / 2, 0, 0, $width, $height, $width, $height );
+			imagejpeg ( $new_image, $full_path, 100 );
+		}
+	}
+	private function getImageBrightness($image_source)
+	{
+		$width = imagesx ( $image_source );
+		$height = imagesy ( $image_source );
+		$bi = imagecreatetruecolor ( 1, 1 );
+		imagecopyresampled ( $bi, $image_source, 0, 0, 0, 0, 1, 1, $width, $height );
+		$color = imagecolorat ( $bi, 0, 0 );
+		$r = ($color >> 16) & 0xFF;
+		$g = ($color >> 8) & 0xFF;
+		$b = $color & 0xFF;
+		$bright = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
+		return $bright;
 	}
 }
 

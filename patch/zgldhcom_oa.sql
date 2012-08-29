@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2012-08-28 14:59:59
+Date: 2012-08-29 19:23:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -219,7 +219,7 @@ CREATE TABLE `oa_uploaded` (
   `statues` varchar(32) NOT NULL DEFAULT 'processing',
   `upload_datetime` datetime DEFAULT NULL,
   PRIMARY KEY (`uploaded_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_uploaded
@@ -232,6 +232,12 @@ INSERT INTO oa_uploaded VALUES ('11', 'Sleep.jpg', '.jpg', 'uploads/0d/92/34/0d9
 INSERT INTO oa_uploaded VALUES ('12', 'd231428.jpg', '.jpg', 'uploads/01/ea/e3/01eae39f648aba5aa1a19cc5b133d14a/', '7309', 'logo', '7', 'saved', '2012-08-23 17:20:27');
 INSERT INTO oa_uploaded VALUES ('13', '20110322011353843daib.jpg', '.jpg', 'uploads/a8/23/c8/a823c86b5a519b9bc5134ab1f42328ec/', '5188', 'logo', '7', 'saved', '2012-08-23 18:05:12');
 INSERT INTO oa_uploaded VALUES ('14', 'Penguins.jpg', '.jpg', 'uploads/f5/b1/9e/f5b19e90460b166129e50fad2e0eee03/', '5490', 'logo', '7', 'saved', '2012-08-28 14:15:06');
+INSERT INTO oa_uploaded VALUES ('15', '010.jpg', '.jpg', 'uploads/0c/6b/b5/0c6bb541c99213ae5c2f304c7c122c2b/', '309439', 'logo', '3', 'processing', '2012-08-29 12:36:16');
+INSERT INTO oa_uploaded VALUES ('16', '003.jpg', '.jpg', 'uploads/7b/91/dd/7b91dd45e96d29838222728a1eacf12c/', '858174', 'logo', '3', 'processing', '2012-08-29 12:36:30');
+INSERT INTO oa_uploaded VALUES ('17', '009.jpg', '.jpg', 'uploads/50/5b/dc/505bdc293f744075ecb6e0802db5a054/', '600559', 'logo', '3', 'processing', '2012-08-29 12:40:15');
+INSERT INTO oa_uploaded VALUES ('18', '010.jpg', '.jpg', 'uploads/88/67/1b/88671b20db06ee51a025ca74811056e8/', '309439', 'logo', '3', 'processing', '2012-08-29 14:04:56');
+INSERT INTO oa_uploaded VALUES ('19', '009.jpg', '.jpg', 'uploads/eb/b9/12/ebb912673dc30a24cafe187120b39066/', '600559', 'logo', '3', 'processing', '2012-08-29 14:05:11');
+INSERT INTO oa_uploaded VALUES ('20', '011.jpg', '.jpg', 'uploads/6b/c1/6d/6bc16d4f607fd16357b9502b0341e91f/', '1133813', 'logo', '3', 'processing', '2012-08-29 14:05:18');
 
 -- ----------------------------
 -- Table structure for `oa_user`
@@ -253,6 +259,6 @@ CREATE TABLE `oa_user` (
 -- ----------------------------
 INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
 INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'b929c12306ea7c3f6a01fca0a0ae64981345259073', '2012-09-17 00:00:00');
-INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', null, null);
+INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'cd5c0c02c4c643e40134865d323079661346237860', '2012-09-28 00:00:00');
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
 INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', 'f42b7b92c832a05ad8d471dc976ea8d51346134345', '2012-09-27 00:00:00');

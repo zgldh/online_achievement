@@ -2,7 +2,7 @@
 
 class MY_Model extends CI_Model{
 }
-// END Controller class
+// END Model class
 
 
 class BasePeer
@@ -58,6 +58,53 @@ class BasePeer
 	}
 }
 
+/**
+ * 用来给 $this->db 做limit限制的对象<br />
+ * @author Zhangwb
+ *
+ */
+class DB_Limit
+{
+	public $offset = null;
+	public $limit = null;
+	
+	/**
+	 * 必须要有 $limit
+	 * @param int $limit
+	 * @param int $offset = null
+	 */
+	function __construct($limit, $offset = null)
+	{
+		$this->offset = $offset;
+		$this->limit = $limit;
+	}
+	
+	/**
+	 * 如果limit为空 则什么也不做。<br />
+	 * 如果offset为空， 则只限制limit<br />
+	 * 否则将同时加上偏移量和limit
+	 * @param CI_DB_active_record $db
+	 */
+	public function setLimit($db)
+	{
+		if($this->limit == null)
+		{
+			return;
+		}
+		if($this->offset == null)
+		{
+			$limit = (int)$this->limit;
+			$db->limit ( $limit );
+		}
+		else
+		{
+			$offset = (int)$this->offset;
+			$limit = (int)$this->limit;
+			$db->limit ( $limit, $offset );
+		}
+	}
+} 
+
 
 /* End of file Controller.php */
-/* Location: ./application/core/MY_Controller.php */
+/* Location: ./application/core/MY_Model.php */

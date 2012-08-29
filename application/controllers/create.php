@@ -73,15 +73,6 @@ class create extends MY_Controller
 		{
 			$data = $this->upload->data ();
 			
-			if ($data ['image_width'] > 256 || $data ['image_height'] > 256)
-			{
-				$config ['source_image'] = $data ['full_path'];
-				$config ['width'] = 256;
-				$config ['height'] = 256;
-				$this->load->library ( 'image_lib', $config );
-				$this->image_lib->resize ();
-			}
-			
 			$this->loadUploadedModel ();
 			$uploaded = new UploadedPeer ( array (
 					'file_name' => $data ['file_name'], 
@@ -91,6 +82,7 @@ class create extends MY_Controller
 					'file_type' => UploadedPeer::FILE_TYPE_LOGO, 
 					'user_id' => $this->webuser->getUserId (), 
 					'statues' => 'processing' ) );
+			$uploaded->preResize();
 			$uploaded->save ();
 			
 			$image_url = '/' . $this->upload->relative_path . $data ['file_name'];
@@ -152,7 +144,7 @@ class create extends MY_Controller
 		{
 			// TODO 当logo上传者id和当前用户id不一样的时候
 		}
-		$logo->resize ( json_decode ( $form ['logo_crop'] ) );
+		$logo->crop ( json_decode ( $form ['logo_crop'] ) );
 		$logo->markAsSaved ();
 		$logo->save ();
 		

@@ -34,6 +34,10 @@ class MY_Controller extends CI_Controller{
      * @var Tags_model
      */
     public $tags_model = null;
+    /**
+     * @var Intent_model
+     */
+    public $intent_model = null;
 
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
@@ -267,6 +271,10 @@ class MY_Controller extends CI_Controller{
     protected function loadTagsModel()
     {
 	    $this->load->model('Tags_model','tags_model',true);
+    }
+    protected function loadIntentModel()
+    {
+	    $this->load->model('Intent_model','intent_model',true);
     }
 }
 // END Controller class
