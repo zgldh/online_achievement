@@ -64,6 +64,18 @@ class Intent_model extends MY_Model
 		}
 		return $re;
 	}
+	/**
+	 * 根据 user_id 和 achievement_id 搜索是否有该 intent
+	 * @param int $user_id
+	 * @param int $achievement_id
+	 * @return Ambigous <boolean, IntentPeer>
+	 */
+	public function getByUserAndAchievement($user_id, $achievement_id)
+	{
+	    $raw = $this->db->get_where ( Intent_model::TABLE_INTENT, array ('user_id'=>$user_id, 'achievement_id'=>$achievement_id) )->row_array ();
+	    $intent = $raw ? new IntentPeer ( $raw ) : false;
+	    return $intent;
+	}
 	
 	/**
 	 * 更新数据 或 插入数据
@@ -74,7 +86,10 @@ class Intent_model extends MY_Model
 	{
 		$this->db->set ( 'achievement_id', $intent->achievement_id );
 		$this->db->set ( 'user_id', $intent->user_id );
-		$this->db->set ( 'achievem_date', $intent->achieve_date );
+		if($intent->achieve_date)
+		{
+		    $this->db->set ( 'achievem_date', $intent->achieve_date );
+		}
 		$this->db->set ( 'status', $intent->status );
 		
 		$pkValue = $intent->getPrimaryKeyValue ();
@@ -86,7 +101,7 @@ class Intent_model extends MY_Model
 		}
 		else
 		{
-			$this->db->set ( 'intent_date', $intent->intent_date );
+			$this->db->set ( 'intent_date', 'NOW()', false );
 			$this->db->insert ( Intent_model::TABLE_INTENT );
 			$intent->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}

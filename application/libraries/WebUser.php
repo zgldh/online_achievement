@@ -137,6 +137,28 @@ class WebUser
 		$userdata = array (WebUser::SESSION_KEY => array ('user_id' => $user_id, 'user_name' => $user_name ) );
 		$ci->session->set_userdata ( $userdata );
 	}
+
+	public function setSessFlashData($newdata = array(), $newval = '')
+	{
+	    $ci = & get_instance ();
+	    $ci->load->library ( 'session' );
+	    $ci->session->set_flashdata($newdata,$newval);
+	}
+
+    public function getSessFlashData($key)
+	{
+	    $ci = & get_instance ();
+	    $ci->load->library ( 'session' );
+	    $ci->session->flashdata($key);
+	}
+
+	public function keepSessFlashData($key)
+	{
+	    $ci = & get_instance ();
+	    $ci->load->library ( 'session' );
+	    $ci->session->keep_flashdata($key);
+	}
+	
 	private function getCookieData()
 	{
 		$ci = & get_instance ();

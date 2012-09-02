@@ -225,8 +225,8 @@ class AchievementPeer extends BasePeer
 		return $creater;
 	}
 	/**
-	 * 得到当前成就的作者
-	 * @return Ambigous <boolean, UserPeer>
+	 * 得到当前成就的步骤
+	 * @return Ambigous <Ambigous, multitype:ProcedurePeer >
 	 */
 	public function getProcedures()
 	{

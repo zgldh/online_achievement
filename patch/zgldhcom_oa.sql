@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50519
+Source Server Version : 50154
 Source Host           : localhost:3306
 Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-08-29 19:23:49
+Date: 2012-09-02 17:57:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,6 +44,28 @@ INSERT INTO oa_achievement VALUES ('12', '0', '拿到驾照', '7', '13', '1', '�
 INSERT INTO oa_achievement VALUES ('13', '0', '去南极', '7', '14', '1', '到南极吹吹风。。', '2', '2012-08-28 14:17:33');
 
 -- ----------------------------
+-- Table structure for `oa_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `oa_comment`;
+CREATE TABLE `oa_comment` (
+  `comment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `post_date` datetime NOT NULL,
+  `deleted` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0: normal; 1: deleted',
+  `reply_comment_id` bigint(20) unsigned DEFAULT NULL COMMENT '这条评论是回复的哪条评论id',
+  `achievement_id` bigint(20) unsigned DEFAULT NULL COMMENT '这条评论隶属于的成就',
+  `track_id` bigint(20) unsigned DEFAULT NULL COMMENT '这条评论隶属于的track',
+  PRIMARY KEY (`comment_id`),
+  KEY `achievement_id` (`achievement_id`,`post_date`),
+  KEY `user_id` (`user_id`,`post_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of oa_comment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `oa_grradation`
 -- ----------------------------
 DROP TABLE IF EXISTS `oa_grradation`;
@@ -71,14 +93,18 @@ CREATE TABLE `oa_intent` (
   `user_id` bigint(20) unsigned NOT NULL,
   `achievement_id` bigint(20) unsigned NOT NULL,
   `intent_date` datetime NOT NULL COMMENT '该意图建立的时间戳',
-  `achieve_date` datetime NOT NULL COMMENT '成就实现时间戳',
+  `achieve_date` datetime DEFAULT NULL COMMENT '成就实现时间戳',
   `status` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '1: 执行中 2: 已经达成',
-  PRIMARY KEY (`intent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
+  PRIMARY KEY (`intent_id`),
+  KEY `user_id` (`user_id`,`achievement_id`),
+  KEY `achievement_id` (`achievement_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
 
 -- ----------------------------
 -- Records of oa_intent
 -- ----------------------------
+INSERT INTO oa_intent VALUES ('2', '2', '13', '2012-09-02 15:22:24', null, '1');
+INSERT INTO oa_intent VALUES ('3', '2', '12', '2012-09-02 16:37:13', null, '1');
 
 -- ----------------------------
 -- Table structure for `oa_procedure`
@@ -194,10 +220,13 @@ INSERT INTO oa_tags_achievement VALUES ('13', '19');
 DROP TABLE IF EXISTS `oa_track`;
 CREATE TABLE `oa_track` (
   `track_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '成就追踪记录',
+  `achievement_id` bigint(20) unsigned NOT NULL,
   `intent_id` bigint(20) unsigned NOT NULL COMMENT '意向id',
   `track_date` datetime NOT NULL COMMENT '本条记录时间戳',
   `content` text COMMENT '记录内容',
-  PRIMARY KEY (`track_id`)
+  PRIMARY KEY (`track_id`),
+  KEY `achievement_id` (`achievement_id`,`track_date`),
+  KEY `intent_id` (`intent_id`,`track_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='oa_achievement_track\r\n用于储存用户对一个成就的意向的实施过程中，每个阶段进行的记录。';
 
 -- ----------------------------
@@ -258,7 +287,7 @@ CREATE TABLE `oa_user` (
 -- Records of oa_user
 -- ----------------------------
 INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
-INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'b929c12306ea7c3f6a01fca0a0ae64981345259073', '2012-09-17 00:00:00');
+INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'c0312b4aaca6da3ddb410dd5b30e5ad11346570407', '2012-10-02 00:00:00');
 INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'cd5c0c02c4c643e40134865d323079661346237860', '2012-09-28 00:00:00');
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
 INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', 'f42b7b92c832a05ad8d471dc976ea8d51346134345', '2012-09-27 00:00:00');

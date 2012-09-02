@@ -1,5 +1,8 @@
 @CHARSET "UTF-8";
 
+/* rewrite bootstrap */
+.tooltip {font-size: 12px;}
+
 #site-topbar{margin-bottom:10px;}
 .navbar-container{width: 99% !important;}
 
@@ -29,3 +32,11 @@
     bottom: 0;
     border: none;
 }
+
+.procedures-box{}
+.procedures-box h4{}
+.procedures-box ol{margin: 0; list-style-position: inside; padding-left: ; }
+.procedures-box ol li{clear: both; position: relative; list-style-position: inside; vertical-align: sub; }
+.procedures-box ol li .procedure-desc:hover{background-color: #eee; border-radius: 4px;}
+.procedures-box ol li .procedure-desc{padding: 5px 200px 5px 5px; display: inline-block; width: 66%; vertical-align: middle; }
+.procedures-box ol li .procedure-tools{display: inline-block; float: right; position: absolute; right: 5px; line-height: 30px; vertical-align: middle; }

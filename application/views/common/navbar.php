@@ -46,7 +46,7 @@
                 	<a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo $this->webuser->getUserName();?> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                     	<li><a href="#"><i class="icon-list-alt"></i> 个人资料</a></li>
-                        <li><a href="#"><i class="icon-star"></i> 我的成就</a></li>
+                        <li><a href="#"><i class="icon-flag"></i> 我的成就</a></li>
                         <li><a href="#"><i class="icon-envelope"></i> 信息</a></li>
                         <li class="divider"></li>
                         <li><a href="/logout" title="退出"><i class="icon-off"></i> 退出</a></li>

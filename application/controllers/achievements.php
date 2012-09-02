@@ -27,12 +27,24 @@ class achievements extends MY_Controller
 		
 		$this->setTitle($achievement->name."--在线成就系统");
 		
-		$data = compact('achievement');
+		$this->loadIntentModel();
+		$intent = IntentPeer::model()->getByUserAndAchievement($this->webuser->getUserId(), $achievement_id);
+		if($intent)
+		{
+		    $this->addJavascriptFile('/js/detail_intent.js');
+		    $this->addJavascriptFile('/js/bootstrap-tooltip.js');
+		}
+		else
+		{
+		    $this->addStyleCode('.procedure-tools{display:none;}');
+		}
+		
+		$data = compact('achievement','intent');
 		$this->view('achievements/detail',$data);
 	}
 	
 	/**
-	 * TODO 开始向某成就努力<br />
+	 * 开始向某成就努力<br />
 	 * 如果条件允许，则添加该intent然后重定向到/detail/$achievement_id<br />
 	 * 会检测： 是否登录， 前提条件 等
 	 * @param int $achievement_id
@@ -40,6 +52,33 @@ class achievements extends MY_Controller
 	public function work_intent($achievement_id)
 	{
 		$this->needLoginOrExit('/achievements/work_intent/'.$achievement_id);
+
+		//检测是否已经有该intent
+        $this->loadIntentModel();
+
+        $error = array();
+        
+        $intent = IntentPeer::model()->getByUserAndAchievement($this->webuser->getUserId(), $achievement_id);
+        if(!$intent)
+        {
+            //TODO 未来加上前提条件过滤
+            
+            //设立该 intent
+            $intent = new IntentPeer();
+            $intent->user_id = $this->webuser->getUserId();
+            $intent->achievement_id = $achievement_id;
+            $intent->save();
+        }
+        
+        if($error)
+        {
+            //有错误。设置错误信息
+            $this->webuser->setSessFlashData('error',$error);
+        }
+
+        $this->load->helper ( 'url' );
+        redirect ( '/detail/'.$achievement_id );
+        exit();
 	}
 }
 
