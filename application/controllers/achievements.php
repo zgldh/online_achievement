@@ -33,6 +33,7 @@ class achievements extends MY_Controller
 		{
 		    $this->addJavascriptFile('/js/detail_intent.js');
 		    $this->addJavascriptFile('/js/bootstrap-tooltip.js');
+		    $this->addJavascriptFile('/js/bootstrap-popover.js');
 		}
 		else
 		{

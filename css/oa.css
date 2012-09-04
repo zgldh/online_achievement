@@ -40,3 +40,4 @@
 .procedures-box ol li .procedure-desc:hover{background-color: #eee; border-radius: 4px;}
 .procedures-box ol li .procedure-desc{padding: 5px 200px 5px 5px; display: inline-block; width: 66%; vertical-align: middle; }
 .procedures-box ol li .procedure-tools{display: inline-block; float: right; position: absolute; right: 5px; line-height: 30px; vertical-align: middle; }
+.procedure-track-popover{width: auto;}

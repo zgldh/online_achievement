@@ -73,21 +73,23 @@ $creater = $achievement->getCreater();
                         <div class="procedure-tools btn-group">
 <!--                             <span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>  -->
 <!--                             <button type="button" class="btn btn-small btn-info"><i class="icon-comment icon-white"></i> 评论</button> -->
-                            <span type="button" class="btn btn-small"><i class="icon-ok"></i> 我完成了</span>
+                            <button type="button" class="btn btn-small procedure_tools_done_btn" title="<?php echo $procedure->description;?>"><i class="icon-ok"></i> 我完成了</button>
                             <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                         </div>
                     <?php $sub_procedures = $procedure->getSubProcedures();?>
                     <?php if($sub_procedures):?>
                     <ol>
                     <?php foreach($sub_procedures as $sub_procedure):?>
+                    <?php $sub_procedure instanceof ProcedurePeer;?>
                         <li>
                             <span class="procedure-desc"><?php echo $sub_procedure->description;?></span>
                             <div class="procedure-tools btn-group">
-<!--                             <button type="button" class="btn btn-small btn-success"><i class="icon-ok-sign icon-white"></i> 完成</button> -->
-                                <button type="button" class="btn btn-small"><i class="icon-ok-sign"></i> 完成</button>
-                                <button type="button" class="btn btn-small btn-info"><i class="icon-comment icon-white"></i> 评论</button>
+<!--                             <span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>  -->
+<!--                             <button type="button" class="btn btn-small btn-info"><i class="icon-comment icon-white"></i> 评论</button> -->
+	                            <button type="button" class="btn btn-small procedure_tools_done_btn" title="<?php echo $sub_procedure->description;?>"><i class="icon-ok"></i> 我完成了</button>
+	                            <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                             </div>
-                     </li>
+                        </li>
                     <?php endforeach;?>
                     </ol>
                     <?php endif;?>
