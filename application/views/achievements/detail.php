@@ -92,7 +92,9 @@ $procedures = $achievement->getProcedures();
                           <button 
                             	type="button" 
                             	class="btn btn-small procedure_tools_done_btn" 
-                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
+                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $procedure->procedure_id;?>"
+                            	data-loading-text="载入中..."
+                            	><i class="icon-ok"></i> 我完成了</button>
                         <?php endif;?>
                             <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                         </div>
@@ -112,7 +114,8 @@ $procedures = $achievement->getProcedures();
 		                          <button 
 		                            	type="button" 
 		                            	class="btn btn-small procedure_tools_done_btn" 
-		                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $sub_procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
+		                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $sub_procedure->procedure_id;?>"
+		                            	data-loading-text="载入中..."><i class="icon-ok"></i> 我完成了</button>
 		                        <?php endif;?>
                             	<button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                             </div>

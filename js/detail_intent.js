@@ -7,8 +7,11 @@ $(function() {
 	var procedure_tools_done_btn = $('button.procedure_tools_done_btn');
 	procedure_tools_done_btn.click(function(e) {
 	    e.preventDefault();
+	    var btn = $(this);
+	    btn.button('loading');
 	    var href = $(e.target).attr('href');
         $.get(href, function(data) {
+    	    btn.button('reset');
             $(data).modal();
         });
 	});
