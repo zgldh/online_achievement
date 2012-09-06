@@ -29,11 +29,9 @@ class achievements extends MY_Controller
 
 		$this->loadIntentModel();
 		$intent = IntentPeer::model()->getByUserAndAchievement($this->webuser->getUserId(), $achievement_id);
-		if($intent)
-		{
-		    $this->addJavascriptFile('/js/detail_intent.js');
-		    $this->addJavascriptFile('/js/bootstrap/bootstrap-modal.js');
-		}
+		    
+		$this->addJavascriptFile('/js/bootstrap/bootstrap-modal.js');
+	    $this->addJavascriptFile('/js/detail_intent.js');
 	    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
 		$this->addStyleFile('/css/detail.css');
 
