@@ -186,6 +186,10 @@ class ProcedurePeer extends BasePeer
 	 */
 	public function getTracksWithIntent($intent)
 	{
+		if(!$intent)
+		{
+			return null;
+		}
 		$CI = & get_instance ();
 		$CI->load->model ( 'Track_model', 'track_model', true );
 		$tracks = TrackPeer::model ()->getTracksByProcedureAndIntent ( $this->procedure_id, $intent->intent_id );
