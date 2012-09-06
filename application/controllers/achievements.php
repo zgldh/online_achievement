@@ -32,9 +32,9 @@ class achievements extends MY_Controller
 		if($intent)
 		{
 		    $this->addJavascriptFile('/js/detail_intent.js');
-		    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
 		    $this->addJavascriptFile('/js/bootstrap/bootstrap-modal.js');
 		}
+	    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
 		$this->addStyleFile('/css/detail.css');
 
 		$data = compact('achievement','intent');
