@@ -81,7 +81,7 @@ $creater = $achievement->getCreater();
                             	class="btn btn-small procedure_tools_done_btn" 
                             	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
                         <?php endif;?>
-                            <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
+                            <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i>&nbsp;</button>
                         </div>
                     <?php $sub_procedures = $procedure->getSubProcedures();?>
                     <?php if($sub_procedures):?>
@@ -101,8 +101,7 @@ $creater = $achievement->getCreater();
 		                            	class="btn btn-small procedure_tools_done_btn" 
 		                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $sub_procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
 		                        <?php endif;?>
-		                        
-                            	<button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
+                            	<button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i>&nbsp;</button>
                             </div>
                         </li>
                     <?php endforeach;?>
