@@ -35,10 +35,6 @@ class achievements extends MY_Controller
 		    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
 		    $this->addJavascriptFile('/js/bootstrap/bootstrap-modal.js');
 		}
-		else
-		{
-		    $this->addStyleCode('.procedures-box ol li .procedure-tools{display:none;}');
-		}
 		$this->addStyleFile('/css/detail.css');
 
 		$data = compact('achievement','intent');
