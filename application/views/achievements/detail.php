@@ -75,7 +75,7 @@ $creater = $achievement->getCreater();
                         <?php if($tmp_tracks):?>
                         	<span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>
                             <button type="button" class="btn btn-small"><i class="icon-comment"></i> 评论</button>
-                        <?php else:?>
+                        <?php elseif($intent):?>
                           <button 
                             	type="button" 
                             	class="btn btn-small procedure_tools_done_btn" 
@@ -95,7 +95,7 @@ $creater = $achievement->getCreater();
 		                        <?php if($tmp_tracks):?>
 		                        	<span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>
 		                            <button type="button" class="btn btn-small"><i class="icon-comment"></i> 评论</button>
-		                        <?php else:?>
+		                        <?php elseif($intent):?>
 		                          <button 
 		                            	type="button" 
 		                            	class="btn btn-small procedure_tools_done_btn" 
