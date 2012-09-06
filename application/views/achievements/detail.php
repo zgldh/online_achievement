@@ -68,12 +68,19 @@ $creater = $achievement->getCreater();
                 <ol>
                 <?php foreach($procedures as $procedure):?>
                 <?php $procedure instanceof ProcedurePeer;?>
+                <?php $tmp_tracks = $procedure->getTracksWithIntent($intent);?>
                     <li>
                         <span class="procedure-desc"><?php echo $procedure->description;?></span>
                         <div class="procedure-tools btn-group">
-<!--                             <span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>  -->
-<!--                             <button type="button" class="btn btn-small btn-info"><i class="icon-comment icon-white"></i> 评论</button> -->
-                            <button type="button" class="btn btn-small procedure_tools_done_btn" title="<?php echo $procedure->description;?>"><i class="icon-ok"></i> 我完成了</button>
+                        <?php if($tmp_tracks):?>
+                        	<span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>
+                            <button type="button" class="btn btn-small"><i class="icon-comment"></i> 评论</button>
+                        <?php else:?>
+                          <button 
+                            	type="button" 
+                            	class="btn btn-small procedure_tools_done_btn" 
+                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
+                        <?php endif;?>
                             <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                         </div>
                     <?php $sub_procedures = $procedure->getSubProcedures();?>
@@ -81,13 +88,21 @@ $creater = $achievement->getCreater();
                     <ol>
                     <?php foreach($sub_procedures as $sub_procedure):?>
                     <?php $sub_procedure instanceof ProcedurePeer;?>
+                    <?php $tmp_tracks = $sub_procedure->getTracksWithIntent($intent);?>
                         <li>
                             <span class="procedure-desc"><?php echo $sub_procedure->description;?></span>
                             <div class="procedure-tools btn-group">
-<!--                             <span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>  -->
-<!--                             <button type="button" class="btn btn-small btn-info"><i class="icon-comment icon-white"></i> 评论</button> -->
-	                            <button type="button" class="btn btn-small procedure_tools_done_btn" title="<?php echo $sub_procedure->description;?>"><i class="icon-ok"></i> 我完成了</button>
-	                            <button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
+		                        <?php if($tmp_tracks):?>
+		                        	<span type="button" class="btn btn-small disabled btn-success"><i class="icon-ok-sign icon-white"></i> 已完成</span>
+		                            <button type="button" class="btn btn-small"><i class="icon-comment"></i> 评论</button>
+		                        <?php else:?>
+		                          <button 
+		                            	type="button" 
+		                            	class="btn btn-small procedure_tools_done_btn" 
+		                            	href="/achievements/modal_procedure_done_form/<?php echo $intent->intent_id;?>/<?php echo $sub_procedure->procedure_id;?>"><i class="icon-ok"></i> 我完成了</button>
+		                        <?php endif;?>
+		                        
+                            	<button type="button" class="btn btn-small procedure_tools_view_track_btn" data-original-title="看看别人是怎么完成的"><i class="icon-eye-open"></i></button>
                             </div>
                         </li>
                     <?php endforeach;?>
@@ -101,6 +116,8 @@ $creater = $achievement->getCreater();
                 <?php endif;?>
                 <hr />
             </div>
+            
+            
             <div class="right-item">
                 <h4>这些人完成了本成就</h4>
                 <div>//TODO 这里显示本成就的 intent标记为完成的用户头像、 对本成就留下的最后一个track</div>
@@ -120,3 +137,4 @@ $creater = $achievement->getCreater();
         <!-- 预览完成 结束 -->
     </div>
 </div>
+

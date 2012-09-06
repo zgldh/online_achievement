@@ -15,6 +15,28 @@ class Track_model extends MY_Model
 		return $procedure;
 	}
 	/**
+	 * 根据特定步骤， 特定意向(intent)， 得到一系列的track
+	 * @param int $procedure_id
+	 * @param int $intent_id
+	 * @return multitype:TrackPeer
+	 */
+	public function getTracksByProcedureAndIntent($procedure_id, $intent_id)
+	{
+		$re = array ();
+		$this->db->where ( 'procedure_id', $procedure_id );
+		$this->db->where ( 'intent_id', $intent_id );
+		$this->db->order_by ( 'track_date', 'desc' );
+		$result = $this->db->get ( Track_model::TABLE )->result_array ();
+		foreach ( $result as $raw )
+		{
+			if ($raw)
+			{
+				$re [] = new TrackPeer ( $raw );
+			}
+		}
+		return $re;
+	}
+	/**
 	 * 更新数据 或 插入数据
 	 *
 	 * @param TrackPeer $track        	
@@ -23,6 +45,7 @@ class Track_model extends MY_Model
 	{
 		$this->db->set ( 'achievement_id', $track->achievement_id );
 		$this->db->set ( 'intent_id', $track->intent_id );
+		$this->db->set ( 'procedure_id', $track->procedure_id );
 		$this->db->set ( 'content', $track->content );
 		
 		$pkValue = $track->getPrimaryKeyValue ();
@@ -52,25 +75,33 @@ class TrackPeer extends BasePeer
 	public $track_id = 0;
 	/**
 	 * 是哪条成就的追踪
-	 * 
+	 *
 	 * @var int
 	 */
 	public $achievement_id = 0;
 	/**
 	 * 意向 id
-	 * 
+	 *
 	 * @var int
 	 */
 	public $intent_id = 0;
+	
+	/**
+	 * 这是哪个步骤的track
+	 *
+	 * @var int
+	 */
+	public $procedure_id = 0;
+	
 	/**
 	 * 本条记录时间戳
-	 * 
+	 *
 	 * @var string
 	 */
 	public $track_date = '';
 	/**
 	 * 记录内容
-	 * 
+	 *
 	 * @var string
 	 */
 	public $content = '';

@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50154
+Source Server Version : 50519
 Source Host           : localhost:3306
 Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
-Target Server Version : 50154
+Target Server Version : 50519
 File Encoding         : 65001
 
-Date: 2012-09-02 17:57:30
+Date: 2012-09-06 16:52:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -98,13 +98,14 @@ CREATE TABLE `oa_intent` (
   PRIMARY KEY (`intent_id`),
   KEY `user_id` (`user_id`,`achievement_id`),
   KEY `achievement_id` (`achievement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
 
 -- ----------------------------
 -- Records of oa_intent
 -- ----------------------------
 INSERT INTO oa_intent VALUES ('2', '2', '13', '2012-09-02 15:22:24', null, '1');
 INSERT INTO oa_intent VALUES ('3', '2', '12', '2012-09-02 16:37:13', null, '1');
+INSERT INTO oa_intent VALUES ('4', '7', '12', '2012-09-03 17:43:45', null, '1');
 
 -- ----------------------------
 -- Table structure for `oa_procedure`
@@ -222,16 +223,19 @@ CREATE TABLE `oa_track` (
   `track_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '成就追踪记录',
   `achievement_id` bigint(20) unsigned NOT NULL,
   `intent_id` bigint(20) unsigned NOT NULL COMMENT '意向id',
+  `procedure_id` bigint(20) unsigned NOT NULL COMMENT '这是哪个步骤的track',
   `track_date` datetime NOT NULL COMMENT '本条记录时间戳',
   `content` text COMMENT '记录内容',
   PRIMARY KEY (`track_id`),
   KEY `achievement_id` (`achievement_id`,`track_date`),
-  KEY `intent_id` (`intent_id`,`track_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='oa_achievement_track\r\n用于储存用户对一个成就的意向的实施过程中，每个阶段进行的记录。';
+  KEY `intent_id` (`intent_id`,`track_date`),
+  KEY `procedure_id` (`procedure_id`,`intent_id`,`track_date`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_track\r\n用于储存用户对一个成就的意向的实施过程中，每个阶段进行的记录。';
 
 -- ----------------------------
 -- Records of oa_track
 -- ----------------------------
+INSERT INTO oa_track VALUES ('1', '12', '4', '32', '2012-09-06 16:33:15', '在郑州兴化驾校报的名');
 
 -- ----------------------------
 -- Table structure for `oa_uploaded`
@@ -287,7 +291,7 @@ CREATE TABLE `oa_user` (
 -- Records of oa_user
 -- ----------------------------
 INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
-INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', 'c0312b4aaca6da3ddb410dd5b30e5ad11346570407', '2012-10-02 00:00:00');
-INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'cd5c0c02c4c643e40134865d323079661346237860', '2012-09-28 00:00:00');
+INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', '09a9862f59de84731248d28f1262038f1346646251', '2012-10-03 00:00:00');
+INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'b222d517b08c2b96afefa98403634c7a1346646219', '2012-10-03 00:00:00');
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
-INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', 'f42b7b92c832a05ad8d471dc976ea8d51346134345', '2012-09-27 00:00:00');
+INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', 'bdb2989b2804180903c7163a836ed7b61346912072', '2012-10-06 00:00:00');

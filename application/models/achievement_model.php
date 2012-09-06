@@ -192,6 +192,9 @@ class AchievementPeer extends BasePeer
 	public function getTags()
 	{
 		$this->needPKValue ( 'Current achievement is empty.' );
+
+		$CI = & get_instance ();
+		$CI->load->model ( 'Tags_model', 'tags_model', true );
 		
 		$re = array ();
 		$relations = TagToAchievementPeer::model ()->getTagAchievementByAchievementID ( $this->achievement_id );

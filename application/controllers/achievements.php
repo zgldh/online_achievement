@@ -32,13 +32,14 @@ class achievements extends MY_Controller
 		if($intent)
 		{
 		    $this->addJavascriptFile('/js/detail_intent.js');
-		    $this->addJavascriptFile('/js/bootstrap-tooltip.js');
-		    $this->addJavascriptFile('/js/bootstrap-popover.js');
+		    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
+		    $this->addJavascriptFile('/js/bootstrap/bootstrap-modal.js');
 		}
 		else
 		{
 		    $this->addStyleCode('.procedures-box ol li .procedure-tools{display:none;}');
 		}
+		$this->addStyleFile('/css/detail.css');
 
 		$data = compact('achievement','intent');
 		$this->view('achievements/detail',$data);
@@ -80,6 +81,46 @@ class achievements extends MY_Controller
         $this->load->helper ( 'url' );
         redirect ( '/detail/'.$achievement_id );
         exit();
+	}
+	
+	public function work_add_track()
+	{
+		$form = $this->inputPost('Form');
+		$this->needLoginOrExit('/detail/'.$form['achievement_id']);
+		
+		$this->loadIntentModel();
+		$intent = IntentPeer::model()->getByPK($form['intent_id']);
+		
+		if($intent && $intent->user_id == $this->webuser->getUserId())
+		{
+			$this->loadProcedureModel();
+			$procedure = ProcedurePeer::model()->getByPK($form['procedure_id']);
+			
+			if($procedure && $procedure->achievement_id == $form['achievement_id'])
+			{
+				$this->loadTrackModel();
+				$track = new TrackPeer();
+				$track->achievement_id = $procedure->achievement_id;
+				$track->intent_id = $intent->intent_id;
+				$track->procedure_id = $procedure->procedure_id;
+				$track->content = $form['content'];
+				$track->save();
+			}
+		}
+		$this->load->helper('url');
+		redirect('/detail/'.$form['achievement_id']);
+	}
+	
+	public function modal_procedure_done_form($intent_id,$procedure_id)
+	{
+		$this->needLoginOrExit();
+		
+		$this->loadProcedureModel();
+		$procedure = ProcedurePeer::model()->getByPK($procedure_id);
+		$intent_id = (int)$intent_id;
+		
+		$data = compact('intent_id','procedure');
+		$this->load->view('/achievements/modal_procedure_done_form',$data);
 	}
 }
 

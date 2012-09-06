@@ -38,6 +38,10 @@ class MY_Controller extends CI_Controller{
      * @var Intent_model
      */
     public $intent_model = null;
+    /**
+     * @var Track_model
+     */
+    public $track_model = null;
 
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
@@ -142,7 +146,7 @@ class MY_Controller extends CI_Controller{
     {
         if($this->navbar->isDisplay())
         {
-            $this->addJavascriptFile('/js/bootstrap-dropdown.js');
+            $this->addJavascriptFile('/js/bootstrap/bootstrap-dropdown.js');
             $this->addAutoRunJavascriptCode("$('.dropdown-toggle').dropdown()");
         }
 
@@ -275,6 +279,10 @@ class MY_Controller extends CI_Controller{
     protected function loadIntentModel()
     {
 	    $this->load->model('Intent_model','intent_model',true);
+    }
+    protected function loadTrackModel()
+    {
+	    $this->load->model('Track_model','track_model',true);
     }
 }
 // END Controller class
