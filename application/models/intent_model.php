@@ -191,6 +191,18 @@ class IntentPeer extends BasePeer
 	{
 		IntentPeer::model()->delete($this);
 	}
+	
+	/**
+	 * 得到当前 intent 的所有track
+	 * @return Ambigous <multitype:TrackPeer, multitype:TrackPeer >
+	 */
+	public function getTracks()
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'Track_model', 'track_model', true );
+		$tracks = TrackPeer::model ()->getTracksByIntent($this->intent_id );
+		return $tracks;
+	}
 }
 
 ?>

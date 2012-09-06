@@ -37,6 +37,26 @@ class Track_model extends MY_Model
 		return $re;
 	}
 	/**
+	 * 根据特定意向(intent)， 得到一系列的track
+	 * @param int $intent_id
+	 * @return multitype:TrackPeer
+	 */
+	public function getTracksByIntent($intent_id)
+	{
+		$re = array ();
+		$this->db->where ( 'intent_id', $intent_id );
+		$this->db->order_by ( 'track_date', 'desc' );
+		$result = $this->db->get ( Track_model::TABLE )->result_array ();
+		foreach ( $result as $raw )
+		{
+			if ($raw)
+			{
+				$re [] = new TrackPeer ( $raw );
+			}
+		}
+		return $re;
+	}
+	/**
 	 * 更新数据 或 插入数据
 	 *
 	 * @param TrackPeer $track        	

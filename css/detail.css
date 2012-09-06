@@ -13,6 +13,12 @@
     border: none;
 }
 
+.processing-box{}
+.processing-box .alert-info{float:left;}
+.processing-box .processing-box-bar-container{margin-left: 120px;position: relative;}
+.processing-box .processing-box-bar-container .progress-bar-text{color: #fff;line-height: 38px;margin-left: 10px;position: absolute;text-shadow: 0 1px 1px #000;}
+.processing-box .processing-box-bar-container .progress{display: inline-block;height: 38px;width: 100%;}
+
 .procedures-box{}
 .procedures-box h4{}
 .procedures-box ol{margin: 0; list-style-position: inside; padding-left: ; }

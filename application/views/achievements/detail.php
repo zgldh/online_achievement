@@ -2,6 +2,8 @@
 $achievement instanceof AchievementPeer;
 $intent instanceof IntentPeer;
 $creater = $achievement->getCreater();
+$tracks = $intent?$intent->getTracks():null;
+$procedures = $achievement->getProcedures();
 ?>
 
 <div class="container-fluid detail-content">
@@ -50,8 +52,20 @@ $creater = $achievement->getCreater();
         <!-- 基本信息 开始 -->
         <div class="right-content span9">
             <?php if($intent):?>
-            <div class="right-item alert alert-success">
-                <h4>执行中</h4>
+            <div class="right-item processing-box">
+            	<div class="alert alert-info">
+            		<h4>执行中</h4>
+                </div>
+                <div class="processing-box-bar-container">
+                	<?php $tmp_tracks_count = count($tracks);?>
+                	<?php $tmp_procedures_count = count($procedures);?>
+                	<span class="progress-bar-text">
+                		<strong>实现进度：</strong><span><?php echo $tmp_tracks_count;?></span>/<span><?php echo $tmp_procedures_count;?></span>
+                	</span>
+                	<div class="progress progress-striped active">
+					    <div class="bar" style="width: <?php echo 100*$tmp_tracks_count/$tmp_procedures_count;?>%;"></div>
+				    </div>
+                </div>
             </div>
             <?php else:?>
             <div class="right-item alert">
@@ -63,7 +77,6 @@ $creater = $achievement->getCreater();
             
             <div class="right-item procedures-box">
                 <h4>实现步骤</h4>
-                <?php $procedures = $achievement->getProcedures();?>
                 <?php if($procedures):?>
                 <ol>
                 <?php foreach($procedures as $procedure):?>
