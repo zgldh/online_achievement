@@ -43,7 +43,7 @@ class create extends MY_Controller
 		
 		$this->addStyleFile ( '/js/select2/select2.css' );
 		$this->addStyleFile ( '/js/jcrop/jquery.Jcrop.min.css' );
-		$this->addStyleFile ( '/css/icons_big.css' );
+		$this->addStyleFile ( '/css/icon_big.css' );
 		$this->addStyleFile ( '/css/create.css' );
 		
 		$this->navbar->setCurrentItem ( NavBar::ITEM_CREATE );

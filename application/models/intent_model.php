@@ -106,6 +106,15 @@ class Intent_model extends MY_Model
 			$intent->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
 	}
+	
+	public function saveIntentComplete(& $intent)
+	{
+		$this->db->set ( 'status', $intent->status );
+		$this->db->set ( 'achieve_date','NOW()',false);
+		$pkValue = $intent->getPrimaryKeyValue ();
+		$this->db->where ( IntentPeer::PK, $pkValue );
+		$this->db->update ( Intent_model::TABLE_INTENT );
+	}
 	/**
 	 * 删除一个 intent
 	 *
@@ -121,6 +130,17 @@ class Intent_model extends MY_Model
 class IntentPeer extends BasePeer
 {
 	const PK = 'intent_id';
+	
+	/**
+	 * 该意图进行中
+	 * @var int
+	 */
+	const STATUS_PROCESSING = 1;
+	/**
+	 * 该意图已经完成
+	 * @var int
+	 */
+	const STATUS_COMPLETE = 2;
 	
 	/**
 	 * 标签ID
@@ -156,7 +176,7 @@ class IntentPeer extends BasePeer
 	 * 该意图的状态<br />
 	 * 1: 执行中 2: 已经达成
 	 * 
-	 * @var int
+	 * @var int IntentPeer:STATUS_PROCESSING | IntentPeer:STATUS_COMPLETE
 	 */
 	public $status = 1;
 	function __construct($raw = null)
@@ -202,6 +222,58 @@ class IntentPeer extends BasePeer
 		$CI->load->model ( 'Track_model', 'track_model', true );
 		$tracks = TrackPeer::model ()->getTracksByIntent($this->intent_id );
 		return $tracks;
+	}
+	
+	/**
+	 * 得到当前 intent 对应的成就
+	 * @return Ambigous <boolean, AchievementPeer>
+	 */
+	public function getAchievement()
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'Achievement_model', 'achievement_model', true );
+		$achievement = AchievementPeer::model()->getByPK($this->achievement_id);
+		return $achievement;
+	}
+	
+	/**
+	 * 该意图是否已经完成
+	 * @return boolean true已经完成, false没有完成，在进行中
+	 */
+	public function isComplete()
+	{
+		return $this->status == IntentPeer::STATUS_COMPLETE?true:false;
+	}
+	
+	/**
+	 * 检查该 intent 对应的成就的所有步骤是否都track完成了
+	 * @return boolean true全都完成了
+	 */
+	public function isAllProceduresComplete()
+	{
+		$achievement = $this->getAchievement();
+		$procedures = $achievement->getProcedures();
+		$flag = true;
+		foreach($procedures as $procedure)
+		{
+			$procedure instanceof ProcedurePeer;
+			$tracks = $procedure->getTracksWithIntent($this);
+			if(count($tracks) == 0)
+			{
+				$flag = false;
+				break;
+			}
+		}
+		return $flag;
+	}
+	
+	/**
+	 * 将当前意图记录为完成，并且保存
+	 */
+	public function complete()
+	{
+		$this->status = IntentPeer::STATUS_COMPLETE;
+		IntentPeer::model()->saveIntentComplete($this);
 	}
 }
 

@@ -76,7 +76,7 @@ class Procedure_model extends MY_Model
 	public function saveProcedurePeer(& $procedure)
 	{
 		$this->db->set ( 'achievement_id', $procedure->achievement_id );
-		$this->db->set ( 'description', $procedure->description );
+		$this->db->set ( 'description', strip_tags($procedure->description) );
 		$this->db->set ( 'step_num', $procedure->step_num );
 		$this->db->set ( 'upper_id', $procedure->upper_id );
 		

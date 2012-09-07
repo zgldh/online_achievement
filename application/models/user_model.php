@@ -47,7 +47,7 @@ class User_model extends MY_Model
 	 */
 	public function saveUserPeer(& $user)
 	{
-		$this->db->set ( 'name', $user->name );
+		$this->db->set ( 'name', strip_tags($user->name) );
 		$this->db->set ( 'password', $user->password );
 		$this->db->set ( 'email', $user->email );
 		$this->db->set ( 'auto_login_expire', $user->auto_login_expire );

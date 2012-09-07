@@ -48,8 +48,8 @@ class Achievement_model extends MY_Model
 	{
 		$this->db->set ( 'creater_id', $achievement->creater_id );
 		$this->db->set ( 'logo_id', $achievement->logo_id );
-		$this->db->set ( 'name', $achievement->name );
-		$this->db->set ( 'requirement', $achievement->requirement );
+		$this->db->set ( 'name', strip_tags($achievement->name) );
+		$this->db->set ( 'requirement', strip_tags($achievement->requirement) );
 		$this->db->set ( 'status', $achievement->status );
 		$this->db->set ( 'super_achievement_id', $achievement->super_achievement_id );
 		$this->db->set ( 'track_type', $achievement->track_type );

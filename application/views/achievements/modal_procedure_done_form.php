@@ -12,8 +12,9 @@ $procedure instanceof ProcedurePeer;
 			<input type="hidden" name="Form[intent_id]" value="<?php echo $intent_id;?>" />
 			<input type="hidden" name="Form[procedure_id]" value="<?php echo $procedure->procedure_id;?>" id="procedure-done-modal-procedure-id" />
 			<input type="hidden" name="Form[achievement_id]" value="<?php echo $procedure->achievement_id;?>" id="procedure-done-modal-procedure-id" />
-			<div>
-				<textarea name="Form[content]" rows="3" placeholder="怎么完成的？"></textarea>
+			<div class="control-group">
+				<textarea name="Form[content]" rows="3" placeholder="怎么完成的？" required="required"></textarea>
+				<div class="help-inline error">请填写内容</div>
 			</div>
 		</form>
 	</div>

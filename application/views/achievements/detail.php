@@ -51,30 +51,53 @@ $procedures = $achievement->getProcedures();
 
         <!-- 基本信息 开始 -->
         <div class="right-content span9">
+        
+        	<!-- 成就进度指示器 begin -->
             <?php if($intent):?>
-            <div class="right-item processing-box">
-            	<div class="alert alert-info">
-            		<h4>执行中</h4>
-                </div>
-                <div class="processing-box-bar-container">
-                	<?php $tmp_tracks_count = count($tracks);?>
-                	<?php $tmp_procedures_count = count($procedures);?>
-                	<span class="progress-bar-text">
-                		<strong>实现进度：</strong><span><?php echo $tmp_tracks_count;?></span>/<span><?php echo $tmp_procedures_count;?></span>
-                	</span>
-                	<div class="progress progress-striped active">
-					    <div class="bar" style="width: <?php echo 100*$tmp_tracks_count/$tmp_procedures_count;?>%;"></div>
-				    </div>
-                </div>
-            </div>
+	            <?php if($intent->isComplete()):?>
+	            <div class="right-item alert alert-success">
+	                <h4>恭喜！您已经于<span><?php echo $intent->achieve_date;?></span>实现了本成就</h4>
+	            </div>
+	            <?php else:?>
+	            <div class="right-item processing-box">
+	            	<div class="alert alert-info">
+	            		<h4>执行中</h4>
+	                </div>
+	                <div class="processing-box-bar-container">
+	                	<?php $tmp_tracks_count = count($tracks);?>
+	                	<?php $tmp_procedures_count = count($procedures);?>
+	                	<?php $tmp_track_rate = 100;?>
+	                	<?php if($tmp_procedures_count != 0):?>
+	                	<?php $tmp_track_rate = (int)(100* $tmp_tracks_count / $tmp_procedures_count);?>
+	                	<?php endif;?>
+	                	
+	                	<?php if($tmp_track_rate == 100):?>
+	                	<div class="progress-striped clearfix">
+	                		<a class="btn btn-warning btn-large"
+	                			href="<?php echo BASEURL;?>achievements/work_complete/<?php echo $intent->intent_id;?>"
+	                		><i class="icon-flag icon-white"></i> 进度已经100%完成！快点点我！</a>
+	                	</div>
+	                	<?php else:?>
+	                	<span class="progress-bar-text">
+	                		<strong>实现进度：</strong><span><?php echo $tmp_track_rate;?>%</span>
+	                	</span>
+	                	<div class="progress progress-striped active">
+						    <div class="bar" style="width: <?php echo $tmp_track_rate; ?>%;"></div>
+					    </div>
+					    <?php endif;?>
+	                </div>
+	            </div>
+	            <?php endif;?>
             <?php else:?>
             <div class="right-item alert">
                 <h4>您还没有实现该成就</h4>
                 <a href="/achievements/work_intent/<?php echo $achievement->achievement_id;?>">现在就开始！</a>
             </div>
             <?php endif;?>
+        	<!-- 成就进度指示器 end -->
+        	
             
-            
+        	<!-- 成就实现步骤 begin -->
             <div class="right-item procedures-box">
                 <h4>实现步骤</h4>
                 <?php if($procedures):?>
@@ -131,6 +154,7 @@ $procedures = $achievement->getProcedures();
                 <?php endif;?>
                 <hr />
             </div>
+        	<!-- 成就实现步骤 end -->
             
             
             <div class="right-item">

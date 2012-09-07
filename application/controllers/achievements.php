@@ -35,6 +35,7 @@ class achievements extends MY_Controller
 	    $this->addJavascriptFile('/js/bootstrap/bootstrap-tooltip.js');
 	    $this->addJavascriptFile('/js/detail_intent.js');
 		$this->addStyleFile('/css/detail.css');
+		$this->addStyleFile('/css/icon_big.css');
 
 		$data = compact('achievement','intent');
 		$this->view('achievements/detail',$data);
@@ -75,7 +76,6 @@ class achievements extends MY_Controller
 
         $this->load->helper ( 'url' );
         redirect ( '/detail/'.$achievement_id );
-        exit();
 	}
 	
 	public function work_add_track()
@@ -104,6 +104,41 @@ class achievements extends MY_Controller
 		}
 		$this->load->helper('url');
 		redirect('/detail/'.$form['achievement_id']);
+	}
+	public function work_complete($intent_id)
+	{
+		$this->needLoginOrExit('/achievements/work_complete/'.$intent_id);
+
+		//检测是否已经有该intent
+        $this->loadIntentModel();
+
+        $error = array();
+
+        $intent = IntentPeer::model()->getByPK($intent_id);
+        if(!$intent)
+        {
+        	//没有该intent
+        	$error[] = '你没有开始做这个成就';
+        }
+        elseif(!$intent->isAllProceduresComplete()) {
+        	// 还没有全部完成
+        	$error[] = '你还有要求的步骤没有完成';
+        }
+        else
+        {
+        	// 都完成了
+        	$intent->complete();
+        }
+
+        if($error)
+        {
+            //有错误。设置错误信息
+            $this->webuser->setSessFlashData('error',$error);
+        }
+
+        $this->load->helper ( 'url' );
+        redirect ( '/detail/'.$intent->achievement_id );
+        exit();
 	}
 	
 	public function modal_procedure_done_form($intent_id,$procedure_id)

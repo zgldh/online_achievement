@@ -20,6 +20,16 @@ $(function() {
 	var procedure_done_form_submit = $('button.procedure-done-form-submit');
 	procedure_done_form_submit.live('click',function(){
 		var form = $(this).parent().parent().find('.procedure-done-form');
+		var textarea = form.find('textarea');
+		if(textarea.val().length == 0)
+		{
+			textarea.parent().addClass('error');
+			return false;
+		}
+		else
+		{
+			textarea.parent().removeClass('error');
+		}
 		form.submit();
 	});
 });

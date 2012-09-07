@@ -133,7 +133,7 @@ class Tags_model extends MY_Model
 	public function saveTagPeer(& $tag)
 	{
 		$tag->tag_name = substr ( trim ( $tag->tag_name ), 0, 255 );
-		$this->db->set ( 'tag_name', $tag->tag_name );
+		$this->db->set ( 'tag_name', strip_tags($tag->tag_name) );
 		$this->db->set ( 'tag_count', $tag->tag_count );
 		
 		$pkValue = $tag->getPrimaryKeyValue ();

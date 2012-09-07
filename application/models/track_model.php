@@ -66,7 +66,7 @@ class Track_model extends MY_Model
 		$this->db->set ( 'achievement_id', $track->achievement_id );
 		$this->db->set ( 'intent_id', $track->intent_id );
 		$this->db->set ( 'procedure_id', $track->procedure_id );
-		$this->db->set ( 'content', $track->content );
+		$this->db->set ( 'content', strip_tags($track->content) );
 		
 		$pkValue = $track->getPrimaryKeyValue ();
 		

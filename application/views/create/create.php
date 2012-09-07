@@ -28,7 +28,7 @@
                 <div class="control-group">
                     <label class="control-label" for="ach_name"><span class="label label-important">必填</span> 成就名称</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="ach_name" name="Achievement[name]" placeholder="起个响亮的名字">
+                        <input type="text" class="input-xlarge" id="ach_name" name="Achievement[name]" placeholder="起个响亮的名字" required="required">
                         <span class="help-inline error">请填写成就名称</span>
                     </div>
                 </div>
@@ -37,6 +37,7 @@
                     <div class="controls">
                         <textarea id="ach_description" name="Achievement[description]" class="input-xlarge" rows="7" style="max-height: 200px;"
                          placeholder="为什么要有这个成就呢？"
+                         required="required"
                         ></textarea>
                         <span class="help-inline error">请填写成就描述</span>
                     </div>
