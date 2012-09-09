@@ -378,6 +378,45 @@ class AchievementPeer extends BasePeer
 		}
 		return $re;
 	}
+
+	/**
+	 * 得到某用户对本成就的 intent 
+	 * @param int $user_id
+	 * @return Ambigous <Ambigous, boolean, IntentPeer>
+	 */
+	public function getIntentByUser($user_id)
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'Intent_model', 'intent_model', true );
+	    $intent = IntentPeer::model ()->getByUserAndAchievement ( $user_id, $this->achievement_id );
+	    return $intent;
+	}
+	
+	/**
+	 * 
+	 * 得到本成就的 intent 列表
+	 * @param boolean $complete = null        是否是已经完成的 intent
+	 * @param int $remove_user_id = null      要过滤掉哪一个user_id
+	 * @param DB_Limit $limit = null          数量限制
+	 * @return Ambigous <multitype:IntentPeer, multitype:IntentPeer >
+	 */
+	public function getIntents($complete = null,$remove_user_id = null, DB_Limit $limit = null)
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'Intent_model', 'intent_model', true );
+		
+		if($complete === true)
+		{
+		    $complete = IntentPeer::STATUS_COMPLETE;
+		}
+		elseif($complete === false)
+		{
+		    $complete = IntentPeer::STATUS_PROCESSING;
+		}
+		
+	    $intents = IntentPeer::model ()->getIntentsByAchievementID($this->achievement_id,$complete,$remove_user_id,$limit);
+	    return $intents;
+	}
 }
 
 ?>

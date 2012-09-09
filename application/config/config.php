@@ -17,6 +17,9 @@
 define('BASEURL', '/');
 $config['base_url']	= BASEURL;
 
+define('IMG_PLACEHOLDER_64x64',BASEURL.'images/image_placeholder_64x64.png');
+define('IMG_PLACEHOLDER_128x128',BASEURL.'images/image_placeholder_128x128.png');
+
 /*
 |--------------------------------------------------------------------------
 | Index File

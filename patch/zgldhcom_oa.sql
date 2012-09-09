@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50519
+Source Server Version : 50154
 Source Host           : localhost:3306
 Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-09-07 19:31:37
+Date: 2012-09-09 19:33:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -98,7 +98,7 @@ CREATE TABLE `oa_intent` (
   PRIMARY KEY (`intent_id`),
   KEY `user_id` (`user_id`,`achievement_id`),
   KEY `achievement_id` (`achievement_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_intent\r\n用于记录用户对某成就有意图去达成。记录达成与否';
 
 -- ----------------------------
 -- Records of oa_intent
@@ -107,6 +107,7 @@ INSERT INTO oa_intent VALUES ('2', '2', '13', '2012-09-02 15:22:24', null, '1');
 INSERT INTO oa_intent VALUES ('3', '2', '12', '2012-09-02 16:37:13', null, '1');
 INSERT INTO oa_intent VALUES ('4', '7', '12', '2012-09-03 17:43:45', null, '1');
 INSERT INTO oa_intent VALUES ('5', '7', '11', '2012-09-07 12:08:42', '2012-09-07 19:31:10', '2');
+INSERT INTO oa_intent VALUES ('6', '1', '11', '2012-09-09 19:07:08', null, '1');
 
 -- ----------------------------
 -- Table structure for `oa_procedure`
@@ -231,16 +232,17 @@ CREATE TABLE `oa_track` (
   KEY `achievement_id` (`achievement_id`,`track_date`),
   KEY `intent_id` (`intent_id`,`track_date`),
   KEY `procedure_id` (`procedure_id`,`intent_id`,`track_date`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_track\r\n用于储存用户对一个成就的意向的实施过程中，每个阶段进行的记录。';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='oa_achievement_track\r\n用于储存用户对一个成就的意向的实施过程中，每个阶段进行的记录。';
 
 -- ----------------------------
 -- Records of oa_track
 -- ----------------------------
-INSERT INTO oa_track VALUES ('1', '12', '4', '32', '2012-09-06 16:33:15', '在郑州兴化驾校报的名');
+INSERT INTO oa_track VALUES ('1', '12', '4', '32', '2012-09-06 16:33:15', '在郑州兴华驾校报的名');
 INSERT INTO oa_track VALUES ('5', '11', '5', '28', '2012-09-07 16:32:21', '满纸荒唐言，一把辛酸泪');
 INSERT INTO oa_track VALUES ('6', '11', '5', '29', '2012-09-07 16:32:33', '猴哥，师傅被妖精抓走了');
 INSERT INTO oa_track VALUES ('7', '11', '5', '30', '2012-09-07 16:33:10', '话说天下大势分久必合合久必分');
 INSERT INTO oa_track VALUES ('9', '11', '5', '31', '2012-09-07 16:46:45', '黑吃黑');
+INSERT INTO oa_track VALUES ('10', '11', '6', '28', '2012-09-09 19:07:19', '字数太多了，没有读完');
 
 -- ----------------------------
 -- Table structure for `oa_uploaded`
@@ -295,8 +297,8 @@ CREATE TABLE `oa_user` (
 -- ----------------------------
 -- Records of oa_user
 -- ----------------------------
-INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', null, null);
-INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', '09a9862f59de84731248d28f1262038f1346646251', '2012-10-03 00:00:00');
+INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', '9d16d23fc402ecc7eb12da56b005ec3b1347188825', '2012-10-09 00:00:00');
+INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', '85e1ccaf67e095cc92ad62ecbd1d744f1347184553', '2012-10-09 00:00:00');
 INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'b222d517b08c2b96afefa98403634c7a1346646219', '2012-10-03 00:00:00');
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', null, null);
-INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '8109943a0db3716078df0d2e4425948e1347006579', '2012-10-07 00:00:00');
+INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '593dd46503a73be5c2ed3820b67c64151347190261', '2012-10-09 00:00:00');

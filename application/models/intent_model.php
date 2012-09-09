@@ -16,15 +16,27 @@ class Intent_model extends MY_Model
 		return $intent;
 	}
 	/**
+	 * 
 	 * 根据 achievement_id 得到该成就所有的 intent
-	 *
-	 * @param int $achievement_id        	
-	 * @param DB_Limit $limit        	
+	 * @param int $achievement_id
+	 * @param int $status
+	 * @param int $remove_user_id
+	 * @param DB_Limit $limit
 	 * @return multitype:IntentPeer
 	 */
-	public function getIntentsByAchievementID($achievement_id, DB_Limit $limit = null)
+	public function getIntentsByAchievementID($achievement_id,$status = null,$remove_user_id = null, DB_Limit $limit = null)
 	{
 		$this->db->order_by ( 'intent_id', 'DESC' );
+		
+		if($status!= null)
+		{
+		    $this->db->where('status',$status);
+		}
+		
+		if($remove_user_id)
+		{
+		    $this->db->where('user_id !='.(int)$remove_user_id);
+		}
 		
 		if ($limit)
 		{
@@ -235,6 +247,17 @@ class IntentPeer extends BasePeer
 		$achievement = AchievementPeer::model()->getByPK($this->achievement_id);
 		return $achievement;
 	}
+	/**
+	 * 得到当前 intent 对应的用户
+	 * @return Ambigous <boolean, UserPeer>
+	 */
+	public function getUser()
+	{
+		$CI = & get_instance ();
+		$CI->load->model ( 'User_model', 'user_model', true );
+		$user = UserPeer::model()->getByPK($this->user_id);
+		return $user;
+	}
 	
 	/**
 	 * 该意图是否已经完成
@@ -274,6 +297,16 @@ class IntentPeer extends BasePeer
 	{
 		$this->status = IntentPeer::STATUS_COMPLETE;
 		IntentPeer::model()->saveIntentComplete($this);
+	}
+	
+	/**
+	 * 得到当前 Intent 的最后一个 TrackPeer
+	 * @return TrackPeer
+	 */
+	public function getLastTrack()
+	{
+	    $tracks = $this->getTracks();
+	    return array_shift($tracks);
 	}
 }
 

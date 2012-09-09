@@ -7,7 +7,7 @@
 					<div class="control-group <?php echo @$errors['user_name']?'error':'';?>">
 						<label class="control-label" for="user_name">帐号</label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" id="user_name" name="Register[user_name]" value="<?php echo @$form['user_name'];?>">
+							<input type="text" class="input-xlarge" id="user_name" name="Register[user_name]" value="<?php echo @$form['user_name'];?>" maxlength="16">
 							<?php if(@$errors['user_name']):?>
 							<p class="help-block"><?php echo $errors['user_name'];?></p>
 							<?php else:?>

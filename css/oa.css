@@ -19,3 +19,16 @@
 
 .right-content{}
 .right-content .right-item{margin-bottom:10px;}
+
+.track_list{}
+.track_list_light{}
+.track_list_light:after{clear: both;content: '';display: table;}
+.track_list,.track_list_light{list-style: none;margin-left: 0; }
+.track_list_light li{float: left;}
+.track_list_light li div{text-align: center;}
+.track_list li{clear:both;position: relative; margin-bottom: 4px; }
+.track_list li:after{clear:both;content: '';display: table;}
+.track_list li .track_face{float: left; margin-right: 5px; }
+.track_list li .track_content{margin-left: 80px;}
+.track_list li .track_content .track_info{color: #999; }
+.track_list li .track_content p{}

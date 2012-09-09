@@ -210,6 +210,37 @@ class UserPeer extends BasePeer
 		}
 		return false;
 	}
+	
+	/**
+	 * 该用户要向某成就发起挑战了！<br />
+	 * 建立一个该用户对特定成就的 intent
+	 * @param int $achievement_id
+	 * @return 成功什么也不返回， 否则返回error数组
+	 */
+	public function createIntent($achievement_id)
+	{
+	    $CI = & get_instance ();
+        $CI->load->model('Intent_model','intent_model',true);
+	    //检测是否已经有该intent
+        $error = array();
+	    
+	    $intent = IntentPeer::model()->getByUserAndAchievement($this->user_id, $achievement_id);
+	    if(!$intent)
+	    {
+	        //TODO 未来加上前提条件过滤
+	    
+	        //设立该 intent
+	        $intent = new IntentPeer();
+	        $intent->user_id = $this->user_id;
+	        $intent->achievement_id = $achievement_id;
+	        $intent->save();
+	    }
+	    else
+	    {
+	        $error[] = '不能重复挑战';
+	        return $error;
+	    }
+	}
 }
 
 ?>
