@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class home extends MY_Controller
+class Home extends MY_Controller
 {
 
 	/**
@@ -25,12 +25,12 @@ class home extends MY_Controller
 		$this->addJavascriptFile ( '/js/nailthumb/jquery.nailthumb.1.1.min.js' );
 		$this->addStyleFile( '/js/nailthumb/jquery.nailthumb.1.1.min.css' );
 	    $this->addAutoRunJavascriptCode("jQuery('.home_wall_item').nailthumb({titleAnimationTime:200, width:128,height:128});");
-		
+
 	    $this->loadAchievementModel();
 	    $achievements = AchievementPeer::model()->getMostPopularAchievements(21);
-	    
+
 	    $data = compact('achievements');
-	    
+
 		$this->view('/home/homepage', $data);
 	}
 }

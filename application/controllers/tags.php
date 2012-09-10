@@ -2,7 +2,7 @@
 
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
-class tags extends MY_Controller
+class Tags extends MY_Controller
 {
 	public function index()
 	{
@@ -28,7 +28,7 @@ class tags extends MY_Controller
 			unset ( $tag->tag_name );
 			unset ( $tag->tag_count );
 		}
-		
+
 		echo json_encode ( $tags );
 	}
 }

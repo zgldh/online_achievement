@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class logout extends MY_Controller
+class Logout extends MY_Controller
 {
 
 	/**

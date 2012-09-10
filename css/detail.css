@@ -13,11 +13,13 @@
     border: none;
 }
 
-.processing-box{}
+.processing-box{position: relative; }
 .processing-box .alert-info{float:left;padding: 8px; }
 .processing-box .processing-box-bar-container{margin-left: 80px;position: relative;}
 .processing-box .processing-box-bar-container .progress-bar-text{color: #fff;line-height: 38px;margin-left: 10px;position: absolute;text-shadow: 0 1px 2px #000;}
 .processing-box .processing-box-bar-container .progress{display: inline-block;height: 38px;width: 100%;}
+.processing-box .intent_status{top: 5px; right: 5px; background: #fff; padding: 4px; color: grey; position: absolute; border-radius: 4px; }
+.processing-box .intent_status span,.processing-box .intent_status a{}
 
 .procedures-box{}
 .procedures-box h4{}

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class signin extends MY_Controller
+class Signin extends MY_Controller
 {
 
 	/**

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class register extends MY_Controller
+class Register extends MY_Controller
 {
 
 	/**
@@ -21,7 +21,7 @@ class register extends MY_Controller
 	public function index()
 	{
 		$errors = '';
-		
+
 		if($this->isPostRequest())
 		{
 			$form = $this->inputPost('Register');
@@ -29,7 +29,7 @@ class register extends MY_Controller
 			$password = $form['password'];
 			$re_password = $form['re_password'];
 			$email = $form['email'];
-			
+
 			$this->loadUserModel();
 			$errors = UserPeer::model()->register($user_name,$password,$re_password,$email);
 			if(!$errors)
@@ -42,17 +42,17 @@ class register extends MY_Controller
 		$this->navbar->hideSignIn();
 	    $this->navbar->setCurrentItem(NavBar::ITEM_REGISTER);
 	    $this->setTitle("注册--在线成就系统");
-	    
+
 	    $data = compact('errors','form');
 		$this->view('/register/register',$data);
 	}
-	
+
 	public function ok()
 	{
 		$this->navbar->hideSignIn();
 	    $this->navbar->setCurrentItem(NavBar::ITEM_REGISTER);
 	    $this->setTitle("注册成功--在线成就系统");
-	    
+
 		$this->view('/register/register_ok');
 	}
 }

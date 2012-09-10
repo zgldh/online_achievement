@@ -3,11 +3,11 @@ class Tags_model extends MY_Model
 {
 	const TABLE_TAGS = 'oa_tags';
 	const TABLE_TAGS_ACHIEVEMENT = 'oa_tags_achievement';
-	
+
 	/**
 	 * 根据Tag id 来得到一个tag
-	 * 
-	 * @param int $tag_id        	
+	 *
+	 * @param int $tag_id
 	 * @return TagPeer
 	 */
 	public function getTagByPK($tag_id)
@@ -19,7 +19,7 @@ class Tags_model extends MY_Model
 	/**
 	 * 根据名字得到/生成一个标签对象
 	 *
-	 * @param string $tag_name        	
+	 * @param string $tag_name
 	 * @param boolean $auto_create
 	 *        	= false 如果找不到，是否自动创建
 	 * @return TagPeer
@@ -28,16 +28,16 @@ class Tags_model extends MY_Model
 	{
 		$tag_name = substr ( trim ( $tag_name ), 0, 255 );
 		$raw = $this->db->get_where ( Tags_model::TABLE_TAGS, array ('tag_name' => $tag_name ) )->row_array ();
-		
+
 		if ($auto_create && ! $raw)
 		{
 			$raw = array ('tag_count' => 0, 'tag_name' => $tag_name );
 		}
-		
+
 		$tag = $raw ? new TagPeer ( $raw ) : false;
 		return $tag;
 	}
-	
+
 	/**
 	 * 根据名字查询出一些标签对象
 	 * @param string $tag_name
@@ -60,11 +60,11 @@ class Tags_model extends MY_Model
 		}
 		return $re;
 	}
-	
+
 	/**
 	 * 根据标签ID得到 “标签-成就”列表
 	 *
-	 * @param int $achievement_id        	
+	 * @param int $achievement_id
 	 * @return multitype:TagToAchievementPeer
 	 */
 	public function getTagAchievementByTagID($tag_id)
@@ -80,7 +80,7 @@ class Tags_model extends MY_Model
 	/**
 	 * 根据成就ID得到 “标签-成就”列表
 	 *
-	 * @param int $achievement_id        	
+	 * @param int $achievement_id
 	 * @return multitype:TagToAchievementPeer
 	 */
 	public function getTagAchievementByAchievementID($achievement_id)
@@ -96,8 +96,8 @@ class Tags_model extends MY_Model
 	/**
 	 * 根据成就ID和标签ID得到 唯一的一个“标签-成就”关系
 	 *
-	 * @param int $achievement_id        	
-	 * @param int $tag_id        	
+	 * @param int $achievement_id
+	 * @param int $tag_id
 	 * @return TagToAchievementPeer
 	 */
 	public function getTagAchievementByPK($achievement_id, $tag_id)
@@ -116,7 +116,7 @@ class Tags_model extends MY_Model
 		$this->db->order_by ( 'tag_count', 'DESC' );
 		$this->db->limit ( $limit );
 		$result = $this->db->get_where ( Tags_model::TABLE_TAGS )->result_array ();
-		
+
 		$re = array ();
 		foreach ( $result as $raw )
 		{
@@ -124,20 +124,61 @@ class Tags_model extends MY_Model
 		}
 		return $re;
 	}
-	
+
+    /**
+	 * 根据多个 tag 获得 Array<TagRelationPeer>, 多个Tag之间是 and 关系
+	 * @param Array<TagPeer> $tags
+	 * @param Array('limit','offset') $parameters = null
+	 * @return multitype:TagRelationPeer
+	 */
+	public function getTagRelationsByTags($tags, $parameters = array())
+	{
+		$re = array ();
+
+		$tag_ids = array();
+		foreach($tags as $tag)
+		{
+			$tag instanceof TagPeer;
+			$tag_ids[] = $tag->tag_id;
+		}
+
+		$this->db->where_in( 'tag_id', $tag_ids );
+
+		$this->db->group_by( 'item_id');
+		$this->db->having('count(*)',count($tag_ids));
+
+		if (isset ( $parameters ['limit'] ))
+		{
+			if (isset ( $parameters ['offset'] ))
+			{
+				$this->db->limit ( $parameters ['limit'], $parameters ['offset'] );
+			}
+			else
+			{
+				$this->db->limit ( $parameters ['limit'] );
+			}
+		}
+		$result = $this->db->get ( Tags_model::TABLE_TAGS_RELATION )->result_array ();
+		foreach ( $result as $raw )
+		{
+			$re [] = new TagRelationPeer ( $raw );
+		}
+		return $re;
+	}
+
 	/**
 	 * 更新数据 或 插入数据
 	 *
-	 * @param TagPeer $tag        	
+	 * @param TagPeer $tag
 	 */
 	public function saveTagPeer(& $tag)
 	{
 		$tag->tag_name = substr ( trim ( $tag->tag_name ), 0, 255 );
 		$this->db->set ( 'tag_name', strip_tags($tag->tag_name) );
 		$this->db->set ( 'tag_count', $tag->tag_count );
-		
+
 		$pkValue = $tag->getPrimaryKeyValue ();
-		
+
 		if ($pkValue)
 		{
 			$this->db->where ( TagPeer::PK, $pkValue );
@@ -152,13 +193,13 @@ class Tags_model extends MY_Model
 	/**
 	 * 保存一个标签和成就的关系,会首先检查是否已经存在该关系
 	 *
-	 * @param TagToAchievementPeer $tag        	
+	 * @param TagToAchievementPeer $tag
 	 * @return int 保存了一条，返回1; 没有保存，返回0
 	 */
 	public function saveTagAchievementPeer(& $tag)
 	{
 		$query = $this->db->get_where ( Tags_model::TABLE_TAGS_ACHIEVEMENT, array (
-				'tag_id' => $tag->tag_id, 
+				'tag_id' => $tag->tag_id,
 				'achievement_id' => $tag->achievement_id ) );
 		if ($query->num_rows () == 0)
 		{
@@ -172,7 +213,7 @@ class Tags_model extends MY_Model
 	/**
 	 * 删除一个标签和成就的关系
 	 *
-	 * @param TagToAchievementPeer $tag        	
+	 * @param TagToAchievementPeer $tag
 	 * @return int 会返回删除的行数
 	 */
 	public function deleteTagAchievementPeer(& $tag)
@@ -184,7 +225,7 @@ class Tags_model extends MY_Model
 class TagToAchievementPeer extends BasePeer
 {
 	const PK = 'achievement_id';
-	
+
 	/**
 	 * 成就ID
 	 *
@@ -236,7 +277,7 @@ class TagToAchievementPeer extends BasePeer
 	public function delete($auto_decrease = false)
 	{
 		$num = TagToAchievementPeer::model ()->deleteTagAchievementPeer ( $this );
-		
+
 		if ($auto_decrease)
 		{
 			if ($num != 0)
@@ -260,7 +301,7 @@ class TagToAchievementPeer extends BasePeer
 class TagPeer extends BasePeer
 {
 	const PK = 'tag_id';
-	
+
 	/**
 	 * 标签ID
 	 *
@@ -303,11 +344,11 @@ class TagPeer extends BasePeer
 		$CI = & get_instance ();
 		return $CI->tags_model;
 	}
-	
+
 	/**
 	 * 将标签的计数加/减一定数量
 	 *
-	 * @param int $delta        	
+	 * @param int $delta
 	 */
 	public function countDelta($delta = 0)
 	{
@@ -318,13 +359,13 @@ class TagPeer extends BasePeer
 	/**
 	 * 将该标签从目标成就上揭下来, 如果该标签本来就没有贴在该成就上，则返回0
 	 *
-	 * @param int $achievement_id        	
+	 * @param int $achievement_id
 	 * @return boolean 揭掉了，返回true
 	 */
 	public function removeFromAchievement($achievement_id)
 	{
 		$this->needPKValue ( 'Current Tag is empty.' );
-		
+
 		$tagToAchievement = TagToAchievementPeer::model ()->getTagAchievementByPK ( $achievement_id, $this->tag_id );
 		if ($tagToAchievement->delete ())
 		{
@@ -337,13 +378,13 @@ class TagPeer extends BasePeer
 	/**
 	 * 将该标签贴到目标成就上, 如果该标签已经贴在该成就上，则返回0
 	 *
-	 * @param int $achievement_id        	
+	 * @param int $achievement_id
 	 * @return int 贴成功了，返回1
 	 */
 	public function appendToAchievement($achievement_id)
 	{
 		$this->needPKValue ( 'Current Tag is empty.' );
-		
+
 		$tagToAchievement = new TagToAchievementPeer ( array ('achievement_id' => $achievement_id, 'tag_id' => $this->tag_id ) );
 		$num = $tagToAchievement->save ();
 		if ($num)
