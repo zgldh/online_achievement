@@ -11,8 +11,16 @@ class Intent_model extends MY_Model
 	 */
 	public function getByPK($intent_id)
 	{
+		if($this->cache_pk->hasData($intent_id))
+		{
+			return $this->cache_pk->getData($intent_id);
+		}
+		
 		$raw = $this->db->get_where ( Intent_model::TABLE_INTENT, array (IntentPeer::PK => $intent_id ) )->row_array ();
 		$intent = $raw ? new IntentPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($intent_id, $intent);
+		
 		return $intent;
 	}
 	/**
@@ -117,15 +125,25 @@ class Intent_model extends MY_Model
 			$this->db->insert ( Intent_model::TABLE_INTENT );
 			$intent->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($intent->getPrimaryKeyValue(), $intent);
 	}
 	
+	/**
+	 * 标记某成就意向为完成
+	 * @param IntentPeer $intent
+	 */
 	public function saveIntentComplete(& $intent)
 	{
+		$intent->status = IntentPeer::STATUS_COMPLETE;
+
 		$this->db->set ( 'status', $intent->status );
 		$this->db->set ( 'achieve_date','NOW()',false);
 		$pkValue = $intent->getPrimaryKeyValue ();
 		$this->db->where ( IntentPeer::PK, $pkValue );
 		$this->db->update ( Intent_model::TABLE_INTENT );
+		
+		$this->cache_pk->setData($pkValue, $intent);
 	}
 	/**
 	 * 删除一个 intent
@@ -135,6 +153,8 @@ class Intent_model extends MY_Model
 	 */
 	public function delete(& $intent)
 	{
+		$this->cache_pk->unsetData($intent->getPrimaryKeyValue());
+		
 		$this->db->delete ( Intent_model::TABLE_INTENT, array ('intent_id' => $intent->intent_id ) );
 		return $this->db->affected_rows ();
 	}

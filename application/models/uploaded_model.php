@@ -11,8 +11,16 @@ class Uploaded_model extends MY_Model
 	 */
 	public function getByPK($uploaded_id)
 	{
+		if($this->cache_pk->hasData($uploaded_id))
+		{
+			return $this->cache_pk->getData($uploaded_id);
+		}
+		
 		$raw = $this->db->get_where ( Uploaded_model::TABLE, array (UploadedPeer::PK => $uploaded_id ) )->row_array ();
 		$uploaded = $raw ? new UploadedPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($uploaded_id, $uploaded);
+		
 		return $uploaded;
 	}
 	/**
@@ -23,6 +31,7 @@ class Uploaded_model extends MY_Model
 	public function deleteByPK($uploaded_id)
 	{
 		$this->db->delete ( Uploaded_model::TABLE, array (UploadedPeer::PK => $uploaded_id ) );
+		$this->cache_pk->unsetData($uploaded_id);
 	}
 	/**
 	 * 更新数据 或 插入数据
@@ -51,6 +60,9 @@ class Uploaded_model extends MY_Model
 			$this->db->insert ( Uploaded_model::TABLE );
 			$uploaded->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($uploaded->getCachePK(), $uploaded);
+		
 	}
 	
 	/**

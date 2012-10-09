@@ -12,6 +12,7 @@
 	<meta charset="utf-8">
 
     <script src="/js/jquery-min.js"></script>
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/oa.css" />
     <link rel="shortcut icon" href="images/favicon.ico" />

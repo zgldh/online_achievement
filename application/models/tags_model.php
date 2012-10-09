@@ -12,8 +12,16 @@ class Tags_model extends MY_Model
 	 */
 	public function getTagByPK($tag_id)
 	{
+		if($this->cache_pk->hasData($tag_id))
+		{
+			return $this->cache_pk->getData($tag_id);
+		}
+		
 		$raw = $this->db->get_where ( Tags_model::TABLE_TAGS, array (TagPeer::PK => $tag_id ) )->row_array ();
 		$tag = $raw ? new TagPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($tag_id, $tag);
+		
 		return $tag;
 	}
 	/**
@@ -189,6 +197,9 @@ class Tags_model extends MY_Model
 			$this->db->insert ( Tags_model::TABLE_TAGS );
 			$tag->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		
+		$this->cache_pk->setData($tag->getCachePK(), $tag);
 	}
 	/**
 	 * 保存一个标签和成就的关系,会首先检查是否已经存在该关系
@@ -245,6 +256,10 @@ class TagToAchievementPeer extends BasePeer
 	public function getPrimaryKeyName()
 	{
 		return TagToAchievementPeer::PK;
+	}
+	public function getCachePK()
+	{
+		return $this->achievement_id.'_'.$this->tag_id;
 	}
 	/**
 	 * 得到该关系的tag

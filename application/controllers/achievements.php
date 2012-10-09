@@ -35,10 +35,6 @@ class Achievements extends MY_Controller
 
         $this->setTitle ( $achievement->name . "--在线成就系统" );
 
-        $this->addJavascriptFile ( '/js/bootstrap/bootstrap-tab.js' );
-        $this->addJavascriptFile ( '/js/bootstrap/bootstrap-button.js' );
-        $this->addJavascriptFile ( '/js/bootstrap/bootstrap-modal.js' );
-        $this->addJavascriptFile ( '/js/bootstrap/bootstrap-tooltip.js' );
         $this->addJavascriptFile ( '/js/detail_intent.js' );
         $this->addStyleFile ( '/css/detail.css' );
         $this->addStyleFile ( '/css/icon_big.css' );

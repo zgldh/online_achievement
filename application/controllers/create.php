@@ -33,7 +33,6 @@ class Create extends MY_Controller
 
         $this->addJavascriptFile ( '/js/jquery.json-2.3.min.js' );
         $this->addJavascriptFile ( '/js/select2/select2.min.js' );
-        $this->addJavascriptFile ( '/js/bootstrap/bootstrap.min.js' );
         $this->addJavascriptFile ( '/js/jquery.nestable.js' );
         $this->addJavascriptFile ( '/js/jcrop/jquery.Jcrop.min.js' );
         $this->addJavascriptFile ( '/js/jquery.autosize.js' );

@@ -10,8 +10,16 @@ class Track_model extends MY_Model
 	 */
 	public function getByPK($track_id)
 	{
+		if($this->cache_pk->hasData($track_id))
+		{
+			return $this->cache_pk->getData($track_id);
+		}
+		
 		$raw = $this->db->get_where ( Track_model::TABLE, array (TrackPeer::PK => $track_id ) )->row_array ();
 		$procedure = $raw ? new TrackPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($track_id, $procedure);
+		
 		return $procedure;
 	}
 	/**
@@ -81,6 +89,8 @@ class Track_model extends MY_Model
 			$this->db->insert ( Track_model::TABLE );
 			$track->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($track->getCachePK(), $track);
 	}
 }
 class TrackPeer extends BasePeer

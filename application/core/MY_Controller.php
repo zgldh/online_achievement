@@ -42,6 +42,10 @@ class MY_Controller extends CI_Controller{
      * @var Track_model
      */
     public $track_model = null;
+    /**
+     * @var Comment_model
+     */
+    public $comment_model = null;
 
     private $_javascripts = array();
     private $_auto_javascript_codes = array();
@@ -146,7 +150,6 @@ class MY_Controller extends CI_Controller{
     {
         if($this->navbar->isDisplay())
         {
-            $this->addJavascriptFile('/js/bootstrap/bootstrap-dropdown.js');
             $this->addAutoRunJavascriptCode("$('.dropdown-toggle').dropdown()");
         }
 
@@ -283,6 +286,10 @@ class MY_Controller extends CI_Controller{
     protected function loadTrackModel()
     {
 	    $this->load->model('Track_model','track_model',true);
+    }
+    protected function loadCommentModel()
+    {
+	    $this->load->model('Comment_model','comment_model',true);
     }
 }
 // END Controller class

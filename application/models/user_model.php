@@ -2,6 +2,32 @@
 class User_model extends MY_Model
 {
 	const TABLE = 'oa_user';
+	public function getByPK($user_id)
+	{
+		if($this->cache_pk->hasData($user_id))
+		{
+			return $this->cache_pk->getData($user_id);
+		}
+		
+		$raw = $this->db->get_where ( User_model::TABLE, array (UserPeer::PK => $user_id ) )->row_array ();
+		$user = $raw ? new UserPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($user_id, $user);
+		
+		return $user;
+	}
+	public function getByName($name)
+	{
+		$raw = $this->db->get_where ( User_model::TABLE, array ('name' => $name ) )->row_array ();
+		$user = $raw ? new UserPeer ( $raw ) : false;
+		return $user;
+	}
+	public function getByEmail($email)
+	{
+		$raw = $this->db->get_where ( User_model::TABLE, array ('email' => $email ) )->row_array ();
+		$user = $raw ? new UserPeer ( $raw ) : false;
+		return $user;
+	}
 	/**
 	 * 检查是否能登录。不能登录返回false 能登录返回对应UserPeer
 	 * 
@@ -21,24 +47,6 @@ class User_model extends MY_Model
 		{
 			return new UserPeer ( $raw );
 		}
-	}
-	public function getByPK($user_id)
-	{
-		$raw = $this->db->get_where ( User_model::TABLE, array (UserPeer::PK => $user_id ) )->row_array ();
-		$user = $raw ? new UserPeer ( $raw ) : false;
-		return $user;
-	}
-	public function getByName($name)
-	{
-		$raw = $this->db->get_where ( User_model::TABLE, array ('name' => $name ) )->row_array ();
-		$user = $raw ? new UserPeer ( $raw ) : false;
-		return $user;
-	}
-	public function getByEmail($email)
-	{
-		$raw = $this->db->get_where ( User_model::TABLE, array ('email' => $email ) )->row_array ();
-		$user = $raw ? new UserPeer ( $raw ) : false;
-		return $user;
 	}
 	/**
 	 * 更新数据 或 插入数据
@@ -65,6 +73,9 @@ class User_model extends MY_Model
 			$this->db->insert ( User_model::TABLE );
 			$user->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($user->getCachePK(), $user);
+		
 	}
 	/**
 	 * 用户注册业务

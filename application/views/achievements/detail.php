@@ -234,7 +234,6 @@ $procedures = $achievement->getProcedures();
                 <?php else:?>
                 <p>完成本成就不需要步骤。。</p>
                 <?php endif;?>
-                <hr />
             </div>
         	<!-- 成就实现步骤 end -->
             
@@ -302,20 +301,20 @@ $procedures = $achievement->getProcedures();
 	                <?php endif;?>
 	                </div>
                 </div>
-                <hr />
             </div>
             
             <div class="right-item">
                 <ul id="comment_tab" class="nav nav-tabs">
                  	<li class="disabled"><i class="icon-big icon-comments"></i></li>
 				    <li class="active"><a href="#comment_all" data-toggle="tab">所有评论</a></li>
-				    <li><a href="#comment_intent" data-toggle="tab">关于我的评论</a></li>
+				    <!-- <li><a href="#comment_intent" data-toggle="tab">关于我的评论</a></li> -->
 			    </ul>
 			    <div class="tab-content">
-			    	<div id="comment_all" class="tab-pane active">//TODO 这里显示本成就的 comment 列表</div>
+			    	<div id="comment_all" class="tab-pane active">
+                        <?php $this->load->module('widget/comment/by_achievement',array($achievement->achievement_id));?>
+			    	</div>
 			    	<div id="comment_intent" class="tab-pane">//TODO 这里显示当前用户的 intent 的 comment 列表</div>
 				</div>
-                <hr />
             </div>
         </div>
     </div>

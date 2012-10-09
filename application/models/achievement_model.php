@@ -4,8 +4,16 @@ class Achievement_model extends MY_Model
 	const TABLE = 'oa_achievement';
 	public function getByPK($achievement_id)
 	{
+		if($this->cache_pk->hasData($achievement_id))
+		{
+			return $this->cache_pk->getData($achievement_id);
+		}
+		
 		$raw = $this->db->get_where ( Achievement_model::TABLE, array (AchievementPeer::PK => $achievement_id ) )->row_array ();
 		$achievement = $raw ? new AchievementPeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($achievement_id, $achievement);
+		
 		return $achievement;
 	}
 	/**
@@ -67,6 +75,8 @@ class Achievement_model extends MY_Model
 			$this->db->insert ( Achievement_model::TABLE );
 			$achievement->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($achievement->getPrimaryKeyValue(), $achievement);
 	}
 }
 class AchievementPeer extends BasePeer

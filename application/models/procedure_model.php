@@ -10,8 +10,16 @@ class Procedure_model extends MY_Model
 	 */
 	public function getByPK($procedure_id)
 	{
+		if($this->cache_pk->hasData($procedure_id))
+		{
+			return $this->cache_pk->getData($procedure_id);
+		}
+		
 		$raw = $this->db->get_where ( Procedure_model::TABLE, array (ProcedurePeer::PK => $procedure_id ) )->row_array ();
 		$procedure = $raw ? new ProcedurePeer ( $raw ) : false;
+		
+		$this->cache_pk->setData($procedure_id, $procedure);
+		
 		return $procedure;
 	}
 	/**
@@ -92,6 +100,8 @@ class Procedure_model extends MY_Model
 			$this->db->insert ( Procedure_model::TABLE );
 			$procedure->setPrimaryKeyvalue ( $this->db->insert_id () );
 		}
+		
+		$this->cache_pk->setData($procedure->getPrimaryKeyValue(),$procedure);
 	}
 }
 class ProcedurePeer extends BasePeer
