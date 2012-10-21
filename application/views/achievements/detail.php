@@ -119,7 +119,7 @@ $procedures = $achievement->getProcedures();
                         <div class="procedure-desc">
                             <span class="label label-success"><?php echo $procedure->description;?></span>
                             <blockquote class="procedure-track">
-                                <p><?php echo $tmp_track->content;?></p>
+                                <p id="track_content_<?php echo $tmp_track->track_id;?>"><?php echo $tmp_track->content;?></p>
                                 <small><?php echo $tmp_track->track_date;?></small>
                             </blockquote>
                         </div>
@@ -135,9 +135,10 @@ $procedures = $achievement->getProcedures();
                             <div class="btn-group pull-right">
                                 <button class="btn btn-mini"><i class="icon-thumbs-up"></i> 123</button>
                                 <button class="btn btn-mini"><i class="icon-thumbs-down"></i> 321</button>
-                                <button type="button" class="btn btn-mini"
-                                	rel="tooltip" 
-                                    data-original-title="添加评论"><i class="icon-comment"></i></button>
+                                <button class="btn btn-mini reference_track_id_btn" type="button" rel="tooltip" 
+                                    data-original-title="添加评论"
+                                    data-track-id="<?php echo $tmp_track->track_id;?>"
+                                    ><i class="icon-comment"></i></button>
                             </div>
                         </div>
                         <?php elseif($intent):?>
@@ -178,7 +179,7 @@ $procedures = $achievement->getProcedures();
                                 <div class="procedure-desc">
                                     <span class="label label-success"><?php echo $sub_procedure->description;?></span>
                                     <blockquote class="procedure-track">
-                                        <p><?php echo $tmp_track->content;?></p>
+                                        <p id="track_content_<?php echo $tmp_track->track_id;?>"><?php echo $tmp_track->content;?></p>
                                         <small><?php echo $tmp_track->track_date;?></small>
                                     </blockquote>
                                 </div>
@@ -194,9 +195,10 @@ $procedures = $achievement->getProcedures();
                                     <div class="btn-group pull-right">
                                         <button class="btn btn-mini"><i class="icon-thumbs-up"></i> 123</button>
                                         <button class="btn btn-mini"><i class="icon-thumbs-down"></i> 321</button>
-                                        <button type="button" class="btn btn-mini"
-                                        	rel="tooltip" 
-                                        	data-original-title="添加评论"><i class="icon-comment"></i></button>
+                                        <button class="btn btn-mini reference_track_id_btn" type="button" rel="tooltip" 
+                                        	data-original-title="添加评论"
+                                        	data-track-id="<?php echo $tmp_track->track_id;?>"
+                                        	><i class="icon-comment"></i></button>
                                     </div>
                                 </div>
                                 <?php elseif($intent):?>

@@ -13,6 +13,18 @@
 class CI_Module {
 
 	/**
+	 * 当前正在访问的用户。
+	 * @var WebUser
+	 */
+	public $webuser = null;
+
+	/**
+	 *
+	 * @var JavascriptCssManager
+	 */
+	public $javascript_css_manager = null;
+	
+	/**
 	 * Constructor
 	 *
 	 * @access public
@@ -62,9 +74,88 @@ class CI_Module {
 
 		// 把自己放到全局超级对象中
 		$CI->$class_name = $this;
+		
+		$this->load->library('WebUser');
+
+// 		include_once(dirname(__FILE__).'/JavascriptCssManager.php');
+// 		$this->javascript_css_manager = new JavascriptCssManager();
 
 		log_message('debug', "$class_name Module Class Initialized");
 	}
+	
+
+	/**
+	 * 得到请求方法
+	 * @return string “GET”, “HEAD”，“POST”，“PUT”
+	 */
+	protected function getRequestMethod()
+	{
+		return $_SERVER['REQUEST_METHOD'];
+	}
+	
+	/**
+	 * 是否是post请求
+	 * @return boolean true|false
+	 */
+	protected function isPostRequest()
+	{
+		return ($this->getRequestMethod() == 'POST')?true:false;
+	}
+	/**
+	 * 是否是get请求
+	 * @return boolean true|false
+	 */
+	protected function isGetRequest()
+	{
+		return ($this->getRequestMethod() == 'GET')?true:false;
+	}
+	
+	
+	public function inputPost($key, $xss_filter = false)
+	{
+		return $this->input->post ( $key, $xss_filter );
+	}
+	
+	public function inputGet($key, $xss_filter = false)
+	{
+		return $this->input->get ( $key, $xss_filter );
+	}
+	
+
+	/**
+	 * 得到JSONP输出字符串
+	 * @param string $callback    回调javascript函数名字
+	 * @param any $parameter      回调参数
+	 * @param string $iframe_id = false  如果输出在iframe里面， 则需要在这里提供iframe的id
+	 * @return string 是一个&lt;script&gt;...js代码...&lt;/script&gt; 的字符串
+	 */
+	public function getJSONP($callback,$parameter, $iframe_id = false)
+	{
+		$parameter = json_encode($parameter);
+		$str = '<script>';
+		if($iframe_id)
+		{
+			$str.= 'parent.'.$callback.'('.$parameter.',"'.$iframe_id.'");';
+		}
+		else
+		{
+			$str.= $callback.'('.$parameter.');';
+		}
+		$str .= '</script>';
+		return $str;
+	}
+	
+	/**
+	 * 需要登录，不然直接断掉
+	 */
+	public function needLoginOrExit()
+	{
+		if(!$this->webuser->isLogin())
+		{
+			exit();
+		}
+	}
+	
 }
 
 // END Module Class

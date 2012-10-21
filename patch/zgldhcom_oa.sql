@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50519
+Source Server Version : 50154
 Source Host           : localhost:3306
 Source Database       : zgldhcom_oa
 
 Target Server Type    : MYSQL
-Target Server Version : 50519
+Target Server Version : 50154
 File Encoding         : 65001
 
-Date: 2012-10-09 18:51:33
+Date: 2012-10-21 17:26:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,7 +59,7 @@ CREATE TABLE `oa_comment` (
   PRIMARY KEY (`comment_id`),
   KEY `user_id` (`user_id`,`post_date`),
   KEY `achievement_id` (`achievement_id`,`track_id`,`post_date`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of oa_comment
@@ -74,6 +74,8 @@ INSERT INTO oa_comment VALUES ('7', '4', 'thntyhntyhtybhthtrehr<br />', '2012-10
 INSERT INTO oa_comment VALUES ('8', '4', 'abcdefghigklmn<br />', '2012-10-09 18:02:07', '0', null, '12', null);
 INSERT INTO oa_comment VALUES ('9', '4', 'ctrl+enter提交<br />', '2012-10-09 18:13:21', '0', null, '12', null);
 INSERT INTO oa_comment VALUES ('10', '4', '评论足够长.15字<br />', '2012-10-09 18:14:22', '0', null, '12', null);
+INSERT INTO oa_comment VALUES ('11', '3', 'loooooool<br />', '2012-10-14 17:50:31', '0', null, '12', null);
+INSERT INTO oa_comment VALUES ('13', '7', '那地方如何？我也去报名？<br />', '2012-10-21 17:21:06', '0', '0', '12', '1');
 
 -- ----------------------------
 -- Table structure for `oa_grradation`
@@ -341,6 +343,6 @@ CREATE TABLE `oa_user` (
 -- ----------------------------
 INSERT INTO oa_user VALUES ('1', 'test1', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:15:24', '9d16d23fc402ecc7eb12da56b005ec3b1347188825', '2012-10-09 00:00:00');
 INSERT INTO oa_user VALUES ('2', 'test2', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:28', '1d7aa8f3ac08650709043d7520dd03791349771180', '2012-11-08 00:00:00');
-INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'b222d517b08c2b96afefa98403634c7a1346646219', '2012-10-03 00:00:00');
+INSERT INTO oa_user VALUES ('3', 'test3', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:37', 'b4bcaa09390df42e368da6a0d6462ea81350208224', '2012-11-13 00:00:00');
 INSERT INTO oa_user VALUES ('4', 'test4', '098f6bcd4621d373cade4e832627b4f6', '', '2012-06-02 23:17:44', '8cec13f067b8f25b9f966d141046b9531349772433', '2012-11-08 00:00:00');
-INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', '6c11970692f19519b02c51c1e9c991601349771171', '2012-11-08 00:00:00');
+INSERT INTO oa_user VALUES ('7', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@email.com', '2012-08-21 17:45:28', 'a6bffaebc0ea6becdda531f2808b97601350806144', '2012-11-20 00:00:00');

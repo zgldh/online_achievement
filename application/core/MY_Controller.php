@@ -2,6 +2,11 @@
 
 class MY_Controller extends CI_Controller{
 
+	/**
+	 * 
+	 * @var JavascriptCssManager
+	 */
+	public $javascript_css_manager = null;
     /**
      * 当前正在访问的用户。
      * @var WebUser
@@ -59,6 +64,9 @@ class MY_Controller extends CI_Controller{
     function __construct()
     {
         parent::__construct();
+        
+        include_once(dirname(__FILE__).'/JavascriptCssManager.php');
+        $this->javascript_css_manager = new JavascriptCssManager();
     }
 
 
@@ -103,12 +111,7 @@ class MY_Controller extends CI_Controller{
      */
     public function addJavascriptFile($path)
     {
-        if(!array_key_exists($path, $this->_javascripts))
-        {
-            $this->_javascripts[] = $path;
-            return true;
-        }
-        return false;
+    	return $this->javascript_css_manager->addJavascriptFile($path);
     }
     /**
      * 添加一段自动执行的Javascript代码
@@ -116,7 +119,7 @@ class MY_Controller extends CI_Controller{
      */
     public function addAutoRunJavascriptCode($code)
     {
-        $this->_auto_javascript_codes[] = $code;
+    	return $this->javascript_css_manager->addAutoRunJavascriptCode($code);
     }
     /**
      * 添加一个css文件
@@ -125,12 +128,7 @@ class MY_Controller extends CI_Controller{
      */
     public function addStyleFile($path)
     {
-        if(!array_key_exists($path, $this->_styles))
-        {
-            $this->_styles[] = $path;
-            return true;
-        }
-        return false;
+    	return $this->javascript_css_manager->addStyleFile($path);
     }
     /**
      * 添加一段css代码
@@ -138,7 +136,7 @@ class MY_Controller extends CI_Controller{
      */
     public function addStyleCode($code)
     {
-        $this->_style_codes[] = $code;
+    	return $this->javascript_css_manager->addStyleCode($code);
     }
 
     /**
@@ -155,11 +153,7 @@ class MY_Controller extends CI_Controller{
 
         $meta_data = array(
                             'title'=>$this->getTitle(),
-                            'javascripts'=>$this->_javascripts,
-                            'auto_javascript_codes'=>$this->_auto_javascript_codes,
-                            'styles'=>$this->_styles
-,
-                            'css_codes'=>$this->_style_codes
+                            'javascript_css_manager'=>$this->javascript_css_manager,
         );
         $data = array_merge($meta_data, $in_data);
 

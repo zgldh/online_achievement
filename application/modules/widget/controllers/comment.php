@@ -18,6 +18,29 @@ class Widget_comment_module extends CI_Module {
 	{
 	    echo 'Widget_comment_module';
 	}
+
+	
+	public function ajax_post($achievement_id)
+	{
+		if(!$this->isPostRequest())
+		{
+			return false;
+		}
+		if(!$this->webuser->isLogin())
+		{
+			return false;
+		}
+		$content = $this->inputPost('content');
+		$track_id = $this->inputPost('track_id');
+		$reply_comment_id = $this->inputPost('reply_comment_id');
+		
+		$this->load->model('Comment_model','comment_model',true);
+		$comment = CommentPeer::create($content, $this->webuser->getUserId(),$achievement_id,$track_id,$reply_comment_id);
+		$comment->save();
+		echo 'ok';
+	}
+	
+	
 	/**
 	 * 得到评论列表内容
 	 * @param unknown_type $achievement_id
@@ -31,7 +54,7 @@ class Widget_comment_module extends CI_Module {
 	    $total_num = 0;
 	    $comments = CommentPeer::model()->getByAchievement($achievement_id,null,$offset,Widget_comment_module::PAGE_SIEZ,$total_num);
 	    $data = compact('achievement_id','comments','page','total_num');
-		$this->load->view('list_by_achievement',$data);
+		$this->load->view('comment/list_by_achievement',$data);
 	}
 	/**
 	 * 显示评论列表和评论对话框
@@ -40,6 +63,6 @@ class Widget_comment_module extends CI_Module {
 	public function by_achievement($achievement_id)
 	{
 	    $data = compact('achievement_id');
-		$this->load->view('by_achievement',$data);
+		$this->load->view('comment/by_achievement',$data);
 	}
 }
